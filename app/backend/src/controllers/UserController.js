@@ -28,7 +28,7 @@ const registerUser = asyncHandler(async (req,res)=>{
         }
         )
         console.log(user);
-        res.json({message:"New user registered"});
+        // res.json({message:"New user registered successfully"});
         if(user){
              res.status(200).json({__id: user.id,email:user.email,password:user.hashedPassword})
         }
@@ -38,7 +38,42 @@ const registerUser = asyncHandler(async (req,res)=>{
         }
 });
 
+
+// Login 
+
+const LoginUser = asyncHandler(async (req,res)=>{
+    const {email,password} = req.body;
+    if(!email || !password){
+        res.status(400);
+        throw new Error("All Fields are mandotory")
+    }
+    const user = await User.findOne({email});
+    if(user && await bcrypt.compare(password,user.password))
+    {
+        // res.json({message:"Login SuccesFully"});
+        const accessToken = jwt .sign({
+            user:{
+                username: user.username,
+                email: user.email,
+                id: user.id
+            },
+        },process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "30d"}
+        );
+        res.status(200).json({accessToken});
+    }
+    else{
+        res.status(401);
+        throw new Error("Email or password is not valid");
+    }
+});
+
+
+
+
 module.exports = {
-    registerUser
+    registerUser,
+    LoginUser
+
 
 }
