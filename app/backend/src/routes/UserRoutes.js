@@ -9,6 +9,7 @@ const {
 
 
 } = require("../controllers/UserController");
+const validateToken = require("../middleware/validateToken");
 
 //For SignUp
 

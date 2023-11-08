@@ -1,10 +1,10 @@
 const express = require("express");
 require('ejs');
-
 require("../src/config/DbConnection");
 const app = express();
 const dotenv = require("dotenv").config();
 const UserRoutes = require("./routes/UserRoutes");
+const PostRoutes = require("./routes/PostRoutes");
 
 
 app.use(express.json());
@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user",UserRoutes);
+app.use("/post",PostRoutes);
 
 
 
