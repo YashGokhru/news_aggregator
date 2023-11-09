@@ -1,0 +1,626 @@
+.search {
+  position: absolute;
+  margin: 0 !important;
+  left: calc(50% - 571px);
+  width: 12.5rem;
+  z-index: 0;
+}
+.create-post,
+.search,
+.settings {
+  text-decoration: none;
+  top: calc(50% - 29px);
+  font-weight: 700;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  height: 3.5rem;
+  flex-shrink: 0;
+}
+.settings {
+  position: absolute;
+  margin: 0 !important;
+  left: calc(50% + 459px);
+  width: 12.5rem;
+  z-index: 1;
+}
+.create-post {
+  left: calc(50% + 159px);
+  width: 14.38rem;
+  z-index: 2;
+}
+.create-post,
+.header-child,
+.search1 {
+  position: absolute;
+  margin: 0 !important;
+}
+.search1 {
+  text-decoration: none;
+  top: calc(50% - 29px);
+  left: calc(50% - 16px);
+  font-weight: 700;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  width: 12.5rem;
+  height: 3.5rem;
+  flex-shrink: 0;
+  z-index: 3;
+}
+.header-child {
+  top: calc(50% - 26px);
+  left: calc(50% - 691px);
+  width: 3.13rem;
+  height: 3.13rem;
+  z-index: 4;
+}
+.noun-profile-665436-1 {
+  text-decoration: none;
+  position: absolute;
+  margin: 0 !important;
+  top: 0.94rem;
+  left: 84.38rem;
+  width: 3.75rem;
+  height: 3.22rem;
+  background-image: url(/public/nounprofile6654361@2x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  z-index: 5;
+}
+.header-item {
+  position: absolute;
+  margin: 0 !important;
+  bottom: 0.09rem;
+  left: 70.59rem;
+  border-right: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 0.06rem;
+  height: 5.06rem;
+  z-index: 6;
+}
+.background,
+.header {
+  position: absolute;
+  background-color: var(--color-white);
+}
+.header {
+  top: calc(50% - 541px);
+  left: -0.06rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 90.13rem;
+  height: 5.13rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 1.56rem 3.97rem;
+  color: var(--color-dimgray);
+}
+.background {
+  top: 5rem;
+  left: 0;
+  box-shadow: 0 0.33000001311302185px 0#bdc5cd;
+  width: 90rem;
+  height: 5rem;
+}
+.cancel {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 1.38rem;
+  left: 81.19rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.4px;
+  font-family: var(--font-poppins);
+  color: var(--color-purple);
+  text-align: left;
+  display: inline-block;
+}
+.top-bar-child {
+  position: absolute;
+  top: 0.94rem;
+  left: 2.69rem;
+  border-radius: 16px;
+  background-color: var(--background);
+  width: 74.94rem;
+  height: 3.13rem;
+}
+.search-icon,
+.search-keyword {
+  position: absolute;
+  top: 1.75rem;
+  left: 4.75rem;
+  width: 1.56rem;
+  height: 1.56rem;
+}
+.search-keyword {
+  border: 0;
+  font-weight: 600;
+  font-family: var(--font-poppins);
+  font-size: 1.25rem;
+  background-color: transparent;
+  top: 1.31rem;
+  left: 8.81rem;
+  letter-spacing: 3px;
+  color: var(--darken-text);
+  text-align: left;
+  display: inline-block;
+  width: 68.06rem;
+  height: 2.19rem;
+}
+.top-bar {
+  position: absolute;
+  top: 5.38rem;
+  left: 0;
+  width: 90rem;
+  height: 5rem;
+  overflow: hidden;
+}
+.recent-searches {
+  position: absolute;
+  top: 0.38rem;
+  left: 36.88rem;
+  letter-spacing: -0.5px;
+}
+.round {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background-color: #acb7c1;
+  width: 1.56rem;
+  height: 1.56rem;
+}
+.close-button,
+.union-icon {
+  position: absolute;
+  top: 0.41rem;
+  left: 0.41rem;
+  width: 0.74rem;
+  height: 0.74rem;
+}
+.close-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  top: 1.13rem;
+  left: 84.19rem;
+  width: 1.56rem;
+  height: 1.56rem;
+  opacity: 0.6;
+}
+.background1,
+.settings-header {
+  position: absolute;
+  left: 0;
+  background-color: var(--color-white);
+  width: 90rem;
+}
+.settings-header {
+  top: 10rem;
+  height: 3.75rem;
+  overflow: hidden;
+  color: var(--darken-text);
+}
+.background1 {
+  top: 0;
+  box-shadow: 0 0.33000001311302185px 0 rgba(0, 0, 0, 0.25),
+    0-0.33000001311302185px 0#ced5dc;
+  height: 9.5rem;
+}
+.secondary-separator {
+  position: absolute;
+  top: 8.16rem;
+  left: -0.01rem;
+  border-top: 0.3px solid var(--secondary-spearator);
+  box-sizing: border-box;
+  width: 25.9rem;
+  height: 0.02rem;
+}
+.round-icon {
+  position: absolute;
+  top: 0;
+  left: 0.75rem;
+  border-radius: 50%;
+  width: 3.75rem;
+  height: 3.98rem;
+  object-fit: cover;
+}
+.sab-khasa {
+  text-decoration: none;
+  position: absolute;
+  top: 4.03rem;
+  left: 0.18rem;
+  letter-spacing: -0.2px;
+  color: inherit;
+  display: inline-block;
+  width: 7.14rem;
+  height: 1.61rem;
+}
+.profile,
+.profile2,
+.s-khasan {
+  position: absolute;
+  width: 7.5rem;
+}
+.s-khasan {
+  top: 4.94rem;
+  left: 0;
+  letter-spacing: -0.2px;
+  color: var(--darken-text);
+  display: inline-block;
+  height: 1.61rem;
+}
+.profile,
+.profile2 {
+  height: 6.55rem;
+}
+.profile {
+  top: 1.5rem;
+  left: 8.13rem;
+}
+.profile2 {
+  top: 0;
+  left: 0;
+}
+.profile1 {
+  top: 1.5rem;
+  left: 76.56rem;
+  width: 7.5rem;
+}
+.profile1,
+.profile4,
+.profile5 {
+  position: absolute;
+  height: 6.55rem;
+}
+.profile5 {
+  top: 0;
+  left: 23.13rem;
+  width: 7.5rem;
+}
+.profile4 {
+  top: 1.5rem;
+  left: 30.63rem;
+  width: 30.63rem;
+}
+.found-profiles {
+  position: absolute;
+  top: 13.75rem;
+  left: 0;
+  width: 90rem;
+  height: 9.5rem;
+  overflow: hidden;
+  font-size: var(--font-size-sm);
+  color: var(--bold-text);
+}
+.background2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 0.33000001311302185px 0#ced5dc;
+  width: 119.88rem;
+  height: 7.44rem;
+}
+.accounts,
+.news {
+  position: absolute;
+  top: 2.31rem;
+  left: 25rem;
+  letter-spacing: -0.3px;
+}
+.accounts {
+  text-decoration: none;
+  left: 55.31rem;
+  font-weight: 700;
+  color: inherit;
+}
+.account-child {
+  position: absolute;
+  top: 5.16rem;
+  left: 23.66rem;
+  border-top: 5px solid var(--color-purple);
+  box-sizing: border-box;
+  width: 7.81rem;
+  height: 0.31rem;
+}
+.account {
+  position: absolute;
+  top: 23.25rem;
+  left: 0;
+  width: 90rem;
+  height: 7.44rem;
+  overflow: hidden;
+}
+.text {
+  position: relative;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+.bounding-box,
+.icon {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+}
+.bounding-box {
+  height: 100%;
+  right: 0;
+  bottom: -100%;
+  left: 0;
+  transform: rotate(-90deg);
+  transform-origin: 0 0;
+}
+.icon {
+  height: 62.5%;
+  right: -16.67%;
+  bottom: -62.5%;
+  left: 16.67%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.icons12pxchevron-right {
+  position: relative;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.buttonstertiarytext-icon {
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+.buttonstertiarytext-icon,
+.featured-news,
+.header1 {
+  position: absolute;
+  width: 3.6rem;
+  height: 1.5rem;
+}
+.header1 {
+  top: 0;
+  left: 0;
+}
+.featured-news {
+  top: 18.5rem;
+  left: 97.34rem;
+  text-align: center;
+  font-size: var(--text-h4-semi-bold-size);
+  font-family: var(--text-h4-semi-bold);
+}
+.cardsfood-card-child {
+  position: absolute;
+  top: 1.69rem;
+  left: 0;
+  border-radius: 50%;
+  width: 2.69rem;
+  height: 2.69rem;
+  object-fit: cover;
+}
+.usa-today {
+  text-decoration: none;
+  position: absolute;
+  top: 2.31rem;
+  left: 3.75rem;
+  font-weight: 700;
+  color: inherit;
+  display: inline-block;
+  width: 16.25rem;
+  height: 2.69rem;
+}
+.cardsfood-card-item {
+  position: absolute;
+  top: 6.13rem;
+  left: 0;
+  border-radius: var(--br-3xs);
+  width: 20rem;
+  height: 18.75rem;
+  object-fit: cover;
+}
+.hours-ago,
+.if-benjamin-netanyahu-led {
+  position: absolute;
+  left: 0;
+  display: inline-block;
+}
+.hours-ago {
+  border: 0;
+  background-color: transparent;
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-sm);
+  top: 25.69rem;
+  color: var(--color-black);
+  text-align: left;
+  width: 10.13rem;
+  height: 1.56rem;
+}
+.if-benjamin-netanyahu-led {
+  text-decoration: none;
+  top: 28.06rem;
+  color: inherit;
+  width: 20.06rem;
+  height: 7.5rem;
+}
+.cardsfood-card-inner {
+  text-decoration: none;
+  position: absolute;
+  top: 33.5rem;
+  left: 11.56rem;
+  width: 1.56rem;
+  height: 1.56rem;
+  background-image: url(/public/rectangle9637@2x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.rectangle-button {
+  left: 16.38rem;
+  background-image: url(/public/rectangle9638@2x.png);
+}
+.cardsfood-card-child1,
+.cardsfood-card-child2,
+.rectangle-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 33.5rem;
+  width: 1.56rem;
+  height: 1.56rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.cardsfood-card-child1 {
+  left: 0;
+  background-image: url(/public/rectangle9639@2x.png);
+}
+.cardsfood-card-child2 {
+  left: 6rem;
+  background-image: url(/public/rectangle9640@2x.png);
+}
+.div,
+.div1 {
+  position: absolute;
+  top: 33.69rem;
+  left: 2.19rem;
+  font-size: var(--font-size-sm);
+  display: inline-block;
+  width: 2.75rem;
+  height: 1.13rem;
+}
+.div1 {
+  left: 8.19rem;
+}
+.cardsfood-card,
+.dishes {
+  position: absolute;
+  top: 0;
+  width: 20rem;
+  height: 36.56rem;
+}
+.cardsfood-card {
+  left: 0;
+}
+.dishes {
+  left: 8.13rem;
+}
+.dishes1 {
+  top: 0;
+  left: 61.88rem;
+  width: 20rem;
+}
+.dishes-parent,
+.dishes1,
+.dishes2 {
+  position: absolute;
+  height: 36.56rem;
+}
+.dishes2 {
+  top: 0;
+  left: 35rem;
+  width: 20rem;
+}
+.dishes-parent {
+  top: 30.69rem;
+  left: 0;
+  background-color: var(--color-white);
+  width: 90rem;
+  overflow: hidden;
+  font-size: var(--text-h4-semi-bold-size);
+  color: var(--color-black);
+}
+.home-desktop {
+  position: relative;
+  border: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 100%;
+  height: 67.5rem;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-13xl);
+  color: var(--color-purple);
+  font-family: var(--font-poppins);
+}
+
+
+
+.search1:hover,
+.create-post:hover,
+.settings:hover {
+  color: black; /* Change this to the color you desire on hover */
+  cursor: pointer;
+}
+
+.accounts {
+  transition: transform 0.2s; /* Add a smooth scale transition on hover */
+}
+
+.accounts:hover {
+  transform: scale(1.05); /* Scale up the post on hover (adjust the scale factor as needed) */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
+
+.usa-today , .usa-today1 , .usa-today3  {
+  transition: color 0.2s; /* Add a smooth color transition on hover */
+}
+
+.usa-today:hover , .usa-today1:hover , .usa-today3:hover {
+  color: rgb(106, 96, 96); /* Change this to the color you desire on hover */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
+
+
+.text {
+  transition: color 0.2s; /* Add a smooth color transition on hover */
+}
+
+.text:hover {
+  color: black; /* Change this to the color you desire on hover */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
+
+
+.if-benjamin-netanyahu-led, .if-benjamin-netanyahu-led1 , .if-benjamin-netanyahu-led3 {
+  transition: color 0.2s; /* Add a smooth color transition on hover */
+}
+
+.if-benjamin-netanyahu-led:hover, .if-benjamin-netanyahu-led1:hover , .if-benjamin-netanyahu-led3:hover {
+  color: #007BFF; /* Change this to the color you desire on hover */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
+
+.cardsfood-card-inner:hover, .rectangle-icon:hover , .cardsfood-card-child1:hover , .cardsfood-card-child2:hover {
+  
+  cursor: pointer;
+  /* You can add more styles like border changes or box-shadow here if needed */
+}
+
+.cancel:hover {
+  color: black; /* Change this to the color you desire on hover */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
+
+.union-icon:hover {
+  background-color: black;
+  opacity: 0.8; /* Adjust the opacity on hover as needed */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
+
+.sab-khasa:hover {
+  color: #007BFF; /* Change this to the color you desire on hover */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
