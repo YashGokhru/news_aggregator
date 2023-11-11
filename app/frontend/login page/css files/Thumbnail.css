@@ -202,3 +202,28 @@
   justify-content: flex-start;
   gap: var(--gap-3xs);
 }
+
+
+/* Add purple color to all buttons */
+.MuiButton-root {
+  background-color: transparent; 
+  color: #828282; /* Text color for better contrast */
+}
+
+/* Optionally, you can style primary buttons differently by using their color attribute */
+.MuiButton-root.primary-button {
+  background-color: transparent;
+  color: #828282; /* Text color for better contrast */
+}
+.MuiButton-root.primary-button1 {
+  background-color: #7F265B;
+  color: #FFFFFF; /* Text color for better contrast */
+}
+
+/* Add hover styles for "Forgot Password?" and "Create an account" */
+.create-an-account:hover,
+.forgot-password:hover {
+  color: #7F265B; /* Change the text color on hover */
+  text-decoration: underline; /* Add underline on hover */
+  cursor: pointer;
+}
