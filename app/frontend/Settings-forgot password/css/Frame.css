@@ -1,0 +1,236 @@
+.account-settings {
+  position: absolute;
+  top: 2.25rem;
+  left: 5.56rem;
+  display: inline-block;
+  width: 22.5rem;
+  height: 2.94rem;
+}
+
+.cancel:hover {
+  background-color: var(--color-hover); /* Change the background color on hover */
+  color: #007BFF; /* Change the text color on hover */
+  border: 1px solid var(--color-hover-border); /* Add a border on hover */
+  transition: background-color 0.3s, color 0.3s, border 0.3s; /* Add a smooth transition effect */
+  cursor: pointer;
+}
+
+.save-changes:hover {
+  background-color: var(--color-hover); /* Change the background color on hover */
+  color: #584848; /* Change the text color on hover */
+  border: 1px solid var(--color-hover-border); /* Add a border on hover */
+  transition: background-color 0.3s, color 0.3s, border 0.3s; /* Add a smooth transition effect */
+  cursor: pointer;
+}
+
+.general:hover,
+.change-password:hover,
+.forgot-password:hover,
+.info:hover {
+  text-decoration: underline; /* Underline the text on hover */
+  color: var(--color-hover-text); /* Change the text color on hover */
+  cursor: pointer;
+  transition: text-decoration 0.3s, color 0.3s; /* Add a smooth transition effect */
+}
+
+.change-password,
+.forgot-password,
+.general,
+.info {
+  text-decoration: none;
+  position: absolute;
+  top: 2.5rem;
+  left: 3.06rem;
+  font-weight: 500;
+  color: inherit;
+  display: inline-block;
+  width: 14.5rem;
+  height: 3.31rem;
+}
+.change-password,
+.forgot-password,
+.info {
+  top: 8.31rem;
+  width: 18.63rem;
+}
+.forgot-password,
+.info {
+  top: 14.13rem;
+}
+.info {
+  top: 19.94rem;
+}
+.general-parent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-6xs);
+  background-color: var(--color-aliceblue);
+  width: 25.5rem;
+  height: 40.81rem;
+  overflow: hidden;
+}
+.frame-child {
+  position: absolute;
+  top: 27.31rem;
+  left: 22.63rem;
+  border-radius: var(--br-8xs);
+  background-color: #007bff;
+  width: 10.19rem;
+  height: 2.94rem;
+}
+.cancel,
+.save-changes {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 28.25rem;
+  left: 24.38rem;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  font-family: var(--font-inter);
+  color: var(--color-black);
+  text-align: left;
+  display: inline-block;
+  width: 6.69rem;
+  height: 1.06rem;
+}
+.cancel {
+  top: 28.19rem;
+  left: 35.31rem;
+  width: 4.19rem;
+  height: 1.13rem;
+}
+.enter-otp,
+.enter-your-registered,
+.new-password,
+.repeate-new-password {
+  position: absolute;
+  top: 1.44rem;
+  left: 1.56rem;
+  font-weight: 500;
+  display: inline-block;
+  width: 16.38rem;
+  height: 1.94rem;
+}
+.enter-otp,
+.new-password,
+.repeate-new-password {
+  top: 7.81rem;
+  width: 7.81rem;
+}
+.new-password,
+.repeate-new-password {
+  top: 14.19rem;
+}
+.repeate-new-password {
+  top: 20.56rem;
+  width: 12.25rem;
+}
+.frame-child1,
+.frame-inner,
+.frame-item,
+.rectangle-div {
+  position: absolute;
+  top: 4.19rem;
+  left: 1.56rem;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-aliceblue);
+  width: 41.5rem;
+  height: 2.38rem;
+}
+.frame-child1,
+.frame-inner,
+.rectangle-div {
+  top: 10.56rem;
+}
+.frame-child1,
+.rectangle-div {
+  top: 16.94rem;
+}
+.frame-child1 {
+  top: 23.31rem;
+}
+.xyazgmailcom {
+  font-size: var(--font-size-base);
+  position: absolute;
+  top: 4.63rem;
+  left: 2.69rem;
+}
+.input,
+.xyaz1,
+.xyazgmailcom {
+  border: 0;
+  font-weight: 500;
+  font-family: var(--font-inter);
+  background-color: transparent;
+  color: var(--color-black);
+  text-align: left;
+  display: inline-block;
+  width: 39.25rem;
+  height: 1.5rem;
+}
+.input {
+  font-size: var(--font-size-base);
+  position: absolute;
+  top: 11rem;
+  left: 2.25rem;
+}
+.xyaz1 {
+  top: 17.38rem;
+  left: 2.31rem;
+}
+.rectangle-parent,
+.xyaz1,
+.xyaz11 {
+  position: absolute;
+  font-size: var(--font-size-base);
+}
+.xyaz11 {
+  border: 0;
+  font-weight: 500;
+  font-family: var(--font-inter);
+  background-color: transparent;
+  top: 23.75rem;
+  left: 2.25rem;
+  color: var(--color-black);
+  text-align: left;
+  display: inline-block;
+  width: 39.25rem;
+  height: 1.5rem;
+}
+.rectangle-parent {
+  top: 1.06rem;
+  left: 30.38rem;
+  width: 43.94rem;
+  height: 38.69rem;
+  overflow: hidden;
+}
+.account-settings-parent,
+.frame-parent {
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+.frame-parent {
+  position: absolute;
+  top: 6rem;
+  left: 5.5rem;
+  border-radius: var(--br-6xs);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 75.44rem;
+  height: 40.94rem;
+  font-size: var(--font-size-9xl);
+}
+.account-settings-parent {
+  position: relative;
+  width: 100%;
+  height: 64rem;
+  text-align: left;
+  font-size: 2rem;
+  color: var(--color-black);
+  font-family: var(--font-inter);
+}
