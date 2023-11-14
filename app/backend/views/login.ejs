@@ -1,0 +1,75 @@
+<!-- login.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    /* Your CSS styles here */
+  </style>
+</head>
+
+<body>
+  <form id="loginForm">
+    <h2>Login</h2>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="button" onclick="login()">Login</button>
+  </form>
+
+  <script>
+    // Function to get the value of a specific cookie
+    function getCookie(cookieName) {
+      const name = `${cookieName}=`;
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookieArray = decodedCookie.split(';');
+      for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+          return cookie.substring(name.length, cookie.length);
+        }
+      }
+      return null;
+    }
+
+    // Assume you have a secure way to obtain and store the access token
+    const accessToken = getCookie("accessToken"); // Replace with your actual cookie name
+
+    async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/user/login', {
+          method: 'POST',
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // Store the access token or perform any other actions on successful login
+          console.log('Login successful:', data.accessToken);
+        } else {
+          const errorData = await response.json();
+          // Handle login error, e.g., display an error message
+          console.error('Login failed:', errorData.message);
+        }
+      } catch (error) {
+        console.error('Error during login:', error.message);
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -11,6 +11,10 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    imagePath: {
+        type: String, // Assuming you store the image as a file path
+        required: true,
+    },
 
     content: {
         type: String,
@@ -19,15 +23,17 @@ const postSchema = new mongoose.Schema({
 
     upvote: {
         type: Number,
+        default:0
     },
-
+    
     downvote: {
         type: Number,
+        default:0
     },
 
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
+        // ref: 'Comment'
     }],
 
 

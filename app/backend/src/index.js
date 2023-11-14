@@ -8,13 +8,14 @@ const PostRoutes = require("./routes/PostRoutes");
 
 
 app.use(express.json());
-// app.set('views', path.join(__dirname, 'views'));
+app.use(express.urlencoded({extended:false}))
 app.set('view engine', 'ejs');
 
 
 app.get("/", (req, res) => {
-  res.send("Welcome to News Aggregator!");
+  res.render("ProfileImage");
 });
+
 
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);

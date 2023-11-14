@@ -1,43 +1,50 @@
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 
-
-const validateToken = asyncHandler(async (req,res,next)=>{
-    let token;
-    let authHeader = req.headers.Authorization || req.headers.authorization;
-    if(!authHeader){
-        res.status(400)
-        throw new Error("Missing header");
+function getCookie(cookieName, cookieString) {
+    if (!cookieString) {
+        return null;
     }
-    console.log(authHeader);
+    const name = `${cookieName}=`;
+    const decodedCookie = decodeURIComponent(cookieString);
+    const cookieArray = decodedCookie.split(';');
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return null;
+}
 
-    if(!authHeader.startsWith("Bearer")){
+const validateToken = asyncHandler(async (req, res, next) => {
+    let token = null;
+
+    // Try to get the token from Authorization header
+    const authHeader = req.headers.authorization || req.headers.Authorization;
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+        token = authHeader.split(" ")[1];
+    }
+
+    // If not found, try to get the token from cookies
+    if (!token) {
+        const cookieString = req.headers.cookie;
+        token = getCookie("accessToken", cookieString);
+    }
+
+    if (!token) {
         res.status(400);
-        throw new Error("Header is not starting with Bearer");
+        throw new Error("Token not found");
     }
 
-
-    token = authHeader.split(" ")[1];
-    if(!token){
-        res.status(400);
-        throw new Error("token not extracted")
-    }
-    console.log(token);
-    jwt.verify(token,process.env.JWT_SECRET_TOKEN,(err,decoded)=>{
-        if(err){
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
             res.status(401);
             throw new Error("User unauthorized");
         }
         req.user = decoded.user;
-        console.log(req.user);
         next();
-    })
-
-    
-    
-})
-
-
-
+    });
+});
 
 module.exports = validateToken;

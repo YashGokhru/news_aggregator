@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../../utils/sendEmail");
 
-// const otpGenerator = require('otp-generator')
+
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
@@ -17,7 +17,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("User already registered");
     }
 
-    //Hash Password
+    
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("password : ", hashedPassword);
 
@@ -25,11 +25,11 @@ const registerUser = asyncHandler(async (req, res) => {
         {
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
         }
     )
     console.log(user);
-    // res.json({message:"New user registered successfully"});
+    
     if (user) {
         res.status(200).json({ __id: user.id, email: user.email, password: user.hashedPassword })
     }
@@ -50,7 +50,7 @@ const LoginUser = asyncHandler(async (req, res) => {
     }
     const user = await User.findOne({ email: email });
     if (user && await bcrypt.compare(password, user.password)) {
-        // res.json({message:"Login SuccesFully"});
+        
         const accessToken = jwt.sign({
             user: {
                 username: user.username,
@@ -60,6 +60,7 @@ const LoginUser = asyncHandler(async (req, res) => {
         }, process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "30d" }
         );
+        res.cookie("uid",accessToken);
         res.status(200).json({ accessToken });
     }
     else {
@@ -81,8 +82,6 @@ const ForgotPassword = async (req, res) => {
             // If user doesn't exist, return an error response
             res.status(400).json({ message: "User not found" });
         } else {
-            // Generate OTP
-            // const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false ,lowerCaseAlphabets: false});
             const subject = "Forgot Password";
             const link = `http://localhost:${process.env.PORT}/user/resetpassword/${user.email}`;
             const body = `Click on the following link to reset your password: ${link}`;
@@ -103,10 +102,8 @@ const ForgotPassword = async (req, res) => {
 
 
 
-// .catch((err)=>{
-//     res.status(400);
-//     throw new Error(err);
-//)}
+
+//Reset Password
 
 const getResetPassword = async (req, res) => {
     const { user_email } = req.params;
@@ -150,9 +147,7 @@ const ResetPassword = async (req, res) => {
             } else {
 
                 try {
-                    user.name = "SmeetAgrawal";
                     user.password = await bcrypt.hash(newP, 10);
-
                     await user.save();
 
                     res.json({ message: "Updated Successfully" });

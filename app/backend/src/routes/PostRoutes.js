@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
-
-const{PostUpload} = require("../controllers/PostController");
+const{PostUpload,GetPost} = require("../controllers/PostController");
 const validateToken = require("../middleware/validateToken");
-
-router.get("/",validateToken,PostUpload);
-
+const upload = require("../../utils/multer")
 
 
+router.post("/",validateToken,upload.single('file'),PostUpload);
 
 
 
