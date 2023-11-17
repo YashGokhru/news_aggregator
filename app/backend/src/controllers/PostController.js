@@ -157,7 +157,7 @@ const SearchByKeyword = async (req, res) => {
   };
 
   //controller for searching by username
-  const SearchByUserName = (req, res) => {
+  const SearchByUserName = async (req, res) => {
     const username = req.body.username;
   
     try {
