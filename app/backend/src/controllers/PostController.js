@@ -37,7 +37,11 @@ const CreatePost = async (req, res) => {
                     });
             });
 
+<<<<<<< HEAD
             res.status(201).json({ message: "Post Uploaded Succesfully" });
+=======
+            res.status(201).json({message:"Post Uploaded Succesfully"});
+>>>>>>> b7019c6cabd737d46588ede92f4801f21228d324
         }
         else {
             res.status(400);
@@ -56,8 +60,12 @@ const GetPost = async (req, res) => {
         const userId = req.user.id;
         const userPosts = await Post.find({ userid: userId });
 
+<<<<<<< HEAD
 
         res.json({ posts: userPosts });
+=======
+        res.json({ posts: userPosts }); 
+>>>>>>> b7019c6cabd737d46588ede92f4801f21228d324
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -69,12 +77,18 @@ const DeletePost = async (req, res) => {
     try {
         const userId = req.user.id;
         const postId = req.params._id;
+<<<<<<< HEAD
         if (!postId) {
 
             return res.status(404).json({ error: 'Post not found' });
         }
 
 
+=======
+        
+        
+        
+>>>>>>> b7019c6cabd737d46588ede92f4801f21228d324
         // Check if the user exists
         const user = await User.findById(userId);
         if (!user) {
@@ -87,7 +101,11 @@ const DeletePost = async (req, res) => {
 
         // Delete the post by its postId
         await Post.deleteOne({ _id: postId });
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> b7019c6cabd737d46588ede92f4801f21228d324
         res.status(200).json({ message: 'Post deleted successfully' });
     } catch (error) {
         console.error(error);
@@ -105,6 +123,7 @@ const PostComment = async (req, res) => {
 
     try {
         const user = await User.findById(req.user.id);
+<<<<<<< HEAD
         const PostId = req.params._id;
         if (!PostId) {
 
@@ -112,6 +131,10 @@ const PostComment = async (req, res) => {
         }
         const post = await Post.findById(PostId);
         console.log("Post:", post);
+=======
+        const post = await Post.findById(req.params._id);
+        console.log("Post:",post);
+>>>>>>> b7019c6cabd737d46588ede92f4801f21228d324
 
 
         const newComment = {
@@ -121,10 +144,17 @@ const PostComment = async (req, res) => {
         };
 
         // Use $push to add the new comment to the end of the 'comments' array
+<<<<<<< HEAD
         await Post.updateOne({ _id: post }, { $push: { comments: newComment } });
         // await Post.save();
 
         res.status(200).json({ message: "Comment Added Succesfully" });
+=======
+        await Post.updateOne({ _id: post}, { $push: { comments: newComment } });
+        // await Post.save();
+
+        res.status(200).json({message:"Comment Added Succesfully"});
+>>>>>>> b7019c6cabd737d46588ede92f4801f21228d324
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
@@ -132,6 +162,7 @@ const PostComment = async (req, res) => {
 };
 
 const GetComment = async (req, res) => {
+<<<<<<< HEAD
     try {
 
         const postId = req.params._id;
@@ -144,6 +175,15 @@ const GetComment = async (req, res) => {
 
         res.json({ comments: post.comments });
 
+=======
+    try { 
+ 
+        const postId = req.params._id; // Assuming you get the postId from the request parameters
+        const post = await Post.findById(postId).select('comments');
+
+        res.json({ comments: post.comments});
+        
+>>>>>>> b7019c6cabd737d46588ede92f4801f21228d324
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
