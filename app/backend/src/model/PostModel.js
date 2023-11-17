@@ -7,6 +7,11 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // Postid:{
+    //     type:String,
+    //     unique:true
+
+    // },
     title: {
         type: String,
         required: true
@@ -32,8 +37,16 @@ const postSchema = new mongoose.Schema({
     },
 
     comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        // ref: 'Comment'
+        userid : {
+            type: String,
+            required: true
+        },
+        name : {
+            type: String,
+        },
+        comment: {
+            type : String
+        }
     }],
 
 

@@ -60,13 +60,17 @@ const LoginUser = asyncHandler(async (req, res) => {
         }, process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "30d" }
         );
-        res.cookie("uid",accessToken);
+        res.cookie("jwt",accessToken,{
+            expires:new Date(Date.now()+ 5000000),
+            httpOnly:true
+        });
         res.status(200).json({ accessToken });
     }
     else {
         res.status(401);
         throw new Error("Email or password is not valid");
     }
+    // return accessToken;
 });
 
 //ForgotPassword 
