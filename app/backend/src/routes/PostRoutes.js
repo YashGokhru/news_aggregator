@@ -5,7 +5,9 @@ const{
     GetPost,
     DeletePost,
     PostComment,
-    GetComment
+    GetComment,
+    SearchByKeyword,
+    SearchByUserName
 } = require("../controllers/PostController");
 const validateToken = require("../middleware/validateToken");
 const upload = require("../../utils/multer")
@@ -18,7 +20,8 @@ router.delete("/deletePost/:_id", validateToken, DeletePost);
 router.post("/CreateComment/:_id",validateToken,PostComment);
 // router.post("/CreateComment",validateToken,upload.single('file'),PostComment);
 router.get("/ShowComment/:_id",validateToken,GetComment);
-
+router.post("/SearchByKewyword",validateToken,SearchByKeyword);
+router.post("/SearchByUserName",validateToken,SearchByUserName);
 
 
 module.exports = router;
