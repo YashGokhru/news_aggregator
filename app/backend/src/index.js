@@ -5,6 +5,7 @@ const app = express();
 const dotenv = require("dotenv").config();
 const UserRoutes = require("./routes/UserRoutes");
 const PostRoutes = require("./routes/PostRoutes");
+const SearchRoutes = require("./routes/SearchRoutes");
 const HomeRoutes = require("./routes/HomeRoutes");
 const cookieParser = require("cookie-parser");
 
@@ -22,6 +23,7 @@ const port = process.env.PORT || 3000
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
 app.use("/home",HomeRoutes);
+app.use("/search",SearchRoutes);
 
 //process.env.PORT
 app.listen(port, () => {
