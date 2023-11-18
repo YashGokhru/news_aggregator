@@ -20,7 +20,7 @@ const CreatePost = async (req, res) => {
                 userid: user_id,
                 title: title,
                 content: content,
-                imagePath: "abc",
+                imagePath: "abc"
 
             }
         )
