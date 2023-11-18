@@ -23,6 +23,7 @@ const HomePage =  async (req, res) => {
         });
 
         res.json({ posts: postsWithUserDetails }); // Send posts with user details
+        console.log("Posts array sent");
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });

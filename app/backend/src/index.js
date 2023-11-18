@@ -7,15 +7,30 @@ const UserRoutes = require("./routes/UserRoutes");
 const PostRoutes = require("./routes/PostRoutes");
 const HomeRoutes = require("./routes/HomeRoutes");
 const cookieParser = require("cookie-parser");
+const path = require('path');
 
+app.set('view engine', 'ejs'); // To parse .ejs from view
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 // app.set('view engine', 'ejs');
 
+// console.log(__dirname);
+// console.log(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get("/", (req, res) => {
   res.render("ProfileImage");
+});
+
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+app.get("/home", (req, res) => {
+  res.render("home");
 });
 
 const port = process.env.PORT || 3000
