@@ -20,8 +20,8 @@ const validateToken = asyncHandler(async (req, res, next) => {
         res.status(400);
         throw new Error("Token not found");
     }
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+    const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
+    jwt.verify(token, keyy, (err, decoded) => {
         if (err) {
             res.status(401);
             throw new Error("User unauthorized");

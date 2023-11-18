@@ -39,7 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
-
+const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
 // Login 
 
 const LoginUser = asyncHandler(async (req, res) => {
@@ -57,7 +57,7 @@ const LoginUser = asyncHandler(async (req, res) => {
                 email: user.email,
                 id: user.id
             },
-        }, process.env.ACCESS_TOKEN_SECRET,
+        }, keyy,
             { expiresIn: "30d" }
         );
         res.cookie("jwt",accessToken,{
