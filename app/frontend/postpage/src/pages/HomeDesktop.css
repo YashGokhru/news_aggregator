@@ -1,0 +1,201 @@
+.background,
+.cardsfood-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.background {
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 90rem;
+  height: 67.5rem;
+}
+.cardsfood-card {
+  width: 7.25rem;
+  height: 5rem;
+}
+.dishes {
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  width: 22.69rem;
+  height: 23.56rem;
+}
+.home-desktop-child {
+  position: absolute;
+  top: 6.63rem;
+  left: 2.63rem;
+  border-radius: 50%;
+  width: 3.56rem;
+  height: 3.38rem;
+  object-fit: cover;
+}
+.hours-ago,
+.sports-india-news {
+  position: absolute;
+  top: 28.06rem;
+  display: inline-block;
+  height: 1.56rem;
+}
+.hours-ago {
+  left: 79.25rem;
+  font-size: 1rem;
+  width: 7.94rem;
+}
+.sports-india-news {
+  left: 24rem;
+  color: #7f265b;
+  width: 53.81rem;
+}
+.if-benjamin-netanyahu-led {
+  position: absolute;
+  top: 6.19rem;
+  left: 24.13rem;
+  font-size: var(--font-size-13xl);
+  font-weight: 500;
+  display: inline-block;
+  width: 61.38rem;
+  height: 5.25rem;
+}
+.businessman-bernie-moreno {
+  position: absolute;
+  top: 12.63rem;
+  left: 24.13rem;
+  font-size: var(--font-size-5xl);
+  display: inline-block;
+  width: 63.81rem;
+  height: 14.63rem;
+}
+.frame-child,
+.frame-item {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--color-gainsboro);
+  position: absolute;
+  top: 1.88rem;
+  left: 0.38rem;
+  border-radius: var(--br-xl);
+  width: 8.81rem;
+  height: 3.06rem;
+}
+.frame-item {
+  width: 8rem;
+}
+.comments1 {
+  margin: 0;
+}
+.comments {
+  position: absolute;
+  top: 2.63rem;
+  left: 1.44rem;
+  display: inline-block;
+  width: 8.44rem;
+  height: 2rem;
+  opacity: 0.8;
+}
+.frame-inner {
+  background-color: var(--color-gainsboro);
+  top: 1.88rem;
+  left: 11.06rem;
+  width: 76.06rem;
+  height: 3.06rem;
+}
+.frame-inner,
+.group-child,
+.group-item {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  position: absolute;
+  border-radius: var(--br-xl);
+}
+.group-child {
+  background-color: var(--color-gainsboro);
+  top: 0;
+  left: 0;
+  width: 86.81rem;
+  height: 31.56rem;
+}
+.group-item {
+  background-color: var(--color-gray-100);
+  top: 0.81rem;
+  left: 1.69rem;
+  width: 84.19rem;
+  height: 3.13rem;
+}
+.comment-1,
+.user-1 {
+  position: absolute;
+  top: 0.94rem;
+  left: 2.56rem;
+  display: inline-block;
+  width: 13.5rem;
+  height: 0.69rem;
+}
+.comment-1 {
+  top: 2.25rem;
+  font-size: var(--font-size-mid);
+  width: 82.06rem;
+  height: 1.69rem;
+}
+.group-inner {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--color-gray-100);
+  position: absolute;
+  top: 5.44rem;
+  left: 1.69rem;
+  border-radius: var(--br-xl);
+  width: 84.19rem;
+  height: 3.13rem;
+}
+.comment-2,
+.user-2 {
+  position: absolute;
+  top: 5.56rem;
+  left: 2.56rem;
+  display: inline-block;
+  width: 13.5rem;
+  height: 0.69rem;
+}
+.comment-2 {
+  top: 6.88rem;
+  font-size: var(--font-size-mid);
+  width: 82.06rem;
+  height: 1.69rem;
+}
+.rectangle-group {
+  position: absolute;
+  top: 5.75rem;
+  left: 0.31rem;
+  width: 86.81rem;
+  height: 31.56rem;
+  font-size: var(--font-size-xs);
+}
+.add-comment {
+  position: absolute;
+  top: 2.63rem;
+  left: 12.31rem;
+  opacity: 0.8;
+}
+.rectangle-parent {
+  position: absolute;
+  top: 28.81rem;
+  left: 1.81rem;
+  width: 87.13rem;
+  height: 37.31rem;
+  font-family: var(--font-inter);
+}
+.home-desktop {
+  position: relative;
+  border: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 100%;
+  height: 67.5rem;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-black);
+  font-family: var(--font-poppins);
+}
