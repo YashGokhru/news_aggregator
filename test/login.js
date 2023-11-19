@@ -51,7 +51,8 @@ describe.only('User Login', () => {
         expect(postRes.body.data.message).to.eq('Authentication failed');
         });
         it('422 Authentication Failed', async () => {
-            const data = {
+            const data = 
+            body:{
                 username:"Test",
                 password:""
             
