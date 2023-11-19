@@ -7,7 +7,7 @@ const UserRoutes = require("./routes/UserRoutes");
 const PostRoutes = require("./routes/PostRoutes");
 const HomeRoutes = require("./routes/HomeRoutes");
 const SearchRoutes = require("./routes/SearchRoutes");
-const HomeRoutes = require("./routes/HomeRoutes");
+
 const cookieParser = require("cookie-parser");
 const path = require('path');
 
