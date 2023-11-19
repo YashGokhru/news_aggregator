@@ -32,6 +32,7 @@ const registerUser = asyncHandler(async (req, res) => {
     
     if (user) {
         res.status(200).json({ __id: user.id, email: user.email, password: user.hashedPassword })
+        res.render("login");
     }
     else {
         res.status(400);
