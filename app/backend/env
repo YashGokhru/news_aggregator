@@ -1,0 +1,8 @@
+PORT = 3000
+ACCESS_TOKEN_SECRET = newsagr21
+
+HOST = smtp-relay.brevo.com
+BREVO_PORT = 587
+
+USER = 202101237@daiict.ac.in
+PASS = T0QRcXEg6dhf3wIC

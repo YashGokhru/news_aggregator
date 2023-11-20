@@ -1,406 +1,80 @@
-.cardsfood-card-child {
-position: absolute;
-top: 1.69rem;
-left: 0rem;
-border-radius: 50%;
-width: 2.69rem;
-height: 2.69rem;
-object-fit: cover;
+/* global.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
 }
-.usa-today {
-text-decoration: none;
-position: absolute;
-top: 2.31rem;
-left: 3.75rem;
-font-weight: 700;
-color: inherit;
-display: inline-block;
-width: 16.25rem;
-height: 2.69rem;
-}
-.cardsfood-card-item {
-position: absolute;
-top: 6.13rem;
-left: 0rem;
-border-radius: var(--br-3xs);
-width: 20rem;
-height: 18.75rem;
-object-fit: cover;
-}
-.hours-ago {
-border: none;
-background-color: transparent;
-font-family: var(--font-poppins);
-font-size: var(--font-size-sm);
-position: absolute;
-top: 25.69rem;
-left: 0rem;
-color: var(--color-black);
-text-align: left;
-display: inline-block;
-width: 10.13rem;
-height: 1.56rem;
-}
-.if-benjamin-netanyahu-led {
-text-decoration: none;
-position: absolute;
-top: 28.06rem;
-left: 0rem;
-color: inherit;
-display: inline-block;
-width: 20.06rem;
-height: 7.5rem;
-}
-.cardsfood-card-inner {
-text-decoration: none;
-position: absolute;
-top: 33.5rem;
-left: 11.56rem;
-width: 1.56rem;
-height: 1.56rem;
-background-image: url('./public/rectangle9637@2x.png');
-background-size: cover;
-background-repeat: no-repeat;
-background-position: top;
-}
-.rectangle-button {
-cursor: pointer;
-border: none;
-padding: 0;
-background-color: transparent;
-position: absolute;
-top: 33.5rem;
-left: 16.38rem;
-width: 1.56rem;
-height: 1.56rem;
-background-image: url('./public/rectangle9638@2x.png');
-background-size: cover;
-background-repeat: no-repeat;
-background-position: top;
-}
-.cardsfood-card-child1 {
-cursor: pointer;
-border: none;
-padding: 0;
-background-color: transparent;
-position: absolute;
-top: 33.5rem;
-left: 0rem;
-width: 1.56rem;
-height: 1.56rem;
-background-image: url('./public/rectangle9639@2x.png');
-background-size: cover;
-background-repeat: no-repeat;
-background-position: top;
-}
-.cardsfood-card-child2 {
-cursor: pointer;
-border: none;
-padding: 0;
-background-color: transparent;
-position: absolute;
-top: 33.5rem;
-left: 6rem;
-width: 1.56rem;
-height: 1.56rem;
-background-image: url('./public/rectangle9640@2x.png');
-background-size: cover;
-background-repeat: no-repeat;
-background-position: top;
-}
-.div {
-position: absolute;
-top: 33.69rem;
-left: 2.19rem;
-font-size: var(--font-size-sm);
-display: inline-block;
-width: 2.75rem;
-height: 1.13rem;
-}
-.div1 {
-position: absolute;
-top: 33.69rem;
-left: 8.19rem;
-font-size: var(--font-size-sm);
-display: inline-block;
-width: 2.75rem;
-height: 1.13rem;
-}
-.cardsfood-card {
-position: absolute;
-top: 0rem;
-left: 0rem;
-width: 20rem;
-height: 37.5rem;
-}
-.dishes {
-position: absolute;
-top: 6rem;
-left: 34.69rem;
-width: 20rem;
-height: 37.5rem;
-}
-.dishes1 {
-position: absolute;
-top: 6rem;
-left: 7.94rem;
-width: 20rem;
-height: 37.5rem;
-}
-.dishes2 {
-position: absolute;
-top: 42.38rem;
-left: 7.94rem;
-width: 20rem;
-height: 37.5rem;
-}
-.usa-today3 {
-position: absolute;
-top: 2.31rem;
-left: 3.75rem;
-font-size: var(--font-size-base);
-display: inline-block;
-width: 16.25rem;
-height: 2.69rem;
-}
-.hours-ago3 {
-position: absolute;
-top: 25.69rem;
-left: 0rem;
-display: inline-block;
-width: 10.13rem;
-height: 1.56rem;
-}
-.if-benjamin-netanyahu-led3 {
-position: absolute;
-top: 28.06rem;
-left: 0rem;
-font-size: var(--font-size-base);
-display: inline-block;
-width: 20.06rem;
-height: 7.5rem;
-}
-.cardsfood-card-child14 {
-position: absolute;
-top: 33.5rem;
-left: 11.56rem;
-width: 1.56rem;
-height: 1.56rem;
-object-fit: cover;
-}
-.cardsfood-card-child15 {
-position: absolute;
-top: 33.5rem;
-left: 16.38rem;
-width: 1.56rem;
-height: 1.56rem;
-object-fit: cover;
-}
-.cardsfood-card-child16 {
-position: absolute;
-top: 33.5rem;
-left: 0rem;
-width: 1.56rem;
-height: 1.56rem;
-object-fit: cover;
-}
-.cardsfood-card-child17 {
-position: absolute;
-top: 33.5rem;
-left: 6rem;
-width: 1.56rem;
-height: 1.56rem;
-object-fit: cover;
-}
-.div6 {
-position: absolute;
-top: 33.69rem;
-left: 2.19rem;
-display: inline-block;
-width: 2.75rem;
-height: 1.13rem;
-}
-.div7 {
-position: absolute;
-top: 33.69rem;
-left: 8.19rem;
-display: inline-block;
-width: 2.75rem;
-height: 1.13rem;
-}
-.dishes3 {
-position: absolute;
-top: 42.38rem;
-left: 34.25rem;
-width: 20rem;
-height: 37.5rem;
-font-size: var(--font-size-sm);
-}
-.cardsfood-card4 {
-position: absolute;
-top: 0rem;
-left: 0rem;
-width: 20.25rem;
-height: 37.5rem;
-}
-.dishes4 {
-position: absolute;
-top: 6rem;
-left: 61.25rem;
-width: 20.25rem;
-height: 37.5rem;
-}
-.dishes5 {
-position: absolute;
-top: 42.81rem;
-left: 61.44rem;
-width: 20.25rem;
-height: 37.5rem;
-font-size: var(--font-size-sm);
-}
-.home {
-cursor: pointer;
-border: none;
-padding: 0;
-background-color: transparent;
-position: absolute;
-margin: 0 !important;
-top: calc(50% - 29px);
-left: calc(50% - 601px);
-font-size: var(--font-size-13xl);
-font-weight: 700;
-font-family: var(--font-poppins);
-color: var(--color-dimgray);
-text-align: left;
-display: flex;
-align-items: center;
-width: 12.5rem;
-height: 3.5rem;
-flex-shrink: 0;
-z-index: 0;
-}
-.settings {
-text-decoration: none;
-position: absolute;
-margin: 0 !important;
-top: calc(50% - 29px);
-left: calc(50% + 459px);
-font-weight: 700;
-color: inherit;
-display: flex;
-align-items: center;
-width: 12.5rem;
-height: 3.5rem;
-flex-shrink: 0;
-z-index: 1;
-}
-.create-post {
-text-decoration: none;
-position: absolute;
-margin: 0 !important;
-top: calc(50% - 29px);
-left: calc(50% + 159px);
-font-weight: 700;
-color: inherit;
-display: flex;
-align-items: center;
-width: 14.38rem;
-height: 3.5rem;
-flex-shrink: 0;
-z-index: 2;
-}
-.search {
-text-decoration: none;
-position: absolute;
-margin: 0 !important;
-top: calc(50% - 29px);
-left: calc(50% - 16px);
-font-weight: 700;
-color: inherit;
-display: flex;
-align-items: center;
-width: 12.5rem;
-height: 3.5rem;
-flex-shrink: 0;
-z-index: 3;
-}
-.header-child {
-position: absolute;
-margin: 0 !important;
-top: calc(50% - 26px);
-left: calc(50% - 691px);
-width: 3.13rem;
-height: 3.13rem;
-z-index: 4;
-}
-.noun-profile-665436-1 {
-text-decoration: none;
-position: absolute;
-margin: 0 !important;
-top: 0.94rem;
-left: 84.38rem;
-width: 3.75rem;
-height: 3.22rem;
-background-image: url('./public/nounprofile6654361@2x.png');
-background-size: cover;
-background-repeat: no-repeat;
-background-position: top;
-z-index: 5;
-}
-.header-item {
-position: absolute;
-margin: 0 !important;
-bottom: 0.09rem;
-left: 70.59rem;
-border-right: 1px solid var(--color-black);
-box-sizing: border-box;
-width: 0.06rem;
-height: 5.06rem;
-z-index: 6;
-}
-.header {
-position: absolute;
-top: calc(50% - 685.5px);
-left: -0.06rem;
-background-color: var(--color-white);
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border: 1px solid var(--color-black);
-box-sizing: border-box;
-width: 90.13rem;
-height: 5.13rem;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-justify-content: flex-start;
-padding: 0rem 1.56rem 3.97rem;
-font-size: var(--font-size-13xl);
-color: var(--color-dimgray);
-}
+
+/* index.css */
 .home-desktop {
-position: relative;
-background-color: var(--color-white);
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border: 1px solid var(--color-black);
-box-sizing: border-box;
-width: 100%;
-height: 85.56rem;
-overflow: hidden;
-opacity: 0;
-text-align: left;
-font-size: var(--font-size-base);
-color: var(--color-black);
-font-family: var(--font-poppins);
-}
-.home-desktop.animate {
-animation: 1s ease 0s 1 normal forwards fade-in
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-  }
+.dishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
+.cardsfood-card {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.cardsfood-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.usa-today {
+  background-color: #3498db;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.hours-ago {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.if-benjamin-netanyahu-led {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.div,
+.div1 {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #888;
+}
+
+.header {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Add more styles based on your design requirements */

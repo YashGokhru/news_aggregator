@@ -1,4 +1,5 @@
 const express = require("express");
+// require('ejs');
 require("../src/config/DbConnection");
 const app = express();
 const dotenv = require("dotenv").config();
@@ -13,30 +14,30 @@ app.set('view engine', 'ejs'); // To parse .ejs from view
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
+// app.set('view engine', 'ejs');
+
+// console.log(__dirname);
+// console.log(express.static(path.join(__dirname)));
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get("/", (req, res) => {
-  res.render("register");
+  res.render("login");
 });
 
 app.get("/register", (req, res) => {
   res.render("register");
 });
-app.get("/login", (req, res) => {``
+app.get("/login", (req, res) => {
   res.render("login");
 });
 app.get("/home", (req, res) => {
   res.render("home");
 });
 
-app.get("/CreatePost", (req, res) => {
-  res.render("CreatePost");
-});
-
 const port = process.env.PORT || 3000
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
-app.use("/home",HomeRoutes);
+app.use("/posts",HomeRoutes);
 app.use("/search",SearchRoutes);
 //process.env.PORT
 app.listen(port, () => {
