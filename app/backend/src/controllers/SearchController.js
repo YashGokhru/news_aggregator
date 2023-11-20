@@ -13,13 +13,16 @@ const SearchByKeyword = async (req, res) => {
           { title: { $regex: keyword, $options: 'i' } }, // Case-insensitive search
           { content: { $regex: keyword, $options: 'i' } }
         ]
-      });
+      }).select('userid title content');
   
       res.json(posts);
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
     }
+
+
+    
   };
 
   //controller for searching by username
