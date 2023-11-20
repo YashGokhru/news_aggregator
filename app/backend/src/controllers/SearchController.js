@@ -31,16 +31,8 @@ const SearchByKeyword = async (req, res) => {
   
     try {
       // Find the user by username
-      const user = await User.findOne({ name: username });
-  
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-  
-      // Search for posts by user ID
-      const posts = await Post.find({ user: user._id });
-  
-      res.json(posts);
+      const users = await User.find({ name: username }).select('_id name email');
+      res.json(users);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
