@@ -32,6 +32,7 @@ const registerUser = asyncHandler(async (req, res) => {
     
     if (user) {
         res.status(200).json({ __id: user.id, email: user.email, password: user.hashedPassword })
+        res.render("login");
     }
     else {
         res.status(400);
@@ -39,7 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
-
+const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
 // Login 
 
 const LoginUser = asyncHandler(async (req, res) => {
@@ -57,7 +58,7 @@ const LoginUser = asyncHandler(async (req, res) => {
                 email: user.email,
                 id: user.id
             },
-        }, process.env.ACCESS_TOKEN_SECRET,
+        }, keyy,
             { expiresIn: "30d" }
         );
         res.cookie("jwt",accessToken,{

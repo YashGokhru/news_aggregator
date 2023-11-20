@@ -7,15 +7,12 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // Postid:{
-    //     type:String,
-    //     unique:true
 
-    // },
     title: {
         type: String,
         required: true
     },
+    
     imagePath: {
         type: String, // Assuming you store the image as a file path
         required: true,
