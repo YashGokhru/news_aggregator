@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --font-nunito-sans: "Nunito Sans";
+
+  /* font sizes */
+  --font-size-lg: 1.13rem;
+  --font-size-sm: 0.88rem;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-purple: #7f265b;
+  --color-lightgray: #ded2d9;
+  --gray-3: #828282;
+  --brand-flat-blue: #0a8bef;
+
+  /* Gaps */
+  --gap-9xs: 0.25rem;
+
+  /* Paddings */
+  --padding-smi: 0.81rem;
+  --padding-3xs: 0.63rem;
+
+  /* Border radiuses */
+  --br-8xs: 5px;
+}

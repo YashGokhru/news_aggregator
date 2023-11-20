@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="styles/homepage_global.css" /> -->
+    <!-- <link rel="stylesheet" href="styles/homepage_index.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+    />
+    <title>Your News Aggregator</title>
+  </head>
+  <body>
+    <div class="home-desktop" data-animate-on-scroll>
+      <div id="postsContainer"></div>
+      <div class="header">
+        <button class="home">Home</button>
+        <button class="settings">Settings</button>
+        <button class="create-post">Create Post</button>
+        <button class="search">Search</button>
+        <!-- <img class="header-child" alt="" src="images/public/group-1686550876.svg" /> -->
+        <button class="noun-profile-665436-1"></button>
+        <div class="header-item"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fetch posts from the backend API
+        const link = "http://localhost:3000/posts";
+        fetch(link)
+          .then((response) => response.json())
+          .then((posts) => {
+            const postsContainer = document.getElementById("postsContainer");
+            // console.log(Object.keys( posts));
+            console.log(posts);
+            console.log(posts.posts);
+            const p = posts.posts;
+            console.log(p);
+            // Iterate through the fetched posts and create HTML elements
+
+            p.forEach((post) => {
+              const postElement = document.createElement("div");
+              postElement.innerHTML = `
+                            <div class="cardsfood-card">
+                              <button><a href="http://localhost:3000/posts"+"${post.userid}"></a></button>
+                              <button class="usa-today">${post.user.name}</button> 
+                              //  <img class="cardsfood-card-item" alt="" src="${post.thumbnail}" /> 
+                             <textarea class="hours-ago" placeholder="${post.content}">${post.content}</textarea>
+                             <button class="if-benjamin-netanyahu-led">${post.title}</button>
+                            </div>`;
+
+              postsContainer.appendChild(postElement);
+            });
+          })
+          .catch((error) => console.error("Error fetching posts:", error));
+      });
+    </script>
+  </body>
+</html>
