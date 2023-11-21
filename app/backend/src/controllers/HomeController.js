@@ -34,6 +34,23 @@ const HomePage =  async (req, res) => {
     }
 }
 
+const PostPage =  async (req, res) => {
+    try {
+
+        const postid = req.params._id;
+        
+        const post = await Post.findById(postid).lean();
+        const useris = post.userid;
+        const user = await User.findById(useris).select('_id name ');
+        console.log(user);
+        res.json({post,user}); 
+        console.log("Post send");
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error for PostPage' });
+    }
+}
 module.exports = {
-    HomePage
+    HomePage,
+    PostPage
 }
