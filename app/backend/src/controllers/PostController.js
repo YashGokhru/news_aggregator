@@ -20,7 +20,7 @@ const CreatePost = async (req, res) => {
                 userid: user_id,
                 title: title,
                 content: content,
-
+                link : "xyz"
             }
         )
         console.log(post);
