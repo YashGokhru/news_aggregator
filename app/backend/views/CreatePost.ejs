@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="styles/createpost_index.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
 </head>
+
 <body>
   <div class="rectangle-parent">
     <img class="frame-child" alt="" src="images/rectangle-9636@2x.png" />
@@ -16,7 +18,7 @@
     <form id="createPostForm">
       <input class="frame-item" type="text" name="content" placeholder="Add content...." />
       <input class="frame-child1" type="text" name="title" placeholder="Add title" />
-      
+
       <button class="frame-child2" type="submit"></button>
       <div class="post">Post</div>
       <button class="frame-child3"></button>
@@ -32,7 +34,7 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       var createPostForm = document.getElementById('createPostForm');
 
       // Function to get the value of a cookie by its name
@@ -41,7 +43,7 @@
         if (match) return match[2];
       }
 
-      createPostForm.addEventListener('submit', function(event) {
+      createPostForm.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent the default form submission
 
         // Retrieve the input values
@@ -54,7 +56,7 @@
         // Use the values as needed (e.g., send them to the server or perform client-side validation)
 
         // Use the Fetch API to send a POST request to the server
-        fetch('/post/CreatePost', {
+        fetch('/post/createpost', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json', // Specify the content type as JSON
@@ -62,17 +64,18 @@
           },
           body: JSON.stringify({ content, title }), // Convert the data to JSON format
         })
-        .then(response => response.json())
-        .then(data => {
-          // Handle the response from the server
-          console.log('Server Response:', data);
-          window.location.href = '/home';
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response from the server
+            console.log('Server Response:', data);
+            window.location.href = '/home';
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
       });
     });
   </script>
 </body>
+
 </html>
