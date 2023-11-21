@@ -1,5 +1,6 @@
 const User = require("../model/UserModel");
 const Post = require("../model/PostModel");
+const Comment = require("../model/CommentModel");
 const asyncHandler = require("express-async-handler");
 const path = require('path');
 
@@ -12,7 +13,6 @@ const CreatePost = async (req, res) => {
         res.status(400);
         throw new Error("All Fields are mandotory");
     }
-    // const imagePath = req.file.path;
 
     try {
         const post = await Post.create(
@@ -20,7 +20,6 @@ const CreatePost = async (req, res) => {
                 userid: user_id,
                 title: title,
                 content: content,
-                imagePath: "abc"
 
             }
         )
@@ -114,14 +113,27 @@ const PostComment = async (req, res) => {
 
 
         const newComment = {
-            comment: req.body.comment,
             userid: req.user.id,
-            name: user.name
+            parentid : null,
+            content: comment,
+            noofreplies:0,
+            upvote: 0,
+            downvote: 0
         };
-
-        // Use $push to add the new comment to the end of the 'comments' array
-        await Post.updateOne({ _id: post }, { $push: { comments: newComment } });
-        // await Post.save();
+        
+        const createdComment = await Comment.create(newComment);
+        const createdCommentId = createdComment._id; // Accessing the ID of the created comment
+        console.log("New comment created:", createdComment.content);
+        console.log("New comment ID:", createdCommentId); // Logging the ID
+        
+        await Post.updateOne(
+          { _id: post }, 
+          { 
+            $push: { replies: createdCommentId },
+            $inc: { noofreplies: 1 } // Incrementing the noofreplies attribute by 1
+          }
+        );
+          
 
         res.status(200).json({ message: "Comment Added Succesfully" });
     } catch (error) {
@@ -130,7 +142,7 @@ const PostComment = async (req, res) => {
     }
 };
 
-const GetComment = async (req, res) => {
+const GetComment = async (req, res) => {         //get comments of particular post
     try {
 
         const postId = req.params._id;
@@ -138,10 +150,11 @@ const GetComment = async (req, res) => {
 
             return res.status(404).json({ error: 'Post not found' });
         }
+    
         // Assuming you get the postId from the request parameters
-        const post = await Post.findById(postId).select('comments');
+        const post = await Post.findById(postId).select('replies noofreplies');
 
-        res.json({ comments: post.comments });
+        res.json({post });
 
     } catch (error) {
         console.error(error);
