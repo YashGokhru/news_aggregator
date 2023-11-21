@@ -11,7 +11,7 @@ const validateToken = require("../middleware/validateToken");
 const upload = require("../../utils/multer")
 
 
-router.post("/CreatePost",validateToken,CreatePost);
+router.post("/createpost",validateToken,CreatePost);
 // router.post("/CreatePost",validateToken,upload.single('file'),PostUpload);
 router.get("/getPost",validateToken,GetPost);
 router.delete("/deletePost/:_id", validateToken, DeletePost);

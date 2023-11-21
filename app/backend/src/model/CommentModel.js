@@ -33,7 +33,7 @@ const commentSchema = new mongoose.Schema({
     downvote: {
         type: Number,
         default:0
-    },s
+    },
 
 
 }, { timestamps: true })

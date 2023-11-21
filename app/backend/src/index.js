@@ -21,7 +21,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get("/", (req, res) => {
-  res.render("login");
+  res.render("register");
 });
 
 app.get("/register", (req, res) => {
@@ -37,7 +37,12 @@ app.get("/postpage", (req, res) => {
   res.render("postpage");
 });
 
-const port = process.env.PORT || 3000
+
+app.get("/createpost", (req, res) => {
+  res.render("CreatePost");
+});
+
+const port = process.env.PORT || 6000
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
 app.use("/posts",HomeRoutes);
