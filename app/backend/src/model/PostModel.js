@@ -15,7 +15,7 @@ const postSchema = new mongoose.Schema({
     link: {
         type: String,
         trim: true, 
-        required: true
+        
     },
 
     content: {
