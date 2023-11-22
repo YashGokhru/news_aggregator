@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/searchstyle.css">
+    <title>Your Basic Website</title>
+</head>
+<body>
+
+  <div class="header">
+    <img class="header-child" alt="" src="images/group-1686550876.svg" />
+      <button class="home" onclick="redirectToUrl('/home')">Home</button>
+      <button class="search" onclick="redirectToUrl('/search')">Search</button>
+      <button class="create-post" onclick="redirectToUrl('/creatpost')">Create Post</button>
+    
+      <button class="profile"><img src="images/profile.png">
+      </button>
+
+  </div>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search...">
+    <br>
+  </div>
+  <div class="buttons">
+    <button class="user1" onclick="user()">Search by Username</button>
+    <button class="user2" onclick="post()">Search by Post</button>
+  </div>
+
+  <div class="dishes" id="postsContainer">
+     <!-- Dynamic content will be added here -->
+   </div>
+
+  <!-- <ul id="postList"></ul> -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // function searchPosts(username) {
+    //     // Replace this with your actual backend API endpoint
+    //     var apiUrl = '/search/SearchByUsername/' + encodeURIComponent(username);
+
+    //     fetch(apiUrl)
+    //       .then(response => response.json())
+    //       .then(posts => {
+    //         displayPosts(posts);
+    //       })
+    //       .catch(error => {
+    //         console.error('Error:', error);
+    //       });
+    //   }
+
+    //   // Function to display the list of posts
+    //   function displayPosts(posts) {
+    //     var postList = document.getElementById('postList');
+    //     postList.innerHTML = ''; // Clear previous results
+
+    //     posts.forEach(post => {
+    //       var listItem = document.createElement('li');
+    //       listItem.innerHTML = `
+    //         <h3>${post.title}</h3>
+    //         <p>${post.content}</p>
+    //         <p>Posted by: ${post.username}</p>
+    //         <hr>
+    //       `;
+    //       postList.appendChild(listItem);
+    //     });
+    //   }
+
+    //   function searchPosts() {
+    //     var searchInput = document.getElementById('searchInput');
+    //     var username = searchInput.value;
+
+    //     // Update the URL with the username
+    //     var newUrl = '/search/searchuser/' + encodeURIComponent(username);
+    //     window.history.pushState({path:newUrl},'',newUrl);
+
+    //     // Perform the search
+    //     searchPosts(username);
+    //   }
+
+    function user() {
+      console.log("user called");
+      var searchInput = document.getElementById('searchInput');
+        var username = searchInput.value;
+        console.log(username);
+        const currentUrl = window.location.href;
+          // Split the URL by "/"
+          const urlParts = currentUrl.split("/");
+
+          // Remove the last part from the array
+          urlParts.pop();
+
+          // Join the parts to create the new URL
+          const newtUrl = urlParts.join("/");
+          const url = newtUrl + "/posts";
+
+        // Update the URL with the username
+        var newUrl = currentUrl + '/searchuser' + "/${username}";
+        console.log(newUrl);
+
+        // Perform the search
+        temp(url,newUrl);  
+    }
+
+    function post() {
+      console.log("post called");
+      var searchInput = document.getElementById('searchInput');
+        var keyword = searchInput.value;
+        console.log(keyword);
+        const currentUrl = window.location.href;
+          // Split the URL by "/"
+          const urlParts = currentUrl.split("/");
+
+          // Remove the last part from the array
+          urlParts.pop();
+
+          // Join the parts to create the new URL
+          const newtUrl = urlParts.join("/");
+          const url = newtUrl + "/posts";
+
+        // Update the URL with the username
+        var newUrl = currentUrl + '/searchpost' + "/${keyword}";
+        console.log(newUrl);
+
+        // Perform the search
+        temp(url,newUrl);  
+    }
+
+    function temp(url,searchurl) {
+      console.log("temp called");
+      const postsContainer = document.getElementById("postsContainer");
+
+      // const currentUrl = window.location.href;
+
+      // // Split the URL by "/"
+      // const urlParts = currentUrl.split("/");
+
+      // // Remove the last part from the array
+      // urlParts.pop();
+
+      // // Join the parts to create the new URL
+      // const newUrl = urlParts.join("/");
+      // const url = newUrl + "/posts";
+      // console.log(url);
+
+      fetch(searchurl)
+        .then((response) => response.json())
+        .then((posts) => {
+          // Iterate through the fetched posts and create HTML elements
+
+          console.log(posts);
+          console.log(posts.posts);
+          const p = posts.posts;
+          console.log(p);
+
+          let PostPageUrl = "";
+          p.forEach((post) => {
+            const postElement = document.createElement("div");
+            postElement.className = "cardsfood-card";
+
+            // Populate the post details based on your data structure
+            PostPageUrl = url + "/${post._id}";
+            console.log(PostPageUrl);
+            postElement.innerHTML = `
+            
+                          
+            <div>
+                    <div class="usa-today">${post.user.name}</div>
+            </div>
+            <div>
+                <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${url}/${post._id}')">${post.title}</button>
+            </div>
+            
+            <div>
+              <div>
+  <div class="react-container">
+      <img class="react" src="images/upvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+      <p class="reaction-count">${post.upvote}</p>
+  </div>
+  <div class="react-container">
+      <img class="react" src="images/downvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+      <p class="reaction-count">${post.downvote}</p>
+  </div>
+  <div class="react-container">
+      <img class="react" src="images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
+
+      <p class="reaction-count">${post.noofreplies}</p>
+  </div>
+  </div>
+
+
+
+            </div>
+          
+
+                        
+                          <!--
+                          <button class="cardsfood-card-inner"></button>
+                          <button class="rectangle-button"></button>
+                          <button class="cardsfood-card-child1"></button>
+                          <button class="cardsfood-card-child2"></button>
+                          <div class="div">${post.likes}</div>
+                          <div class="div1">${post.comments}</div>
+                          -->
+                      `;
+
+            postsContainer.appendChild(postElement);
+          });
+        })
+        .catch((error) => console.error("Error fetching posts:", error));
+    }
+  });
+  function redirectToUrl(fullUrl) {
+window.location.href = fullUrl;
+}
+</script>
+
+  <!-- <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="box">
+          <h2>Box 1</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="box">
+          <h2>Box 2</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="box">
+          <h2>Box 3</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col">
+        <div class="box">
+          <h2>Box 4</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="box">
+          <h2>Box 5</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+  
+      <div class="col">
+        <div class="box">
+          <h2>Box 6</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+
+</body>
+</html>
