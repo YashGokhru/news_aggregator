@@ -99,7 +99,7 @@ const PostComment = async (req, res) => {
     const post = await Post.findById(PostId);
     console.log("Post:", post);
 
-    console.log(1111);
+    
     const newComment = {
       userid: req.user.id,
       postid: PostId,
@@ -109,7 +109,7 @@ const PostComment = async (req, res) => {
       upvote: 0,
       downvote: 0,
     };
-    console.log(2222);
+    
     const createdComment = await Comment.create(newComment);
     const createdCommentId = createdComment._id; // Accessing the ID of the created comment
     console.log("New comment created:", createdComment.content);
