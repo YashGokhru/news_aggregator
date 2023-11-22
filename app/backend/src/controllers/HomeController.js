@@ -1,3 +1,4 @@
+const PostVote = require("../model/PostVoting");
 const User = require("../model/UserModel");
 const Post = require("../model/PostModel");
 const asyncHandler = require("express-async-handler");
@@ -41,8 +42,9 @@ const PostPage =  async (req, res) => {
         
         const post = await Post.findById(postid).lean();
         const useris = post.userid;
-        const user = await User.findById(useris).select('_id name ');
+        const user = await User.findById(useris).select('_id name');
         console.log(user);
+
         res.json({post,user}); 
         console.log("Post send");
     } catch (error) {
@@ -50,7 +52,60 @@ const PostPage =  async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error for PostPage' });
     }
 }
+
+const vote = async (req, res) => {
+    const { vote } = req.body;
+
+    if(!vote){
+       res.status(400).json({ error: 'Invalid Voting' });
+    }
+    const postidd = req.params._id;
+    const useridd = req.user.id; 
+    const entry = await PostVote.findOne({ 
+      $and: [ { userid: useridd }, { postid: postidd } ]
+    });
+    console.log(entry);
+    // console.log();
+    let response = 0;
+    try{
+    if(entry){
+      if (entry.vote == vote) {
+        await PostVote.deleteOne({ _id: entry._id });
+        response = 0;
+        console.log("remove Upvote/Downvote");
+      } else {
+        await PostVote.updateOne({ _id: entry._id }, { $set: { vote: vote } });
+        response = vote;
+        console.log("update Upvote/Downvote");
+      }
+    }
+    else{
+      const newentry = await PostVote.create(
+        {
+            userid: useridd,
+            postid: postidd,
+            vote : vote
+        }
+      )
+      console.log("added Upvote/Downvote");
+      response = vote;
+    }
+
+    const filter1 = { postid: postidd, vote : 1 };
+    const filter2 = { postid: postidd, vote : -1 };
+
+    const upvotecount = await PostVote.countDocuments(filter1);
+    const downvotecount = await PostVote.countDocuments(filter2);
+    await Post.updateOne({ _id: postidd }, { $set: { upvote: upvotecount,  downvote: downvotecount } });
+
+    res.json({ response : response , uc : upvotecount , dc : downvotecount });
+    
+  }catch(error){
+    return res.status(400).json({ error: 'ERROR IN VOTING' });
+  }
+}
 module.exports = {
     HomePage,
-    PostPage
+    PostPage,
+    vote
 }
