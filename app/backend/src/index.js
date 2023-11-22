@@ -9,6 +9,8 @@ const HomeRoutes = require("./routes/HomeRoutes");
 const SearchRoutes = require("./routes/SearchRoutes");
 const cookieParser = require("cookie-parser");
 const path = require('path');
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
 app.set('view engine', 'ejs'); // To parse .ejs from view
 app.use(cookieParser());
@@ -37,12 +39,20 @@ app.get("/postpage", (req, res) => {
   res.render("postpage");
 });
 
+app.get("/resetpassword", (req, res) => {
+  res.render("resetpassword");
+});
+
+app.get("/forgotpassword", (req, res) => {
+  res.render("ForgotPassword");
+});
+
 
 app.get("/createpost", (req, res) => {
   res.render("CreatePost");
 });
 
-const port = process.env.PORT || 6000
+const port = process.env.PORT || 3000
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
 app.use("/posts",HomeRoutes);

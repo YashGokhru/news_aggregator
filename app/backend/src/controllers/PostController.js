@@ -3,10 +3,11 @@ const Post = require("../model/PostModel");
 const Comment = require("../model/CommentModel");
 const asyncHandler = require("express-async-handler");
 const path = require('path');
+const mongoose = require('mongoose');
 
 
 const CreatePost = async (req, res) => {
-    const { title, content } = req.body;
+    const { title, content,link } = req.body;
     const user_id = req.user.id;
     console.log(user_id);
     if (!title || !content) {
@@ -20,6 +21,7 @@ const CreatePost = async (req, res) => {
                 userid: user_id,
                 title: title,
                 content: content,
+                link:link
 
             }
         )
@@ -63,16 +65,15 @@ const GetPost = async (req, res) => {
     }
 }
 
-
 const DeletePost = async (req, res) => {
     try {
         const userId = req.user.id;
         const postId = req.params._id;
-        if (!postId) {
 
-            return res.status(404).json({ error: 'Post not found' });
+        // Validate the postId
+        if (!mongoose.Types.ObjectId.isValid(postId)) {
+            return res.status(400).json({ error: 'Invalid Post ID' });
         }
-
 
         // Check if the user exists
         const user = await User.findById(userId);
@@ -92,6 +93,7 @@ const DeletePost = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 const PostComment = async (req, res) => {
     const { comment } = req.body;

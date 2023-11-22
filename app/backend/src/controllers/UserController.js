@@ -88,14 +88,14 @@ const ForgotPassword = async (req, res) => {
             res.status(400).json({ message: "User not found" });
         } else {
             const subject = "Forgot Password";
-            const link = `http://localhost:${process.env.PORT}/user/resetpassword/${user.email}`;
+            const link = `http://localhost:${process.env.PORT}/resetpassword`;
             const body = `Click on the following link to reset your password: ${link}`;
 
             // Send the email
             await sendEmail(user.email, subject, body);
 
             // Return a success response
-            res.json({ message: "Link Sent Successfully" });
+            res.send('<html><body>Link Sent Successfully</body></html>');
             
         }
     } catch (error) {
@@ -127,8 +127,7 @@ const getResetPassword = async (req, res) => {
 
 }
 const ResetPassword = async (req, res) => {
-    const { newP, confP } = req.body;
-    const { user_email } = req.params;
+    const { newP, confP ,email} = req.body;
 
     console.log(req.body);
     if (!newP || !confP) {
@@ -144,7 +143,7 @@ const ResetPassword = async (req, res) => {
     }
    
 
-    User.findOne({ email: user_email })
+    User.findOne({ email: email })
         .then(async (user) => {
             if (!user) {
                 res.status(401);
