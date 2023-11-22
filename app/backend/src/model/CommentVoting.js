@@ -5,11 +5,12 @@ const Comment = require("./CommentModel");
 const CommentVoting = new mongoose.Schema({
     userid : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : User
+        ref : User,
+        
     },
-    commenttid : {
+    commentid : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : Comment
+        ref : Comment,
     },
     vote : {                     // 1 for upvote, -1 for downvote;
         type : Number,
