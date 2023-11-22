@@ -1,0 +1,172 @@
+.divcontainer-child {
+    position: absolute;
+    top: -0.06rem;
+    left: 45rem;
+    background-color: var(--color-white);
+    backdrop-filter: blur(4px);
+    width: 45rem;
+    height: 64rem;
+  }
+  .have-an-account,
+  .login {
+    position: relative;
+  }
+  .login {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-purple);
+  }
+  .have-an-account-parent {
+    position: absolute;
+    top: 59.5rem;
+    left: 61.56rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.63rem;
+  }
+  .divcontainer-item {
+    position: absolute;
+    top: 7.69rem;
+    left: 49.38rem;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  .sign-up {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26.25rem;
+  }
+  .sign-up-parent {
+    height: 4.88rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .email {
+    position: relative;
+    font-weight: 600;
+  }
+  .frame-child {
+    border: 1px solid var(--color-lightgray);
+    font-family: var(--font-nunito-sans);
+    font-size: var(--font-size-sm);
+    background-color: transparent;
+    border-radius: var(--br-8xs);
+    box-sizing: border-box;
+    width: 26.25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-smi) var(--padding-3xs);
+  }
+  .email-parent,
+  .frame-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .email-parent {
+    gap: var(--gap-9xs);
+  }
+  .frame-container {
+    gap: 1.5rem;
+  }
+  .check {
+    position: relative;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+  .checkbox,
+  .checkbox-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  .checkbox {
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .checkbox-wrapper {
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 0.75rem;
+    color: #a1a1a1;
+  }
+  .sign-up1 {
+    position: relative;
+    font-size: var(--font-size-lg);
+    font-weight: 800;
+    font-family: var(--font-nunito-sans);
+    color: var(--color-white);
+    text-align: left;
+  }
+  .sign-up-wrapper {
+    cursor: pointer;
+    border: 0;
+    padding: var(--padding-smi) var(--padding-3xs) 0.75rem;
+    background-color: var(--color-purple);
+    border-radius: 6px;
+    width: 26.25rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .frame-group,
+  .frame-parent {
+    display: flex;
+    flex-direction: column;
+  }
+  .frame-group {
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--gray-3);
+  }
+  .frame-parent {
+    position: absolute;
+    top: 9.94rem;
+    left: 49.94rem;
+    width: 33.88rem;
+    height: 48.31rem;
+    align-items: center;
+    justify-content: center;
+    gap: 2.25rem;
+    text-align: center;
+    font-size: 2.25rem;
+    color: #525252;
+  }
+  .divcontainer-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45rem;
+    height: 64rem;
+    object-fit: cover;
+  }
+  .divcontainer {
+    position: relative;
+    border-radius: 34px;
+    background-color: var(--color-white);
+    box-shadow: 0 0 45px #e1c2a8;
+    border: 10px solid var(--color-white);
+    box-sizing: border-box;
+    width: 100%;
+    height: 65.25rem;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-lg);
+    color: var(--gray-3);
+    font-family: var(--font-nunito-sans);
+  }
+  

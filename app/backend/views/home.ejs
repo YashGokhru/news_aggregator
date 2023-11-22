@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="styles/homepage_global.css" />
+    <link rel="stylesheet" href="styles/homepage_index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+    />
+    <title>Your News Aggregator</title>
+  </head>
+  <body>
+    <div class="home-desktop" data-animate-on-scroll>
+      <div class="header">
+        <img class="header-child" alt="" src="images/group-1686550876.svg" />
+          <button class="home" onclick="redirectToUrl('/home')">Home</button>
+          <button class="search" onclick="redirectToUrl('/search')">Search</button>
+          <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
+        
+          <button class="profile"><img src="/images/profile.png"
+            ></button>
+
+      </div>
+
+      <div class="dishes" id="postsContainer">
+        <!-- Dynamic content will be added here -->
+      </div>
+      
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const postsContainer = document.getElementById("postsContainer");
+
+        const currentUrl = window.location.href;
+
+        // Split the URL by "/"
+        const urlParts = currentUrl.split("/");
+
+        // Remove the last part from the array
+        urlParts.pop();
+
+        // Join the parts to create the new URL
+        const newUrl = urlParts.join("/");
+        const url = newUrl + "/posts";
+        console.log(url);
+
+        fetch(url)
+          .then((response) => response.json())
+          .then((posts) => {
+            // Iterate through the fetched posts and create HTML elements
+
+            console.log(posts);
+            console.log(posts.posts);
+            const p = posts.posts;
+            console.log(p);
+
+            let PostPageUrl = "";
+            p.forEach((post) => {
+              const postElement = document.createElement("div");
+              postElement.className = "cardsfood-card";
+
+              // Populate the post details based on your data structure
+              PostPageUrl = url + "/${post._id}";
+              console.log(PostPageUrl);
+              postElement.innerHTML = `
+              
+                            
+              <div>
+                      <div class="usa-today">${post.user.name}</div>
+              </div>
+              <div>
+                  <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${url}/${post._id}')">${post.title}</button>
+              </div>
+              
+              <div>
+                <div>
+    <div class="react-container">
+        <img class="react" src="images/upvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+        <p class="reaction-count">${post.upvote}</p>
+    </div>
+    <div class="react-container">
+        <img class="react" src="images/downvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+        <p class="reaction-count">${post.downvote}</p>
+    </div>
+    <div class="react-container">
+        <img class="react" src="images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
+
+        <p class="reaction-count">${post.noofreplies}</p>
+    </div>
+</div>
+
+
+
+              </div>
+            
+
+                           
+                            <!--
+                            <button class="cardsfood-card-inner"></button>
+                            <button class="rectangle-button"></button>
+                            <button class="cardsfood-card-child1"></button>
+                            <button class="cardsfood-card-child2"></button>
+                            <div class="div">${post.likes}</div>
+                            <div class="div1">${post.comments}</div>
+                            -->
+                        `;
+
+              postsContainer.appendChild(postElement);
+            });
+          })
+          .catch((error) => console.error("Error fetching posts:", error));
+      });
+      function redirectToUrl(fullUrl) {
+    window.location.href = fullUrl;
+}
+    </script>
+  </body

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="styles/login_global.css" />
+    <link rel="stylesheet" href="styles/login_index.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400;600;700;800&display=swap" />
+</head>
+
+<body>
+    <div class="rectangle-parent">
+        <img class="frame-child" alt="" src="images/rectangle-9637@2x.png" />
+        <img class="frame-item" alt="" src="images/group-1686550876.svg" />
+
+        <div class="frame-parent">
+            <div class="frame-wrapper">
+                <div class="login-to-your-account-wrapper">
+                    <b class="login-to-your">Login to your Account</b>
+                </div>
+            </div>
+            <div class="frame-group">
+                <form id="loginForm">
+                    <div class="frame-container">
+                        <div class="email-parent">
+                            <div class="email">Email</div>
+                            <input id="emailInput" class="frame-inner" type="email" required />
+                        </div>
+                        <div class="frame-div">
+                            <div class="email-parent">
+                                <div class="email">Password</div>
+                                <input id="passwordInput" class="frame-inner" type="password" required />
+                            </div>
+                            <div class="checkbox-parent">
+                                <div class="checkbox">
+                                    <input class="check" type="checkbox" />
+                                    <div class="login-to-your">Remember Me</div>
+                                </div>
+                                <a class="forgot-password" href="/forgotpassword">Forgot Password?</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="login-wrapper">
+                        <div class="login">Login</div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var loginForm = document.getElementById('loginForm');
+
+            loginForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Retrieve the input values
+                var email = document.getElementById('emailInput').value;
+                var password = document.getElementById('passwordInput').value;
+
+                // Create an object with user login data
+                var userData = {
+                    email: email,
+                    password: password
+                };
+
+                // Send a POST request to /user/login
+                fetch('/user/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                })
+                    .then(response => {
+                        console.log('Login successful');
+                        // Handle the response as needed
+                        window.location.href = '/home';
+                    })
+                    .catch(error => {
+                        console.error('Error during login:', error);
+                        // Handle errors as needed
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>
