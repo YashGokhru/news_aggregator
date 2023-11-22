@@ -20,7 +20,7 @@ password:{
 posts: [
     {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Post
+    ref: 'Post'
   }],
 
 }, {timestamps:true})

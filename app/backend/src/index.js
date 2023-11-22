@@ -10,6 +10,8 @@ const SearchRoutes = require("./routes/SearchRoutes");
 const CommentRoutes = require("./routes/CommentRoutes");
 const cookieParser = require("cookie-parser");
 const path = require('path');
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
 app.set('view engine', 'ejs'); // To parse .ejs from view
 app.use(cookieParser());
@@ -36,6 +38,14 @@ app.get("/home", (req, res) => {
 });
 app.get("/postpage", (req, res) => {
   res.render("postpage");
+});
+
+app.get("/resetpassword", (req, res) => {
+  res.render("resetpassword");
+});
+
+app.get("/forgotpassword", (req, res) => {
+  res.render("ForgotPassword");
 });
 
 
