@@ -13,7 +13,7 @@ const SearchByKeyword = async (req, res) => {
           { title: { $regex: keyword, $options: 'i' } }, // Case-insensitive search
           { content: { $regex: keyword, $options: 'i' } }
         ]
-      }).select('userid title content');
+      });
   
       res.json(posts);
     } catch (error) {
@@ -27,20 +27,22 @@ const SearchByKeyword = async (req, res) => {
 
   //controller for searching by username
   const SearchByUsername = async (req, res) => {
-    const username = req.params.username;
+    const { username } = req.params;
   
     try {
       // Find the user by username
-      const user = await User.findOne({ name: username });
+      const users = await User.find({ name: username })
   
-      if (!user) {
+      if (!users) {
         return res.status(404).json({ error: 'User not found' });
       }
   
-      // Search for posts by user ID
-      const posts = await Post.find({ user: user._id });
-  
-      res.json(posts);
+    const postIds = users.reduce((acc, user) => acc.concat(user.posts), []);
+    
+    const postDetails = await Post.find({ _id: { $in: postIds } });
+
+    res.json(postDetails);
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });

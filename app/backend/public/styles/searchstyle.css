@@ -1,0 +1,120 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+  
+    padding: 1.25rem; /* 20px / 16px = 1.25rem */
+    border-radius: 0.5rem; /* 8px / 16px = 0.5rem */
+    margin-top: 0rem; /* 20px / 16px = 1.25rem */
+    display: flex;
+    justify-content: space-between;
+    max-height: 3rem;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid #cdcdcd;
+  }
+
+.home{
+    font-weight: 1000;
+    font-family: var(--font-poppins);
+    font-size: x-large;
+    color: #525252;
+    position: absolute;
+    margin: 0 !important;
+    left: calc(50% - 601px);
+    background-color: transparent
+  }
+.create-post{
+    font-weight: 1000;
+    font-family: var(--font-poppins);
+    font-size: x-large;
+    color: #525252;
+    position: absolute;
+    margin: 0 !important;
+    left: calc(50% + 320px);
+    background-color: transparent
+  }
+.search{
+    font-weight: 1000;
+    font-family: var(--font-poppins);
+    font-size: x-large;
+    color: #525252;
+    position: absolute;
+    margin: 0 !important;
+    left: calc(50% + 100px);
+    background-color: transparent
+}
+.profile img{
+    max-width: 2.8rem;
+    max-height: 2.8rem;
+}
+button.profile{
+  background: transparent;
+}
+
+.search-bar {
+    text-align: center;
+    margin-top: 10px;
+    width: 80%;
+    padding-left: 200px;
+}
+
+.search-bar input {
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 16px;
+    width: 80%; 
+}
+
+.buttons{
+    text-align: center;
+}
+
+.user1 {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 400px;
+}
+
+.user2 {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* .container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .row {
+    display: flex;
+    width: 100%;
+  }
+  
+  .col {
+    flex-basis: 33.33%; /* Equal width for each column */
+    /* padding: 10px;
+  }
+  
+  .box {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .box h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .box p {
+    font-size: 16px;
+    line-height: 24px;
+  } */

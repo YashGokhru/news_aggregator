@@ -6,7 +6,7 @@ const{
 } = require("../controllers/SearchController");
 const validateToken = require("../middleware/validateToken");
 
-router.get("/SearchByKeyword/:keyword",validateToken,SearchByKeyword);
-router.get("/SearchByUsername/:username",validateToken,SearchByUsername);
+router.get("/searchpost/:keyword",validateToken,SearchByKeyword);
+router.get("/searchuser/:username",validateToken,SearchByUsername);
 
 module.exports = router;
