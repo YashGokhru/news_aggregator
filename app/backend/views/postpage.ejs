@@ -49,12 +49,6 @@
               <p class="if-benjamin-netanyahu-led">fbdfbfdbfdbdfI don't think we showed any class in defeat. Fans or players. Aussies got snubbed by everyone. Can you imagine the shitstorm in our media if they snubbed us if we just won a final in their country? I think it's what happens when ppl start to think they deserve a win, not that a win needs to be earned and sometimes the other side plays well enough to earn it. </p>
             </div>
           </div>
-          
-
-
-
-
-
 
         </div>
       </div>
@@ -80,28 +74,49 @@
           return result;
         }
 
-        function generateRandomComments(parentId, depth, maxDepth) {
-          if (depth >= maxDepth) {
-            return;
+        function generateComments(parentId, depth, id) {
+          let p;
+          let url;
+          const currentUrl = window.location.href;
+          const urlParts = currentUrl.split("/");
+          urlParts.pop();
+          const newUrl = urlParts.join("/");
+
+        // console.log(url);
+          if(id){
+            url = newUrl + "/post/comments/" + id;
           }
-
-          const numComments = Math.floor(Math.random() * 3) + 1; // Random number of comments (1 to 3)
+          else{
+            url = newUrl + "/post/ShowComment/655d29d9a8ab70e961846352" //access by postid;
+          }
+          fetch(url)
+            .then((response) => response.json()).then((posts) => {
+            p = posts.replies;
+          
+            console.log(Array.isArray(p));
+            console.log(p);
+            console.log(typeof posts);
+            console.log(posts);
+            
+          const numComments = p.length;
           const commentsContainer = document.getElementById(parentId);
-
+          
+          
           for (let i = 0; i < numComments; i++) {
-            const commentId = `comment-${generateRandomString(8)}`;
-            const replyFormId = `reply-form-${commentId}`;
-            const repliesContainerId = `replies-${commentId}`;
+            // console.log(p[i]._id);
+            let commentId = `${p[i]._id}`;
+            let replyFormId = `reply-form-${commentId}`;
+            let repliesContainerId = `replies-${commentId}`;
 
-            const comment = document.createElement('div');
+            let comment = document.createElement('div');
             comment.className = 'comment';
             comment.id = commentId;
             comment.innerHTML = `
               <div class="comment-header">
                 <img class="comment-avatar" src="images/comment.png" alt="User Avatar" />
-                <span class="comment-username">User${i + 1}</span>
+                <span class="comment-username">User : ${p[i].username}</span>
               </div>
-              <p class="comment-text">This is a random comment (${commentId}).</p>
+              <p class="comment-text">${p[i].content}.</p>
               <div class="comment-footer">
                 <button class="reply-btn" onclick="toggleReplyForm('${replyFormId}')">Reply</button>
                 <button class="view-replies-btn" onclick="toggleReplies('${repliesContainerId}')">View Replies</button>
@@ -116,12 +131,14 @@
             commentsContainer.appendChild(comment);
 
             // Recursively generate replies
-            generateRandomComments(repliesContainerId, depth + 1, maxDepth);
+            generateComments(repliesContainerId, depth + 1, p[i]._id);
           }
+        })
+          .catch((error) => console.error("Error fetching posts:", error));
         }
 
         // Generate comments and replies
-        generateRandomComments('comments-container', 0, 3);
+        generateComments('comments-container', 0, null);
       </script>
     </div>
     <!-- End of nested comments section -->
@@ -169,12 +186,28 @@
     }
 
     function postReply(formId, parentId) {
-      // Add your logic to handle posting the reply here
+      
       console.log(`Reply posted for form with ID: ${formId}, parent ID: ${parentId}`);
-      // For a real implementation, you would likely send the reply data to a server.
+      
+      let p;
+          let url;
+          const currentUrl = window.location.href;
+          const urlParts = currentUrl.split("/");
+          urlParts.pop();
+          const newUrl = urlParts.join("/");
 
-      // For this example, let's add a new comment dynamically
-      addComment('new-comment-id', parentId);
+          if(id){
+            url = newUrl + "/post/comments/" + id;
+          }
+          else{
+            url = newUrl + "/post/ShowComment/655d29d9a8ab70e961846352" //access by postid;
+          }
+          fetch(url)
+            .then((response) => response.json()).then((posts) => {
+
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
+      
     }
 
     // JavaScript code for upvote and downvote button clicks

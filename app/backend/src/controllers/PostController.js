@@ -3,28 +3,25 @@ const Post = require("../model/PostModel");
 const Comment = require("../model/CommentModel");
 const asyncHandler = require("express-async-handler");
 const path = require("path");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const CreatePost = async (req, res) => {
-    const { title, content,link } = req.body;
-    const user_id = req.user.id;
-    console.log(user_id);
-    if (!title || !content) {
-        res.status(400);
-        throw new Error("All Fields are mandotory");
-    }
+  const { title, content, link } = req.body;
+  const user_id = req.user.id;
+  console.log(user_id);
+  if (!title || !content) {
+    res.status(400);
+    throw new Error("All Fields are mandotory");
+  }
 
-    try {
-        const post = await Post.create(
-            {
-                userid: user_id,
-                title: title,
-                content: content,
-                link:link
-
-            }
-        )
-        console.log(post);
+  try {
+    const post = await Post.create({
+      userid: user_id,
+      title: title,
+      content: content,
+      link: link,
+    });
+    console.log(post);
 
     if (post) {
       post.save().then((post) => {
@@ -59,14 +56,14 @@ const GetPost = async (req, res) => {
 };
 
 const DeletePost = async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const postId = req.params._id;
+  try {
+    const userId = req.user.id;
+    const postId = req.params._id;
 
-        // Validate the postId
-        if (!mongoose.Types.ObjectId.isValid(postId)) {
-            return res.status(400).json({ error: 'Invalid Post ID' });
-        }
+    // Validate the postId
+    if (!mongoose.Types.ObjectId.isValid(postId)) {
+      return res.status(400).json({ error: "Invalid Post ID" });
+    }
 
     // Check if the user exists
     const user = await User.findById(userId);
@@ -87,7 +84,6 @@ const DeletePost = async (req, res) => {
   }
 };
 
-
 const PostComment = async (req, res) => {
   const { comment } = req.body;
 
@@ -105,7 +101,6 @@ const PostComment = async (req, res) => {
     const post = await Post.findById(PostId);
     console.log("Post:", post);
 
-    
     const newComment = {
       userid: req.user.id,
       postid: PostId,
@@ -115,7 +110,7 @@ const PostComment = async (req, res) => {
       upvote: 0,
       downvote: 0,
     };
-    
+
     const createdComment = await Comment.create(newComment);
     const createdCommentId = createdComment._id; // Accessing the ID of the created comment
     console.log("New comment created:", createdComment.content);
@@ -159,7 +154,45 @@ const GetComment = async (req, res) => {
         updatedReplies.push(updatedReply);
       }
     }
-    res.json({ replies: updatedReplies, noofreplies: post.noofreplies });
+    res.json({ replies: updatedReplies });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const GetAllComments = async (req, res) => {
+  //get comments of particular post
+  try {
+    const commId = req.params._id;
+    if (!commId) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    // Fetch replies
+    const replies = await Comment.find({ parentid: commId });
+
+    // Extract user IDs from replies
+    const userIds = replies.map((reply) => reply.userid);
+    
+    // Fetch users based on the extracted user IDs
+    const users = await User.find({ _id: { $in: userIds } });
+    
+    // Create a map of user IDs to usernames for easy lookup
+    const userIdToUsernameMap = {};
+    users.forEach((user) => {
+      userIdToUsernameMap[user._id] = user.name;
+    });
+
+    // Process the replies to include usernames
+    const processedReplies = replies.map((reply) => ({
+      ...reply.toObject(),
+      username: userIdToUsernameMap[reply.userid], // Get the username from the map
+      // Other fields you might need from the reply
+    }));
+
+    // Send the processed replies as the response
+    res.json({ replies: processedReplies });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -171,4 +204,5 @@ module.exports = {
   DeletePost,
   PostComment,
   GetComment,
+  GetAllComments,
 };
