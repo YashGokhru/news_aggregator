@@ -18,11 +18,17 @@
           <div class="if-benjamin-netanyahu-led-container">
             <p class="if-benjamin-netanyahu-led">
               If Benjamin Netanyahu-led Israel didn't create Frankenstein's
-              monster, it for sure helped.
-
-              if they snubbed us if we just won a final in their country? I think it's what happens when ppl start to think they deserve a win, not that a win needs to be earned and sometimes the other side plays well enough to earn it. 
-              if they snubbed us if we just won a final in their country? I think it's what happens when ppl start to think they deserve a win, not that a win needs to be earned and sometimes the other side plays well enough to earn it. 
-              if they snubbed us if we just won a final in their country? I think it's what happens when ppl start to think they deserve a win, not that a win needs to be earned and sometimes the other side plays well enough to earn it. 
+              monster, it for sure helped. if they snubbed us if we just won a
+              final in their country? I think it's what happens when ppl start
+              to think they deserve a win, not that a win needs to be earned and
+              sometimes the other side plays well enough to earn it. if they
+              snubbed us if we just won a final in their country? I think it's
+              what happens when ppl start to think they deserve a win, not that
+              a win needs to be earned and sometimes the other side plays well
+              enough to earn it. if they snubbed us if we just won a final in
+              their country? I think it's what happens when ppl start to think
+              they deserve a win, not that a win needs to be earned and
+              sometimes the other side plays well enough to earn it.
             </p>
             <p class="if-benjamin-netanyahu-led">&nbsp;</p>
             <p class="if-benjamin-netanyahu-led">
@@ -46,10 +52,16 @@
                 Title - This is title of this news.
               </p>
               <p class="if-benjamin-netanyahu-led">vvbbvdbdfbdb</p>
-              <p class="if-benjamin-netanyahu-led">fbdfbfdbfdbdfI don't think we showed any class in defeat. Fans or players. Aussies got snubbed by everyone. Can you imagine the shitstorm in our media if they snubbed us if we just won a final in their country? I think it's what happens when ppl start to think they deserve a win, not that a win needs to be earned and sometimes the other side plays well enough to earn it. </p>
+              <p class="if-benjamin-netanyahu-led">
+                fbdfbfdbfdbdfI don't think we showed any class in defeat. Fans
+                or players. Aussies got snubbed by everyone. Can you imagine the
+                shitstorm in our media if they snubbed us if we just won a final
+                in their country? I think it's what happens when ppl start to
+                think they deserve a win, not that a win needs to be earned and
+                sometimes the other side plays well enough to earn it.
+              </p>
             </div>
           </div>
-
         </div>
       </div>
       <div class="header">
@@ -62,56 +74,53 @@
       </div>
     </div>
 
+    <!-- Start of nested comments section -->
     <div class="comments-container" id="comments-container">
       <!-- Generate random comments and replies using JavaScript -->
       <script>
         function generateRandomString(length) {
-          const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-          let result = '';
+          const characters =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+          let result = "";
           for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * characters.length));
+            result += characters.charAt(
+              Math.floor(Math.random() * characters.length)
+            );
           }
           return result;
         }
 
         function generateComments(parentId, depth, id) {
           let p;
-          let url;
-          const currentUrl = window.location.href;
-          const urlParts = currentUrl.split("/");
-          urlParts.pop();
-          const newUrl = urlParts.join("/");
-
-        // console.log(url);
-          if(id){
+          const newUrl = window.location.origin;
+          if (id) {
             url = newUrl + "/post/comments/" + id;
-          }
-          else{
-            url = newUrl + "/post/ShowComment/655d29d9a8ab70e961846352" //access by postid;
+          } else {
+            url = newUrl + "/post/ShowComment/655d29d9a8ab70e961846352"; //access by postid;
           }
           fetch(url)
-            .then((response) => response.json()).then((posts) => {
-            p = posts.replies;
-          
-            console.log(Array.isArray(p));
-            console.log(p);
-            console.log(typeof posts);
-            console.log(posts);
-            
-          const numComments = p.length;
-          const commentsContainer = document.getElementById(parentId);
-          
-          
-          for (let i = 0; i < numComments; i++) {
-            // console.log(p[i]._id);
-            let commentId = `${p[i]._id}`;
-            let replyFormId = `reply-form-${commentId}`;
-            let repliesContainerId = `replies-${commentId}`;
+            .then((response) => response.json())
+            .then((posts) => {
+              p = posts.replies;
 
-            let comment = document.createElement('div');
-            comment.className = 'comment';
-            comment.id = commentId;
-            comment.innerHTML = `
+              console.log(Array.isArray(p));
+              console.log(p);
+              console.log(typeof posts);
+              console.log(posts);
+
+              const numComments = p.length;
+              const commentsContainer = document.getElementById(parentId);
+
+              for (let i = 0; i < numComments; i++) {
+                // console.log(p[i]._id);
+                let commentId = `${p[i]._id}`;
+                let replyFormId = `reply-form-${commentId}`;
+                let repliesContainerId = `replies-${commentId}`;
+
+                let comment = document.createElement("div");
+                comment.className = "comment";
+                comment.id = commentId;
+                comment.innerHTML = `
               <div class="comment-header">
                 <img class="comment-avatar" src="images/comment.png" alt="User Avatar" />
                 <span class="comment-username">User : ${p[i].username}</span>
@@ -128,28 +137,25 @@
               <div class="replies-container" id="${repliesContainerId}" style="display: none;"></div>
             `;
 
-            commentsContainer.appendChild(comment);
+                commentsContainer.appendChild(comment);
 
-            // Recursively generate replies
-            generateComments(repliesContainerId, depth + 1, p[i]._id);
-          }
-        })
-          .catch((error) => console.error("Error fetching posts:", error));
+                // Recursively generate replies
+                generateComments(repliesContainerId, depth + 1, p[i]._id);
+              }
+            })
+            .catch((error) => console.error("Error fetching posts:", error));
         }
 
         // Generate comments and replies
-        generateComments('comments-container', 0, null);
+        generateComments("comments-container", 0, null);
       </script>
     </div>
     <!-- End of nested comments section -->
 
-    </div>
-  </div>
-</div>
-    
-
     <script>
-      var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
+      var scrollAnimElements = document.querySelectorAll(
+        "[data-animate-on-scroll]"
+      );
       var observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
@@ -164,27 +170,30 @@
           threshold: 0.15,
         }
       );
-      
+
       for (let i = 0; i < scrollAnimElements.length; i++) {
         observer.observe(scrollAnimElements[i]);
       }
 
       function toggleReplyForm(formId) {
-      // Toggle the visibility of the reply form for the clicked comment
-      var replyForm = document.getElementById(formId);
-      if (replyForm) {
-        replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+        // Toggle the visibility of the reply form for the clicked comment
+        var replyForm = document.getElementById(formId);
+        if (replyForm) {
+          replyForm.style.display =
+            replyForm.style.display === "none" ? "block" : "none";
+        }
       }
-    }
 
-    function toggleReplies(repliesId) {
-      // Toggle the visibility of the replies container for the clicked comment
-      var repliesContainer = document.getElementById(repliesId);
-      if (repliesContainer) {
-        repliesContainer.style.display = repliesContainer.style.display === 'none' ? 'block' : 'none';
+      function toggleReplies(repliesId) {
+        // Toggle the visibility of the replies container for the clicked comment
+        var repliesContainer = document.getElementById(repliesId);
+        if (repliesContainer) {
+          repliesContainer.style.display =
+            repliesContainer.style.display === "none" ? "block" : "none";
+        }
       }
-    }
 
+      /* Initial
     function postReply(formId, parentId) {
       
       console.log(`Reply posted for form with ID: ${formId}, parent ID: ${parentId}`);
@@ -209,25 +218,76 @@
             .catch((error) => console.error("Error fetching posts:", error));
       
     }
+    */
 
+      
+    function postReply(replyFormId, commentId) {
+    const replyForm = document.getElementById(replyFormId);
+    const replyTextArea = replyForm.querySelector('.reply-textarea');
+    const replyContent = replyTextArea.value;
+
+    const parentId = commentId; // Assuming commentId is the parent comment ID
+      const url = window.location.origin;
+      console.log(parentId);
+    fetch(url+"/comments/replytocomment/" + `${parentId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ "comment": replyContent  }),
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.json(); // You might handle the response data if needed
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then((data) => {
+            // Handle success - maybe update UI or perform other actions
+            console.log('Reply posted:', data);
+
+            // Assuming you want to update the UI after posting the reply
+            const newReplyElement = document.createElement('div');
+            newReplyElement.className = 'comment';
+            newReplyElement.innerHTML = `
+                <div class="comment-header">
+                    <img class="comment-avatar" src="images/comment.png" alt="User Avatar" />
+                    <span class="comment-username">User : ${data.username}</span>
+                </div>
+                <p class="comment-text">${data.content}.</p>
+            `;
+
+            const repliesContainerId = `replies-${commentId}`;
+            const repliesContainer = document.getElementById(repliesContainerId);
+            repliesContainer.appendChild(newReplyElement);
+
+            // Clear the textarea after posting
+            replyTextArea.value = '';
+
+            // Optionally, hide the reply form after posting
+            replyForm.style.display = 'none';
+        })
+        .catch((error) => {
+            console.error('Error posting reply:', error);
+        });
+}
     // JavaScript code for upvote and downvote button clicks
-document.addEventListener('DOMContentLoaded', function () {
-  const upvoteButton = document.querySelector('.frame-child');
-  const downvoteButton = document.querySelector('.frame-item');
+      document.addEventListener("DOMContentLoaded", function () {
+        const upvoteButton = document.querySelector(".frame-child");
+        const downvoteButton = document.querySelector(".frame-item");
 
-  upvoteButton.addEventListener('click', function () {
-    toggleVoteColor(upvoteButton);
-  });
+        upvoteButton.addEventListener("click", function () {
+          toggleVoteColor(upvoteButton);
+        });
 
-  downvoteButton.addEventListener('click', function () {
-    toggleVoteColor(downvoteButton);
-  });
+        downvoteButton.addEventListener("click", function () {
+          toggleVoteColor(downvoteButton);
+        });
 
-  function toggleVoteColor(button) {
-    button.classList.toggle('voted');
-  }
-});
-    
-      </script>
+        function toggleVoteColor(button) {
+          button.classList.toggle("voted");
+        }
+      });
+    </script>
   </body>
 </html>

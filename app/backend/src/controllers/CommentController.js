@@ -44,7 +44,8 @@ const replytocomment = async (req, res) => {
 
     await Post.updateOne({ _id: postidd }, { $inc: { noofreplies: 1 } });
     await Comment.updateOne({ _id: commid }, { $inc: { noofreplies: 1 } });
-    res.status(200).json({ message: "Comment Added Succesfully" });
+    const user = await User.findById(req.user.id).select('name').lean();
+    res.status(200).json({ message: "Comment Added Succesfully", content : comment, username :  user.name});
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

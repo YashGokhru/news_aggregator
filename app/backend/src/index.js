@@ -52,7 +52,7 @@ app.get("/profile", (req, res) => {
 app.get("/createpost", (req, res) => {
   res.render("CreatePost");
 });
-
+//
 const port = process.env.PORT || 3000
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
