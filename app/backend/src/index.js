@@ -52,15 +52,11 @@ app.get("/profile", (req, res) => {
 app.get("/createpost", (req, res) => {
   res.render("CreatePost");
 });
-<<<<<<< HEAD
-//
-=======
 
 app.get("/search", (req, res) => {
   res.render("search");
 });
 
->>>>>>> 0f43187a8fa6055665792fdadfa5eef9a743005d
 const port = process.env.PORT || 3000
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
