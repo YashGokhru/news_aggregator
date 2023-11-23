@@ -53,6 +53,10 @@ app.get("/createpost", (req, res) => {
   res.render("CreatePost");
 });
 
+app.get("/search", (req, res) => {
+  res.render("search");
+});
+
 const port = process.env.PORT || 3000
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);

@@ -24,8 +24,8 @@
     <br>
   </div>
   <div class="buttons">
-    <button class="user1" onclick="user()">Search by Username</button>
-    <button class="user2" onclick="post()">Search by Post</button>
+    <button id="user" class="user1">Search by Username</button>
+    <button id="post" class="user2">Search by Post</button>
   </div>
 
   <div class="dishes" id="postsContainer">
@@ -79,6 +79,8 @@
     //     // Perform the search
     //     searchPosts(username);
     //   }
+    document.getElementById('user').addEventListener('click', user());
+    document.getElementById('post').addEventListener('click', post())
 
     function user() {
       console.log("user called");
@@ -86,6 +88,7 @@
         var username = searchInput.value;
         console.log(username);
         const currentUrl = window.location.href;
+        const nurl = window.location.href;
           // Split the URL by "/"
           const urlParts = currentUrl.split("/");
 
@@ -97,7 +100,7 @@
           const url = newtUrl + "/posts";
 
         // Update the URL with the username
-        var newUrl = currentUrl + '/searchuser' + "/${username}";
+        var newUrl = nurl + '/searchuser' + "/${username}";
         console.log(newUrl);
 
         // Perform the search

@@ -13,7 +13,7 @@ const SearchByKeyword = async (req, res) => {
           { title: { $regex: keyword, $options: 'i' } }, // Case-insensitive search
           { content: { $regex: keyword, $options: 'i' } }
         ]
-      }).select('userid title content');
+      });
   
       res.json(posts);
     } catch (error) {
@@ -31,14 +31,14 @@ const SearchByKeyword = async (req, res) => {
   
     try {
       // Find the user by username
-      const user = await User.findOne({ name: username });
+      const user = await User.find({ name: username });
   
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
       }
   
       // Search for posts by user ID
-      const posts = await Post.find({ user: user._id });
+      const posts = await Post.find({ userid: user._id });
   
       res.json(posts);
     } catch (error) {
