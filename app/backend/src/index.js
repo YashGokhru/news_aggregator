@@ -10,8 +10,6 @@ const SearchRoutes = require("./routes/SearchRoutes");
 const CommentRoutes = require("./routes/CommentRoutes");
 const cookieParser = require("cookie-parser");
 const path = require('path');
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
 
 app.set('view engine', 'ejs'); // To parse .ejs from view
 app.use(cookieParser());
@@ -47,7 +45,9 @@ app.get("/resetpassword", (req, res) => {
 app.get("/forgotpassword", (req, res) => {
   res.render("ForgotPassword");
 });
-
+app.get("/postpage", (req, res) => {
+  res.render("postpage");
+});
 
 app.get("/createpost", (req, res) => {
   res.render("CreatePost");

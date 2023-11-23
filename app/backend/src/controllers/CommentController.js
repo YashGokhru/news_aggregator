@@ -71,6 +71,8 @@ const showreplies = async (req, res) => {
   }
 };
 
+
+
 const vote = async (req, res) => {
     const { vote } = req.body;
 
@@ -79,38 +81,43 @@ const vote = async (req, res) => {
     }
     const commidd = req.params._id;
     const useridd = req.user.id; 
-    const entry = CommentVote.findOne({ 
-      $and: [ { userid: useridd }, { commid: commidd } ]
+    const entry = await CommentVote.findOne({ 
+      $and: [ { userid: useridd }, { commentid: commidd } ]
     });
-
+    console.log(entry);
+    // console.log();
     let response = 0;
     try{
     if(entry){
       if (entry.vote == vote) {
-        await Comment.deleteOne({ _id: entry._id });
+        await CommentVote.deleteOne({ _id: entry._id });
         response = 0;
+        console.log("remove Upvote/Downvote");
       } else {
-        await Comment.updateOne({ _id: entry._id }, { $set: { vote: entry.vote } });
+        await CommentVote.updateOne({ _id: entry._id }, { $set: { vote: vote } });
         response = vote;
+        console.log("update Upvote/Downvote");
       }
     }
     else{
       const newentry = await CommentVote.create(
         {
             userid: useridd,
-            commid: commidd,
+            commentid: commidd,
             vote : vote
         }
       )
+      console.log("added Upvote/Downvote");
       response = vote;
     }
 
-    const filter1 = { commid: commidd, vote : 1 };
-    const filter2 = { commid: commidd, vote : -1 };
+    const filter1 = { commentid: commidd, vote : 1 };
+    const filter2 = { commentid: commidd, vote : -1 };
 
-    const upvotecount = await collection.countDocuments(filter1);
-    const downvotecount = await collection.countDocuments(filter2);
-    
+    const upvotecount = await CommentVote.countDocuments(filter1);
+    const downvotecount = await CommentVote.countDocuments(filter2);
+    await Comment.updateOne({ _id: commidd }, { $set: { upvote: upvotecount,  downvote: downvotecount } });
+
     res.json({ response : response , uc : upvotecount , dc : downvotecount });
     
   }catch(error){
@@ -121,5 +128,5 @@ const vote = async (req, res) => {
 module.exports = {
   replytocomment,
   showreplies,
-  vote,
+  vote
 };
