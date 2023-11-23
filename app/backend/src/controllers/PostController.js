@@ -45,10 +45,29 @@ const CreatePost = async (req, res) => {
 };
 const GetPost = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const userPosts = await Post.find({ userid: userId });
+    const posts = await Post.find({userid : req.user.id.toString()}).select('userid title content upvote downvote noofreplies').lean(); // Fetch posts
 
-    res.json({ posts: userPosts });
+        // Get unique user IDs from posts
+        const userIds = req.user.id;
+
+        // Fetch user details for all user IDs
+        const users = await User.find({ _id : userIds }, 'name').lean();
+
+        // Map user details to posts based on user IDs
+        const postsWithUserDetails = posts.map(post => {
+            const user = users.find(user => user._id.toString() === post.userid); // Find matching user
+            return {
+                ...post,
+                user: user ? { name: user.name} : null // Add user details to post
+            };
+        });
+
+        
+
+        res.json({ posts: postsWithUserDetails, user : users }); // Send posts with user details
+
+        // res.json(posts); 
+        console.log("Posts array sent");
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

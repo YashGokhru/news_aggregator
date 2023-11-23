@@ -45,8 +45,8 @@ app.get("/resetpassword", (req, res) => {
 app.get("/forgotpassword", (req, res) => {
   res.render("ForgotPassword");
 });
-app.get("/postpage", (req, res) => {
-  res.render("postpage");
+app.get("/profile", (req, res) => {
+  res.render("ProfilePage");
 });
 
 app.get("/createpost", (req, res) => {
