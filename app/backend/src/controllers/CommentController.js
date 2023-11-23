@@ -71,6 +71,8 @@ const showreplies = async (req, res) => {
   }
 };
 
+
+
 const vote = async (req, res) => {
     const { vote } = req.body;
 
@@ -126,5 +128,5 @@ const vote = async (req, res) => {
 module.exports = {
   replytocomment,
   showreplies,
-  vote,
+  vote
 };
