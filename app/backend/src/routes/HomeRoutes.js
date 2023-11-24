@@ -10,5 +10,5 @@ const validateToken = require("../middleware/validateToken");
 //For Home
 router.get("/", validateToken, HomePage);
 router.get("/:_id",validateToken,PostPage);
-router.get("/post/vote/:_id",validateToken, vote);
+router.post("/post/vote/:_id",validateToken, vote);
 module.exports = router;

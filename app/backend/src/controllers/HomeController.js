@@ -45,8 +45,10 @@ const PostPage =  async (req, res) => {
         const user = await User.findById(useris).select('_id name');
         console.log(user);
 
-        res.json({post,user}); 
+        res.render('postpage',{post,user}); 
+        console.log({post,user});
         console.log("Post send");
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error for PostPage' });
@@ -55,7 +57,7 @@ const PostPage =  async (req, res) => {
 
 const vote = async (req, res) => {
     const { vote } = req.body;
-
+    console.log(vote);
     if(!vote){
        res.status(400).json({ error: 'Invalid Voting' });
     }

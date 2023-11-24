@@ -34,9 +34,9 @@ app.get("/login", (req, res) => {
 app.get("/home", (req, res) => {
   res.render("home");
 });
-app.get("/postpage/", (req, res) => {
-  res.render("postpage");
-});
+// app.get("/postpage/", (req, res) => {
+//   res.render("postpage");
+// });
 
 app.get("/resetpassword", (req, res) => {
   res.render("resetpassword");
