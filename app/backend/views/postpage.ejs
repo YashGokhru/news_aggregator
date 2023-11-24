@@ -21,14 +21,14 @@
       <!-- Main post content -->
       <div class="post">
         <!-- Post content -->
-        <div class="username-xyz">Author Name</div>
+        <div class="username-xyz"><%= user.name %></div>
         <div class="title-this-container">
-          <p>This is the post title</p>
+          <p><%= post.title %></p>
         </div>
         <div class="title-body">
-          <p>This is the post body</p>
+          <p><%= post.content%></p>
         </div>
-        <div id="linkContainer"></div>
+        <div><a href="<%= post.link %>">Link</a></div>
 
         <script>
           let backendLink = "https://www.example.com"; // This could be fetched from the backend or null
@@ -50,9 +50,71 @@
           }
         </script>
         <!-- Upvote, downvote, comment buttons -->
-        <button class="frame-child upvote"></button>
-        <button class="frame-inner downvote"></button>
+        <button class="frame-child upvote">Upvote</button>
+        <button class="frame-inner downvote">Downvote</button>
+        <div id="voteCounts">
+          Upvotes: <span id="upvoteCount"><%= post.upvote %></span><br />
+          Downvotes: <span id="downvoteCount"><%= post.downvote %></span>
+        </div>
+
         <button class="frame-item comment-btn"></button>
+
+        <script>
+                 const id = '<%= post._id %>';
+                // Function to handle vote actions
+                function castVote(voteType) {
+                  console.log(voteType);
+                  const requestOptions = {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ vote: voteType }), // Sending vote in the request body
+                  };
+                  fetch("/posts/post/vote/" + id, requestOptions) // Send request to backend with vote type
+                    .then((response) => response.json())
+                    .then((data) => {
+                      const value = data.response;
+                      const upvoteCount = data.uc;
+                      const downvoteCount = data.dc;
+
+                      // Update vote counts in the UI
+                      document.getElementById("upvoteCount").innerText = upvoteCount;
+                      document.getElementById("downvoteCount").innerText= downvoteCount;
+
+                      // Update button states based on the received value
+                      const upvoteButton = document.querySelector(".upvote");
+                      const downvoteButton = document.querySelector(".downvote");
+
+                      if (value === 1) {
+                        upvoteButton.innerText = "Upvoted";
+                        downvoteButton.innerText = "Downvote";
+                      } else if (value === -1) {
+                        upvoteButton.innerText = "Upvote";
+                        downvoteButton.innerText = "Downvoted";
+                      } else {
+                        upvoteButton.innerText = "Upvote";
+                        downvoteButton.innerText = "Downvote";
+                      }
+                    })
+                    .catch((error) => {
+                      console.error("Error:", error);
+                    });
+                }
+
+                // Event listeners for upvote and downvote buttons
+                document
+                  .querySelector(".upvote")
+                  .addEventListener("click", function () {
+                    castVote(1); // 1 represents upvote
+                  });
+
+                document
+                  .querySelector(".downvote")
+                  .addEventListener("click", function () {
+                    castVote(-1); // -1 represents downvote
+                  });
+        </script>
       </div>
 
       <!-- Comments section -->
@@ -96,7 +158,6 @@
 
               <!-- Start of nested comments section -->
               <div class="comments-container" id="comments-container">
-                <!-- Generate random comments and replies using JavaScript -->
                 <script>
                   function generateComments(parentId, depth, id) {
                     let p;
@@ -113,10 +174,10 @@
                       .then((posts) => {
                         p = posts.replies;
 
-                        console.log(Array.isArray(p));
-                        console.log(p);
-                        console.log(typeof posts);
-                        console.log(posts);
+                        // console.log(Array.isArray(p));
+                        // console.log(p);
+                        // console.log(typeof posts);
+                        // console.log(posts);
 
                         const numComments = p.length;
                         const commentsContainer =
@@ -232,9 +293,7 @@
                 
             `;
 
-    
-            const repliesContainer =
-              document.getElementById(commentId);
+            const repliesContainer = document.getElementById(commentId);
             repliesContainer.appendChild(newReplyElement);
 
             // Clear the textarea after posting

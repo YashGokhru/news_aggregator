@@ -75,9 +75,9 @@ const showreplies = async (req, res) => {
 
 
 const vote = async (req, res) => {
-    const { vote } = req.body;
+    const { vote } = req.body.vote;
 
-    if(!vote){
+    if(vote!=1 || vote!=-1){
        res.status(400).json({ error: 'Invalid Voting' });
     }
     const commidd = req.params._id;
