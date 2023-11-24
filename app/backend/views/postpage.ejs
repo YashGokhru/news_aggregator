@@ -160,11 +160,14 @@
                   function generateComments(parentId, depth, id) {
                     let p;
                     const newUrl = window.location.origin;
+
+                    const pid = '<%= post._id %>';
+
                     if (id) {
                       url = newUrl + "/post/comments/" + id;
                     } else {
                       url =
-                        newUrl + "/post/ShowComment/655d29d9a8ab70e961846352"; //access by postid;
+                        newUrl + "/post/ShowComment/" + pid; //access by postid;
                     }
 
                     fetch(url)
