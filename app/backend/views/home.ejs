@@ -47,6 +47,7 @@
         const url = newUrl + "/posts";
         console.log(url);
 
+        const baseurl  = window.location.origin;
         fetch(url)
           .then((response) => response.json())
           .then((posts) => {
@@ -72,7 +73,7 @@
                       <div class="usa-today">${post.user.name}</div>
               </div>
               <div>
-                  <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${url}/${post._id}')">${post.title}</button>
+                  <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${baseurl}/postpage/')">${post.title}</button>
               </div>
               
               <div>

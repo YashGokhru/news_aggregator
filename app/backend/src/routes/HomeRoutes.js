@@ -8,7 +8,7 @@ const {
 const validateToken = require("../middleware/validateToken");
 
 //For Home
-router.get("/", HomePage);
-router.get("/:_id", PostPage);
+router.get("/", validateToken, HomePage);
+router.get("/:_id",validateToken,PostPage);
 router.get("/post/vote/:_id",validateToken, vote);
 module.exports = router;

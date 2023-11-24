@@ -5,122 +5,133 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
     <title>postpage</title>
     <!-- <link rel="stylesheet" href="styles/global.css" /> -->
-    <link rel="stylesheet" href="styles/PostPage.css" />
+    <link rel="stylesheet" href="/styles/postpage.css" />
+    <!-- <link rel="stylesheet" href="styles/index_1.css" /> -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
     />
   </head>
   <body>
-    <div class="post-page" data-animate-on-scroll>
-      <div class="post-page-body">
-        <div class="cardsfood-card">
-          <div class="if-benjamin-netanyahu-led-container">
-            <p class="if-benjamin-netanyahu-led">
-              If Benjamin Netanyahu-led Israel didn't create Frankenstein's
-              monster, it for sure helped. if they snubbed us if we just won a
-              final in their country? I think it's what happens when ppl start
-              to think they deserve a win, not that a win needs to be earned and
-              sometimes the other side plays well enough to earn it. if they
-              snubbed us if we just won a final in their country? I think it's
-              what happens when ppl start to think they deserve a win, not that
-              a win needs to be earned and sometimes the other side plays well
-              enough to earn it. if they snubbed us if we just won a final in
-              their country? I think it's what happens when ppl start to think
-              they deserve a win, not that a win needs to be earned and
-              sometimes the other side plays well enough to earn it.
-            </p>
-            <p class="if-benjamin-netanyahu-led">&nbsp;</p>
-            <p class="if-benjamin-netanyahu-led">
-              This is description of post .
-            </p>
-          </div>
-          <div class="username-body">
-            <a class="username-xyz">Username - xyz</a>
-          </div>
-          <div class="rectangle-parent">
-            <button class="frame-child"></button>
-            <button class="frame-item"></button>
-            <button class="frame-inner"></button>
-            <div class="div">50</div>
-            <div class="div1">50</div>
-            <div class="div2">50</div>
-          </div>
-          <div class="title-body">
-            <div class="title-this-container">
-              <p class="if-benjamin-netanyahu-led">
-                Title - This is title of this news.
-              </p>
-              <p class="if-benjamin-netanyahu-led">vvbbvdbdfbdb</p>
-              <p class="if-benjamin-netanyahu-led">
-                fbdfbfdbfdbdfI don't think we showed any class in defeat. Fans
-                or players. Aussies got snubbed by everyone. Can you imagine the
-                shitstorm in our media if they snubbed us if we just won a final
-                in their country? I think it's what happens when ppl start to
-                think they deserve a win, not that a win needs to be earned and
-                sometimes the other side plays well enough to earn it.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="header">
-        <a class="home">Home</a>
-        <a class="create-post">Create Post</a>
-        <a class="search">Search</a>
-        <img class="header-child" alt="" src="images/group-1686550876.svg" />
-
-        <a class="profile-page"> </a>
-      </div>
+    <div class="header">
+      <!-- Header content goes here -->
     </div>
 
-    <!-- Start of nested comments section -->
-    <div class="comments-container" id="comments-container">
-      <!-- Generate random comments and replies using JavaScript -->
-      <script>
-        function generateRandomString(length) {
-          const characters =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-          let result = "";
-          for (let i = 0; i < length; i++) {
-            result += characters.charAt(
-              Math.floor(Math.random() * characters.length)
-            );
-          }
-          return result;
-        }
+    <div class="post-page">
+      <!-- Main post content -->
+      <div class="post">
+        <!-- Post content -->
+        <div class="username-xyz">Author Name</div>
+        <div class="title-this-container">
+          <p>This is the post title</p>
+        </div>
+        <div class="title-body">
+          <p>This is the post body</p>
+        </div>
+        <div id="linkContainer"></div>
 
-        function generateComments(parentId, depth, id) {
-          let p;
-          const newUrl = window.location.origin;
-          if (id) {
-            url = newUrl + "/post/comments/" + id;
+        <script>
+          let backendLink = "https://www.example.com"; // This could be fetched from the backend or null
+
+          // Get the container element where the link will be displayed
+          const linkContainer = document.getElementById("linkContainer");
+
+          // Check if backendLink is not null and create the link element
+          if (backendLink !== null) {
+            const linkElement = document.createElement("a");
+            linkElement.href = backendLink;
+            linkElement.textContent = "Click here"; // Set the link text, change this as needed
+
+            // Append the link element to the link container
+            linkContainer.appendChild(linkElement);
           } else {
-            url = newUrl + "/post/ShowComment/655d29d9a8ab70e961846352"; //access by postid;
+            // If backendLink is null, display a message or handle it in any other way you want
+            linkContainer.textContent = "No link available"; // You can display a message or handle it differently
           }
-          fetch(url)
-            .then((response) => response.json())
-            .then((posts) => {
-              p = posts.replies;
+        </script>
+        <!-- Upvote, downvote, comment buttons -->
+        <button class="frame-child upvote"></button>
+        <button class="frame-inner downvote"></button>
+        <button class="frame-item comment-btn"></button>
+      </div>
 
-              console.log(Array.isArray(p));
-              console.log(p);
-              console.log(typeof posts);
-              console.log(posts);
+      <!-- Comments section -->
+      <div class="comments-container">
+        <div class="comment">
+          <div class="comment-header">
+            <img
+              class="comment-avatar"
+              src="images/profile.png"
+              alt="User Avatar"
+            />
+            <div class="comment-username">Comment as Username</div>
+          </div>
+          <div class="comment-text">
+            <!-- Comment text -->
+            Sample Comment Text
+          </div>
+          <!-- <div class="comment-footer">
+            <button class="reply-btn">Reply</button>
+            <button class="view-replies-btn">View Replies</button>
+          </div> -->
+          <form class="reply-form">
+            <textarea
+              class="reply-textarea"
+              placeholder="Your reply..."
+            ></textarea>
+            <button class="post-reply-btn">Post Reply</button>
+          </form>
+          <div class="replies-container">
+            <!-- Nested replies -->
+            <div class="comment">
+              <!-- Nested reply content -->
+              <div class="comment-header">
+                <img
+                  class="comment-avatar"
+                  src="images/comment.png"
+                  alt="User Avatar"
+                />
+                <div class="comment-username">Discussion Forum</div>
+              </div>
 
-              const numComments = p.length;
-              const commentsContainer = document.getElementById(parentId);
+              <!-- Start of nested comments section -->
+              <div class="comments-container" id="comments-container">
+                <!-- Generate random comments and replies using JavaScript -->
+                <script>
+                  function generateComments(parentId, depth, id) {
+                    let p;
+                    const newUrl = window.location.origin;
+                    if (id) {
+                      url = newUrl + "/post/comments/" + id;
+                    } else {
+                      url =
+                        newUrl + "/post/ShowComment/655d29d9a8ab70e961846352"; //access by postid;
+                    }
 
-              for (let i = 0; i < numComments; i++) {
-                // console.log(p[i]._id);
-                let commentId = `${p[i]._id}`;
-                let replyFormId = `reply-form-${commentId}`;
-                let repliesContainerId = `replies-${commentId}`;
+                    fetch(url)
+                      .then((response) => response.json())
+                      .then((posts) => {
+                        p = posts.replies;
 
-                let comment = document.createElement("div");
-                comment.className = "comment";
-                comment.id = commentId;
-                comment.innerHTML = `
+                        console.log(Array.isArray(p));
+                        console.log(p);
+                        console.log(typeof posts);
+                        console.log(posts);
+
+                        const numComments = p.length;
+                        const commentsContainer =
+                          document.getElementById(parentId);
+
+                        for (let i = 0; i < numComments; i++) {
+                          // console.log(p[i]._id);
+                          let commentId = `${p[i]._id}`;
+                          let replyFormId = `reply-form-${commentId}`;
+                          let repliesContainerId = `replies-${commentId}`;
+
+                          let comment = document.createElement("div");
+                          comment.className = "comment";
+                          comment.id = commentId;
+                          comment.innerHTML = `
               <div class="comment-header">
                 <img class="comment-avatar" src="images/comment.png" alt="User Avatar" />
                 <span class="comment-username">User : ${p[i].username}</span>
@@ -137,44 +148,32 @@
               <div class="replies-container" id="${repliesContainerId}" style="display: none;"></div>
             `;
 
-                commentsContainer.appendChild(comment);
+                          commentsContainer.appendChild(comment);
 
-                // Recursively generate replies
-                generateComments(repliesContainerId, depth + 1, p[i]._id);
-              }
-            })
-            .catch((error) => console.error("Error fetching posts:", error));
-        }
+                          // Recursively generate replies
+                          generateComments(
+                            repliesContainerId,
+                            depth + 1,
+                            p[i]._id
+                          );
+                        }
+                      })
+                      .catch((error) =>
+                        console.error("Error fetching posts:", error)
+                      );
+                  }
 
-        // Generate comments and replies
-        generateComments("comments-container", 0, null);
-      </script>
+                  // Generate comments and replies
+                  generateComments("comments-container", 0, null);
+                </script>
+              </div>
+              <!-- End of nested comments section -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- End of nested comments section -->
-
     <script>
-      var scrollAnimElements = document.querySelectorAll(
-        "[data-animate-on-scroll]"
-      );
-      var observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting || entry.intersectionRatio > 0) {
-              const targetElement = entry.target;
-              targetElement.classList.add("animate");
-              observer.unobserve(targetElement);
-            }
-          }
-        },
-        {
-          threshold: 0.15,
-        }
-      );
-
-      for (let i = 0; i < scrollAnimElements.length; i++) {
-        observer.observe(scrollAnimElements[i]);
-      }
-
       function toggleReplyForm(formId) {
         // Toggle the visibility of the reply form for the clicked comment
         var replyForm = document.getElementById(formId);
@@ -193,101 +192,62 @@
         }
       }
 
-      /* Initial
-    function postReply(formId, parentId) {
-      
-      console.log(`Reply posted for form with ID: ${formId}, parent ID: ${parentId}`);
-      
-      let p;
-          let url;
-          const currentUrl = window.location.href;
-          const urlParts = currentUrl.split("/");
-          urlParts.pop();
-          const newUrl = urlParts.join("/");
+      function postReply(replyFormId, commentId) {
+        const replyForm = document.getElementById(replyFormId);
+        const replyTextArea = replyForm.querySelector(".reply-textarea");
+        const replyContent = replyTextArea.value;
 
-          if(id){
-            url = newUrl + "/post/comments/" + id;
-          }
-          else{
-            url = newUrl + "/post/ShowComment/655d29d9a8ab70e961846352" //access by postid;
-          }
-          fetch(url)
-            .then((response) => response.json()).then((posts) => {
-
-            })
-            .catch((error) => console.error("Error fetching posts:", error));
-      
-    }
-    */
-
-      
-    function postReply(replyFormId, commentId) {
-    const replyForm = document.getElementById(replyFormId);
-    const replyTextArea = replyForm.querySelector('.reply-textarea');
-    const replyContent = replyTextArea.value;
-
-    const parentId = commentId; // Assuming commentId is the parent comment ID
-      const url = window.location.origin;
-      console.log(parentId);
-    fetch(url+"/comments/replytocomment/" + `${parentId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ "comment": replyContent  }),
-    })
-        .then((response) => {
-            if (response.ok) {
-                return response.json(); // You might handle the response data if needed
-            }
-            throw new Error('Network response was not ok.');
+        const parentId = commentId; // Assuming commentId is the parent comment ID
+        const url = window.location.origin;
+        console.log(parentId);
+        fetch(url + "/comments/replytocomment/" + `${parentId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ comment: replyContent }),
         })
-        .then((data) => {
+          .then((response) => {
+            if (response.ok) {
+              return response.json(); // You might handle the response data if needed
+            }
+            throw new Error("Network response was not ok.");
+          })
+          .then((data) => {
             // Handle success - maybe update UI or perform other actions
-            console.log('Reply posted:', data);
+            console.log("Reply posted:", data);
 
             // Assuming you want to update the UI after posting the reply
-            const newReplyElement = document.createElement('div');
-            newReplyElement.className = 'comment';
+            const newReplyElement = document.createElement("div");
+            newReplyElement.className = "comment";
+            let newcommentId = `${data._id}`;
+            let newreplyFormId = `reply-form-${newcommentId}`;
+            let newrepliesContainerId = `replies-${newcommentId}`;
             newReplyElement.innerHTML = `
                 <div class="comment-header">
                     <img class="comment-avatar" src="images/comment.png" alt="User Avatar" />
                     <span class="comment-username">User : ${data.username}</span>
                 </div>
                 <p class="comment-text">${data.content}.</p>
+                
             `;
 
-            const repliesContainerId = `replies-${commentId}`;
-            const repliesContainer = document.getElementById(repliesContainerId);
+    
+            const repliesContainer =
+              document.getElementById(commentId);
             repliesContainer.appendChild(newReplyElement);
 
             // Clear the textarea after posting
-            replyTextArea.value = '';
+            replyTextArea.value = "";
 
             // Optionally, hide the reply form after posting
-            replyForm.style.display = 'none';
-        })
-        .catch((error) => {
-            console.error('Error posting reply:', error);
-        });
-}
-    // JavaScript code for upvote and downvote button clicks
-      document.addEventListener("DOMContentLoaded", function () {
-        const upvoteButton = document.querySelector(".frame-child");
-        const downvoteButton = document.querySelector(".frame-item");
-
-        upvoteButton.addEventListener("click", function () {
-          toggleVoteColor(upvoteButton);
-        });
-
-        downvoteButton.addEventListener("click", function () {
-          toggleVoteColor(downvoteButton);
-        });
-
-        function toggleVoteColor(button) {
-          button.classList.toggle("voted");
-        }
-      });
+            replyForm.style.display = "none";
+          })
+          .catch((error) => {
+            console.error("Error posting reply:", error);
+          });
+      }
+      // JavaScript code for upvote and downvote button clicks
     </script>
   </body>
 </html>
