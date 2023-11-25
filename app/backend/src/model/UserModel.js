@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Post = require("./PostModel");
 
 const userSchema = new mongoose.Schema({
 name:{
@@ -13,9 +14,11 @@ email:{
 
 password:{
     type:String,
-    required:true,
+    required:true
 },
-posts: [{
+
+posts: [
+    {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post'
   }],

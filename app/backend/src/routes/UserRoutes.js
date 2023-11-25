@@ -19,14 +19,14 @@ router.post("/register", registerUser);
 router.post("/login", LoginUser);
 
 //Forgot Passowrd
-router.post("/forgot", ForgotPassword);
+router.post("/forgotpassword", ForgotPassword);
 
 //Reset Password
 
-router.post("/resetpassword/:user_email", ResetPassword);
+router.post("/resetpassword", ResetPassword);
 
 //GetReset Password
 
-router.get("/resetpassword/:user_email", getResetPassword);
+// router.get("/resetpassword/:user_email", getResetPassword);
 
 module.exports = router;

@@ -32,6 +32,7 @@ const registerUser = asyncHandler(async (req, res) => {
     
     if (user) {
         res.status(200).json({ __id: user.id, email: user.email, password: user.hashedPassword })
+        res.render("login");
     }
     else {
         res.status(400);
@@ -39,7 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
-
+const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
 // Login 
 
 const LoginUser = asyncHandler(async (req, res) => {
@@ -57,16 +58,21 @@ const LoginUser = asyncHandler(async (req, res) => {
                 email: user.email,
                 id: user.id
             },
-        }, process.env.ACCESS_TOKEN_SECRET,
+        }, keyy,
             { expiresIn: "30d" }
         );
-        res.cookie("uid",accessToken);
+        const oneday = 24*60*60*1000;   
+        res.cookie("jwt",accessToken,{
+            expires:new Date(Date.now()+ oneday),
+            httpOnly:true
+        });
         res.status(200).json({ accessToken });
     }
     else {
         res.status(401);
         throw new Error("Email or password is not valid");
     }
+    // return accessToken;
 });
 
 //ForgotPassword 
@@ -83,14 +89,14 @@ const ForgotPassword = async (req, res) => {
             res.status(400).json({ message: "User not found" });
         } else {
             const subject = "Forgot Password";
-            const link = `http://localhost:${process.env.PORT}/user/resetpassword/${user.email}`;
+            const link = `http://localhost:${process.env.PORT}/resetpassword`;
             const body = `Click on the following link to reset your password: ${link}`;
 
             // Send the email
             await sendEmail(user.email, subject, body);
 
             // Return a success response
-            res.json({ message: "Link Sent Successfully" });
+            res.send('<html><body>Link Sent Successfully</body></html>');
             
         }
     } catch (error) {
@@ -122,8 +128,7 @@ const getResetPassword = async (req, res) => {
 
 }
 const ResetPassword = async (req, res) => {
-    const { newP, confP } = req.body;
-    const { user_email } = req.params;
+    const { newP, confP ,email} = req.body;
 
     console.log(req.body);
     if (!newP || !confP) {
@@ -139,7 +144,7 @@ const ResetPassword = async (req, res) => {
     }
    
 
-    User.findOne({ email: user_email })
+    User.findOne({ email: email })
         .then(async (user) => {
             if (!user) {
                 res.status(401);

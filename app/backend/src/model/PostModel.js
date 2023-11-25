@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Comments = require("./CommentModel");
 
 const postSchema = new mongoose.Schema({
 
@@ -7,13 +7,15 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    
     title: {
         type: String,
         required: true
     },
-    imagePath: {
-        type: String, // Assuming you store the image as a file path
-        required: true,
+    link: {
+        type: String,
+        trim: true, 
+        
     },
 
     content: {
@@ -26,15 +28,20 @@ const postSchema = new mongoose.Schema({
         default:0
     },
     
-    downvote: {
+    downvote: {       
         type: Number,
         default:0
     },
 
-    comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        // ref: 'Comment'
+    replies: [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : Comments
     }],
+
+    noofreplies: {         //no of replies
+        type : Number,
+        default : 0
+    }
 
 
 }, { timestamps: true })
