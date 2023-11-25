@@ -57,10 +57,10 @@ app.get("/search", (req, res) => {
   res.render("search");
 });
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001;
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
-app.use("/posts",HomeRoutes);
+app.use("/home",HomeRoutes);
 app.use("/search",SearchRoutes);
 app.use("/comments",CommentRoutes);
 //process.env.PORT
