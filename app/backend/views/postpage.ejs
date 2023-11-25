@@ -136,11 +136,36 @@
           </div> -->
           <form class="reply-form">
             <textarea
+              id="reply-textarea"
               class="reply-textarea"
               placeholder="Your reply..."
             ></textarea>
-            <button class="post-reply-btn">Post Reply</button>
+            <button onclick="sendReply()">Post Reply</button>
           </form>
+          
+          <script>
+            function sendReply() {
+              const textareaValue = document.getElementById('reply-textarea').value;
+              const postid = "<%= post._id %>";
+              fetch('/post/CreateComment/' + postid, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ comment: textareaValue })
+              })
+              .then(response => {
+                // Handle response here
+                console.log('Reply sent to backend:', response);
+                location.reload();
+              })
+              .catch(error => {
+                // Handle error here
+                console.error('Error sending reply:', error);
+              });
+            }
+          </script>
+          
           <div class="replies-container">
             <!-- Nested replies -->
             <div class="comment">
