@@ -60,60 +60,61 @@
         <button class="frame-item comment-btn"></button>
 
         <script>
-                 const id = '<%= post._id %>';
-                // Function to handle vote actions
-                function castVote(voteType) {
-                  console.log(voteType);
-                  const requestOptions = {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ vote: voteType }), // Sending vote in the request body
-                  };
-                  fetch("/posts/post/vote/" + id, requestOptions) // Send request to backend with vote type
-                    .then((response) => response.json())
-                    .then((data) => {
-                      const value = data.response;
-                      const upvoteCount = data.uc;
-                      const downvoteCount = data.dc;
+          const id = "<%= post._id %>";
+          // Function to handle vote actions
+          function castVote(voteType) {
+            console.log(voteType);
+            const requestOptions = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ vote: voteType }), // Sending vote in the request body
+            };
+            fetch("/posts/post/vote/" + id, requestOptions) // Send request to backend with vote type
+              .then((response) => response.json())
+              .then((data) => {
+                const value = data.response;
+                const upvoteCount = data.uc;
+                const downvoteCount = data.dc;
 
-                      // Update vote counts in the UI
-                      document.getElementById("upvoteCount").innerText = upvoteCount;
-                      document.getElementById("downvoteCount").innerText= downvoteCount;
+                // Update vote counts in the UI
+                document.getElementById("upvoteCount").innerText = upvoteCount;
+                document.getElementById("downvoteCount").innerText =
+                  downvoteCount;
 
-                      // Update button states based on the received value
-                      const upvoteButton = document.querySelector(".upvote");
-                      const downvoteButton = document.querySelector(".downvote");
+                // Update button states based on the received value
+                const upvoteButton = document.querySelector(".upvote");
+                const downvoteButton = document.querySelector(".downvote");
 
-                      if (value === 1) {
-                        upvoteButton.innerText = "Upvoted";
-                        downvoteButton.innerText = "Downvote";
-                      } else if (value === -1) {
-                        upvoteButton.innerText = "Upvote";
-                        downvoteButton.innerText = "Downvoted";
-                      } else {
-                        upvoteButton.innerText = "Upvote";
-                        downvoteButton.innerText = "Downvote";
-                      }
-                    })
-                    .catch((error) => {
-                      console.error("Error:", error);
-                    });
+                if (value === 1) {
+                  upvoteButton.innerText = "Upvoted";
+                  downvoteButton.innerText = "Downvote";
+                } else if (value === -1) {
+                  upvoteButton.innerText = "Upvote";
+                  downvoteButton.innerText = "Downvoted";
+                } else {
+                  upvoteButton.innerText = "Upvote";
+                  downvoteButton.innerText = "Downvote";
                 }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
 
-                // Event listeners for upvote and downvote buttons
-                document
-                  .querySelector(".upvote")
-                  .addEventListener("click", function () {
-                    castVote(1); // 1 represents upvote
-                  });
+          // Event listeners for upvote and downvote buttons
+          document
+            .querySelector(".upvote")
+            .addEventListener("click", function () {
+              castVote(1); // 1 represents upvote
+            });
 
-                document
-                  .querySelector(".downvote")
-                  .addEventListener("click", function () {
-                    castVote(-1); // -1 represents downvote
-                  });
+          document
+            .querySelector(".downvote")
+            .addEventListener("click", function () {
+              castVote(-1); // -1 represents downvote
+            });
         </script>
       </div>
 
@@ -128,8 +129,7 @@
             />
             <div class="comment-username">Comment</div>
           </div>
-          <div class="comment-text">
-          </div>
+          <div class="comment-text"></div>
           <!-- <div class="comment-footer">
             <button class="reply-btn">Reply</button>
             <button class="view-replies-btn">View Replies</button>
@@ -142,30 +142,31 @@
             ></textarea>
             <button onclick="sendReply()">Post Reply</button>
           </form>
-          
+
           <script>
             function sendReply() {
-              const textareaValue = document.getElementById('reply-textarea').value;
+              const textareaValue =
+                document.getElementById("reply-textarea").value;
               const postid = "<%= post._id %>";
-              fetch('/post/CreateComment/' + postid, {
-                method: 'POST',
+              fetch("/post/CreateComment/" + postid, {
+                method: "POST",
                 headers: {
-                  'Content-Type': 'application/json'
+                  "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ comment: textareaValue })
+                body: JSON.stringify({ comment: textareaValue }),
               })
-              .then(response => {
-                // Handle response here
-                console.log('Reply sent to backend:', response);
-                location.reload();
-              })
-              .catch(error => {
-                // Handle error here
-                console.error('Error sending reply:', error);
-              });
+                .then((response) => {
+                  // Handle response here
+                  console.log("Reply sent to backend:", response);
+                  location.reload();
+                })
+                .catch((error) => {
+                  // Handle error here
+                  console.error("Error sending reply:", error);
+                });
             }
           </script>
-          
+
           <div class="replies-container">
             <!-- Nested replies -->
             <div class="comment">
@@ -186,13 +187,12 @@
                     let p;
                     const newUrl = window.location.origin;
 
-                    const pid = '<%= post._id %>';
+                    const pid = "<%= post._id %>";
 
                     if (id) {
                       url = newUrl + "/post/comments/" + id;
                     } else {
-                      url =
-                        newUrl + "/post/ShowComment/" + pid; //access by postid;
+                      url = newUrl + "/post/ShowComment/" + pid; //access by postid;
                     }
 
                     fetch(url)
@@ -227,6 +227,11 @@
               <div class="comment-footer">
                 <button class="reply-btn" onclick="toggleReplyForm('${replyFormId}')">Reply</button>
                 <button class="view-replies-btn" onclick="toggleReplies('${repliesContainerId}')">View Replies</button>
+                <button class="upvote-btn" onclick="vote(1,'${p[i]._id}')">Upvote</button>
+                <span class="upvote-count">0</span> 
+  
+                <button class="downvote-btn" onclick="vote(-1,'${p[i]._id}')">Downvote</button>
+                <span class="downvote-count">0</span> 
               </div>
               <div class="reply-form" id="${replyFormId}" style="display: none;">
                 <textarea class="reply-textarea" placeholder="Type your reply..."></textarea>
@@ -261,6 +266,49 @@
       </div>
     </div>
     <script>
+      function vote(action, commenId) {
+
+        fetch(`/comments/vote/${commenId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ vote: action }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Update UI based on response
+            updateVoteCounts(data.uc, data.dc);
+            updateVoteStatus(data.response);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      function updateVoteCounts(upvotes, downvotes) {
+        document.querySelector(".upvote-count").textContent = upvotes;
+        document.querySelector(".downvote-count").textContent = downvotes;
+      }
+
+      function updateVoteStatus(value) {
+        const upvoteButton = document.querySelector(".upvote-btn");
+        const downvoteButton = document.querySelector(".downvote-btn");
+
+        // Reset styles
+        upvoteButton.classList.remove("upvoted", "downvoted");
+
+        if (value === 1) {
+          upvoteButton.classList.add("upvoted");
+          downvoteButton.classList.remove("downvoted");
+        } else if (value === -1) {
+          downvoteButton.classList.add("downvoted");
+          upvoteButton.classList.remove("upvoted");
+        } else {
+          upvoteButton.classList.remove("upvoted", "downvoted");
+          downvoteButton.classList.remove("upvoted", "downvoted");
+        }
+      }
       function toggleReplyForm(formId) {
         // Toggle the visibility of the reply form for the clicked comment
         var replyForm = document.getElementById(formId);

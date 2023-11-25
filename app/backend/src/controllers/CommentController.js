@@ -75,9 +75,9 @@ const showreplies = async (req, res) => {
 
 
 const vote = async (req, res) => {
-    const { vote } = req.body.vote;
+    const { vote } = req.body;
 
-    if(vote!=1 || vote!=-1){
+    if(!vote){
        res.status(400).json({ error: 'Invalid Voting' });
     }
     const commidd = req.params._id;
@@ -114,9 +114,10 @@ const vote = async (req, res) => {
 
     const filter1 = { commentid: commidd, vote : 1 };
     const filter2 = { commentid: commidd, vote : -1 };
-
+    
     const upvotecount = await CommentVote.countDocuments(filter1);
     const downvotecount = await CommentVote.countDocuments(filter2);
+    
     await Comment.updateOne({ _id: commidd }, { $set: { upvote: upvotecount,  downvote: downvotecount } });
 
     res.json({ response : response , uc : upvotecount , dc : downvotecount });
