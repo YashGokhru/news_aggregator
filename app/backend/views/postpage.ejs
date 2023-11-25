@@ -201,7 +201,7 @@
                         p = posts.replies;
 
                         // console.log(Array.isArray(p));
-                        // console.log(p);
+                        console.log(p);
                         // console.log(typeof posts);
                         // console.log(posts);
 
@@ -228,10 +228,10 @@
                 <button class="reply-btn" onclick="toggleReplyForm('${replyFormId}')">Reply</button>
                 <button class="view-replies-btn" onclick="toggleReplies('${repliesContainerId}')">View Replies</button>
                 <button class="upvote-btn" onclick="vote(1,'${p[i]._id}')">Upvote</button>
-                <span class="upvote-count">0</span> 
+                <span class="upvote-count">${p[i].upvote}</span> 
   
                 <button class="downvote-btn" onclick="vote(-1,'${p[i]._id}')">Downvote</button>
-                <span class="downvote-count">0</span> 
+                <span class="downvote-count">${p[i].downvote}</span> 
               </div>
               <div class="reply-form" id="${replyFormId}" style="display: none;">
                 <textarea class="reply-textarea" placeholder="Type your reply..."></textarea>
@@ -267,7 +267,6 @@
     </div>
     <script>
       function vote(action, commenId) {
-
         fetch(`/comments/vote/${commenId}`, {
           method: "POST",
           headers: {
@@ -278,22 +277,30 @@
           .then((response) => response.json())
           .then((data) => {
             // Update UI based on response
-            updateVoteCounts(data.uc, data.dc);
-            updateVoteStatus(data.response);
+            updateVoteCounts(commenId, data.uc, data.dc);
+            updateVoteStatus(commenId, data.response);
           })
           .catch((error) => {
             console.error("Error:", error);
           });
       }
 
-      function updateVoteCounts(upvotes, downvotes) {
-        document.querySelector(".upvote-count").textContent = upvotes;
-        document.querySelector(".downvote-count").textContent = downvotes;
+      function updateVoteCounts(commentId, upvotes, downvotes) {
+        document
+          .getElementById(commentId)
+          .querySelector(".upvote-count").textContent = upvotes;
+        document
+          .getElementById(commentId)
+          .querySelector(".downvote-count").textContent = downvotes;
       }
 
-      function updateVoteStatus(value) {
-        const upvoteButton = document.querySelector(".upvote-btn");
-        const downvoteButton = document.querySelector(".downvote-btn");
+      function updateVoteStatus(commentId, value) {
+        const upvoteButton = document
+          .getElementById(commentId)
+          .querySelector(".upvote-btn");
+        const downvoteButton = document
+          .getElementById(commentId)
+          .querySelector(".downvote-btn");
 
         // Reset styles
         upvoteButton.classList.remove("upvoted", "downvoted");
