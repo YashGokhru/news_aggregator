@@ -61,8 +61,9 @@ const LoginUser = asyncHandler(async (req, res) => {
         }, keyy,
             { expiresIn: "30d" }
         );
+        const oneDay = 24 * 60 * 60 * 1000;
         res.cookie("jwt",accessToken,{
-            expires:new Date(Date.now()+ 5000000),
+            expires:new Date(Date.now()+ oneDay),
             httpOnly:true
         });
         res.status(200).json({ accessToken });
