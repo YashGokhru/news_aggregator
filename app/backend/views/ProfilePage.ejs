@@ -4,29 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="styles/profile_index.css">
-    <link rel="stylesheet" href="styles/homepage_global.css" />
-    <link rel="stylesheet" href="styles/homepage_index.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="header">
-        <img class="header-child" alt="" src="images/Logo.png" />
+        <img class="header-child" alt="" src="Logo.png" />
         <button class="home" onclick="redirectToUrl('/home')">Home</button>
         <button class="search" onclick="redirectToUrl('/search')">Search</button>
         <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
         
-        <button class="profile"><img src="images/Profile.jpeg"></button>
+        <button class="profile"><img src="Profile.jpeg"></button>
     </div>
 
     <div class="container">
         <div class="form">
-            <b>Username:</b><input type="text" id="usernameInput"><br><br>
-            <b>Email:</b><input type="text" id="emailInput">
+            <b>Username:  </b>Name<br><br>
+            <b>Email:  </b>Email
         </div>
 
         <div class="buttons-container">
-            <button class="changepw">Change Password</button>
-            <button class="changepw">Sign Out</button>
+            <button class="changepw" onclick="redirectToUrl('/resetpassword')">Change Password</button>
+            <button class="changepw" onclick="redirectToUrl('/login')">Sign Out</button>
         </div>
     </div>
 
@@ -39,21 +37,31 @@
             const postsContainer = document.getElementById("postsContainer");
 
             // Assuming you have a user ID available, replace 'userId' with the actual user ID
-            // const userId = "user123"; // Replace with your actual user ID
+            const userId = "user123"; // Replace with your actual user ID
 
-            // // Fetch user data based on user ID
-            // fetchUserData(userId)
-            //     .then((userData) => {
-            //         // Populate the input boxes with user data
-            //         document.getElementById('usernameInput').value = userData.username;
-            //         document.getElementById('emailInput').value = userData.email;
-            //     })
-            //     .catch((error) => console.error("Error fetching user data:", error));
+            // Fetch user data based on user ID
+            fetchUserData(userId)
+                .then((userData) => {
+                    // Populate the input boxes with user data
+                    document.getElementById('usernameInput').value = userData.username;
+                    document.getElementById('emailInput').value = userData.email;
+                })
+                .catch((error) => console.error("Error fetching user data:", error));
 
-            const baseURL = window.location.origin;
-            console.log("Base URL:", baseURL);
+            const currentUrl = window.location.href;
 
-            fetch(baseURL + "/post/getpost")
+            // Split the URL by "/"
+            const urlParts = currentUrl.split("/");
+
+            // Remove the last part from the array
+            urlParts.pop();
+
+            // Join the parts to create the new URL
+            const newUrl = urlParts.join("/");
+            const url = newUrl + "/posts";
+            console.log(url);
+
+            fetch(url)
                 .then((response) => response.json())
                 .then((posts) => {
                     // Iterate through the fetched posts and create HTML elements
@@ -63,7 +71,6 @@
                     console.log(p);
 
                     let PostPageUrl = "";
-                    const url = baseURL + "/posts/";
                     p.forEach((post) => {
                         const postElement = document.createElement("div");
                         postElement.className = "cardsfood-card";

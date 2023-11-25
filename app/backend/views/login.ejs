@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8" />
@@ -7,50 +7,54 @@
 
     <link rel="stylesheet" href="styles/login_global.css" />
     <link rel="stylesheet" href="styles/login_index.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400;600;700;800&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400;600;700;800&display=swap" />
 </head>
 
 <body>
-    <div class="rectangle-parent">
-        <img class="frame-child" alt="" src="images/rectangle-9637@2x.png" />
-        <img class="frame-item" alt="" src="images/group-1686550876.svg" />
-
+    <div class="divcontainer">
+        <div class="divcontainer-child"></div>
+        <div class="dont-have-an-account-parent">
+            <div class="dont-have-an-account">Don't have an account?</div>
+            <a class="login" href="#" onclick="redirectToLoginPage()">SignUp</a>
+        </div>
+        <img class="divcontainer-item" alt="" src="images/group-1686550876.svg" />
+        <form id="loginForm">
         <div class="frame-parent">
-            <div class="frame-wrapper">
-                <div class="login-to-your-account-wrapper">
-                    <b class="login-to-your">Login to your Account</b>
-                </div>
+            <div class="login-parent">
+                <b class="log_in">Login to Your Account</b>
+                <div></div>
             </div>
             <div class="frame-group">
-                <form id="loginForm">
-                    <div class="frame-container">
-                        <div class="email-parent">
-                            <div class="email">Email</div>
-                            <input id="emailInput" class="frame-inner" type="email" required />
-                        </div>
-                        <div class="frame-div">
-                            <div class="email-parent">
-                                <div class="email">Password</div>
-                                <input id="passwordInput" class="frame-inner" type="password" required />
-                            </div>
-                            <div class="checkbox-parent">
-                                <div class="checkbox">
-                                    <input class="check" type="checkbox" />
-                                    <div class="login-to-your">Remember Me</div>
-                                </div>
+                <div class="frame-container">
+                    <div class="email-parent">
+                        <div class="email">Email</div>
+                        <input id="emailInput" class="frame-child" placeholder="mail@abc.com" type="email" required/>
+                    </div>
+                    <div class="email-parent">
+                        <div class="email">Password</div>
+                        <input id="passwordInput" class="frame-child" placeholder="xyz123" type="password" required/>
+                    </div>
+                </div>
+                
+                <button id="loginButton" class="login-wrapper" autofocus="{true}">
+                    <div class="login1">Login</div>
+                </button>
+            </form>
+                <div class="checkbox-parent">
                                 <a class="forgot-password" href="/forgotpassword">Forgot Password?</a>
                             </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="login-wrapper">
-                        <div class="login">Login</div>
-                    </button>
-                </form>
             </div>
         </div>
+        <img class="divcontainer-inner" alt="" src="images/rectangle-9637@2x.png" />
     </div>
 
     <script>
+        function redirectToLoginPage() {
+    // You can add any additional actions or checks here before redirection
+    // For example, you can use window.location.href to redirect:
+             window.location.href = "/register";
+        }
         document.addEventListener('DOMContentLoaded', function () {
             var loginForm = document.getElementById('loginForm');
 
