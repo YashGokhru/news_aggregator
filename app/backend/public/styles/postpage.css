@@ -1,0 +1,91 @@
+/* Basic styling for the post and comment structure */
+
+/* Body and Font */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #333;
+}
+
+/* Header */
+.header {
+  background-color: #444;
+  color: white;
+  padding: 20px;
+}
+
+/* Post */
+.post {
+  background-color: #fff;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Comment */
+.comment {
+  background-color: #f9f9f9;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.comment-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-username {
+  font-weight: bold;
+}
+
+.comment-text {
+  margin-bottom: 10px;
+}
+
+.comment-footer button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.reply-form {
+  margin-top: 10px;
+}
+
+.reply-textarea {
+  width: calc(100% - 20px);
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.post-reply-btn {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hide view replies button if no replies */
+.view-replies-btn[hidden] {
+  display: none;
+}
