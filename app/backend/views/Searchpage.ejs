@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <link rel="stylesheet" href="styles/Search_page_global.css">
+    <link rel="stylesheet" href="Search_page_index.css">
+</head>
+<body>
+    <div class="header">
+        <img class="header-child" alt="" src="images/Logo.png" />
+        <button class="home" onclick="redirectToUrl('/home')">Home</button>
+        <button class="search" onclick="redirectToUrl('/search')">Search</button>
+        <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
+        
+        <button class="profile"><img src="images/Profile.jpeg"></button>
+    </div>
+
+    <div class="searchbox">
+        <img class="searchimg" src="images/search.jpg" alt="">
+        <input type="text" id="searchBox" placeholder="Enter Username or Keyword">
+    </div>
+
+    <div class="buttonsforsearch">
+        <button onclick="searchUser()" class="searchuser">Search User</button>
+        <button onclick="searchPost()" class="searchpost">Search Post</button>
+    </div>
+    
+
+    <div class="searchpostsreasult" id="searchResults">
+        <!-- dynamic search results -->
+    </div>
+
+    <script>
+        function searchUser() {
+            const username = document.getElementById('searchBox').value;
+            if (username.trim() === "") {
+                alert("Please enter a username");
+                return;
+            }
+
+            console.log(username);
+
+            fetch(`/search/searchuser/${username}`)
+                .then(response => response.json())
+                .then(posts => displayResults(posts))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function searchPost() {
+            const keyword = document.getElementById('searchBox').value;
+            if (keyword.trim() === "") {
+                alert("Please enter a keyword");
+                return;
+            }
+
+            console.log(keyword);
+
+            fetch(`/search/searchpost/${keyword}`)
+                .then(response => response.json())
+                .then(posts => displayResults(posts))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function displayResults(posts) {
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = ""; // Clear previous results
+
+            if (posts.length === 0) {
+                resultsContainer.innerHTML = "<p>No results found.</p>";
+                return;
+            }
+
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.innerHTML = `
+                                          <<div>
+                      <div class="usa-today">${post.user.name}</div>
+              </div>
+              <div>
+                  <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${url}/${post._id}')">${post.title}</button>
+              </div>
+              
+              <div>
+                <div>
+    <div class="react-container">
+        <img class="react" src="images/upvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+        <p class="reaction-count">${post.upvote}</p>
+    </div>
+    <div class="react-container">
+        <img class="react" src="images/downvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+        <p class="reaction-count">${post.downvote}</p>
+    </div>
+    <div class="react-container">
+        <img class="react" src="images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
+
+        <p class="reaction-count">${post.noofreplies}</p>
+    </div>
+</div>
+
+
+
+              </div>
+            
+
+                           
+                            <!--
+                            <button class="cardsfood-card-inner"></button>
+                            <button class="rectangle-button"></button>
+                            <button class="cardsfood-card-child1"></button>
+                            <button class="cardsfood-card-child2"></button>
+                            <div class="div">${post.likes}</div>
+                            <div class="div1">${post.comments}</div>
+                            -->
+                        `;
+
+                resultsContainer.appendChild(postElement);
+            });
+        }
+
+        function redirectToUrl(fullUrl) {
+          window.location.href = fullUrl;
+        }
+    </script>
+
+</body>
+</html>
