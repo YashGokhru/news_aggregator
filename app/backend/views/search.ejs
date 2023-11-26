@@ -80,7 +80,9 @@
                 postElement.className = "cardsfood-card";
                 postElement.innerHTML = `
 
-                
+                <div>
+                      <div class="usa-today">${post.username}</div>
+              </div>
                 
               <div>
                   <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('/home/posts/${post._id}')">${post.title}</button>
