@@ -8,6 +8,7 @@ const PostRoutes = require("./routes/PostRoutes");
 const HomeRoutes = require("./routes/HomeRoutes");
 const SearchRoutes = require("./routes/SearchRoutes");
 const CommentRoutes = require("./routes/CommentRoutes");
+const ProfileRoutes = require("./routes/ProfileRoutes");
 const cookieParser = require("cookie-parser");
 const path = require('path');
 
@@ -31,9 +32,9 @@ app.get("/register", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login");
 });
-app.get("/home", (req, res) => {
-  res.render("home");
-});
+// app.get("/home", (req, res) => {
+//   res.render("home");
+// });
 // app.get("/postpage/", (req, res) => {
 //   res.render("postpage");
 // });
@@ -45,9 +46,9 @@ app.get("/resetpassword", (req, res) => {
 app.get("/forgotpassword", (req, res) => {
   res.render("ForgotPassword");
 });
-app.get("/profile", (req, res) => {
-  res.render("ProfilePage");
-});
+// app.get("/profile", (req, res) => {
+//   res.render("ProfilePage");
+// });
 
 app.get("/createpost", (req, res) => {
   res.render("CreatePost");
@@ -57,12 +58,13 @@ app.get("/search", (req, res) => {
   res.render("search");
 });
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
-app.use("/posts",HomeRoutes);
+app.use("/home",HomeRoutes);
 app.use("/search",SearchRoutes);
 app.use("/comments",CommentRoutes);
+app.use("/profile",ProfileRoutes);
 //process.env.PORT
 app.listen(port, () => {
   console.log("Server listening on port " + port + "✅");

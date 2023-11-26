@@ -4,28 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/styles/profile_index.css">
+    <link rel="stylesheet" href="/styles/homepage_global.css" />
+    <link rel="stylesheet" href="/styles/homepage_index.css" />
 </head>
 <body>
     <div class="header">
-        <img class="header-child" alt="" src="Logo.png" />
+        <img class="header-child" alt="" src=""" />
         <button class="home" onclick="redirectToUrl('/home')">Home</button>
         <button class="search" onclick="redirectToUrl('/search')">Search</button>
         <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
         
-        <button class="profile"><img src="Profile.jpeg"></button>
+        <button class="profile"><img src="/images/profile.png"></button>
     </div>
 
     <div class="container">
         <div class="form">
-            <b>Username:  </b>Name<br><br>
-            <b>Email:  </b>Email
+            <b>Username: </b><%= user.name %><br><br>
+            <b>Email: </b><%= user.email %>
         </div>
 
         <div class="buttons-container">
             <button class="changepw" onclick="redirectToUrl('/resetpassword')">Change Password</button>
             <button class="changepw" onclick="redirectToUrl('/login')">Sign Out</button>
         </div>
+        <script>
+        function redirectToUrl(fullUrl) {
+            window.location.href = fullUrl;
+        }
+            </script>
     </div>
 
     <div class="dishes" id="postsContainer">
@@ -37,31 +44,21 @@
             const postsContainer = document.getElementById("postsContainer");
 
             // Assuming you have a user ID available, replace 'userId' with the actual user ID
-            const userId = "user123"; // Replace with your actual user ID
+            // const userId = "user123"; // Replace with your actual user ID
 
-            // Fetch user data based on user ID
-            fetchUserData(userId)
-                .then((userData) => {
-                    // Populate the input boxes with user data
-                    document.getElementById('usernameInput').value = userData.username;
-                    document.getElementById('emailInput').value = userData.email;
-                })
-                .catch((error) => console.error("Error fetching user data:", error));
+            // // Fetch user data based on user ID
+            // fetchUserData(userId)
+            //     .then((userData) => {
+            //         // Populate the input boxes with user data
+            //         document.getElementById('usernameInput').value = userData.username;
+            //         document.getElementById('emailInput').value = userData.email;
+            //     })
+            //     .catch((error) => console.error("Error fetching user data:", error));
 
-            const currentUrl = window.location.href;
+            const baseURL = window.location.origin;
+            console.log("Base URL:", baseURL);
 
-            // Split the URL by "/"
-            const urlParts = currentUrl.split("/");
-
-            // Remove the last part from the array
-            urlParts.pop();
-
-            // Join the parts to create the new URL
-            const newUrl = urlParts.join("/");
-            const url = newUrl + "/posts";
-            console.log(url);
-
-            fetch(url)
+            fetch(baseURL + "/post/getpost")
                 .then((response) => response.json())
                 .then((posts) => {
                     // Iterate through the fetched posts and create HTML elements
@@ -71,6 +68,7 @@
                     console.log(p);
 
                     let PostPageUrl = "";
+                    const url = baseURL + "/posts/";
                     p.forEach((post) => {
                         const postElement = document.createElement("div");
                         postElement.className = "cardsfood-card";
@@ -83,19 +81,19 @@
                                 <div class="usa-today">${post.user.name}</div>
                             </div>
                             <div>
-                                <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${url}/${post._id}')">${post.title}</button>
+                                <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${baseURL}/home/posts/${post._id}')">${post.title}</button>
                             </div>
                             <div>
                                 <div class="react-container">
-                                    <img class="react" src="images/upvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+                                    <img class="react" src="/images/upvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
                                     <p class="reaction-count">${post.upvote}</p>
                                 </div>
                                 <div class="react-container">
-                                    <img class="react" src="images/downvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+                                    <img class="react" src="/images/downvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
                                     <p class="reaction-count">${post.downvote}</p>
                                 </div>
                                 <div class="react-container">
-                                    <img class="react" src="images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
+                                    <img class="react" src="/images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
                                     <p class="reaction-count">${post.noofreplies}</p>
                                 </div>
                             </div>
