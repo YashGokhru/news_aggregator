@@ -57,20 +57,20 @@
         }
         document.addEventListener('DOMContentLoaded', function () {
             var loginForm = document.getElementById('loginForm');
-
+    
             loginForm.addEventListener('submit', function (event) {
                 event.preventDefault(); // Prevent the default form submission
-
+    
                 // Retrieve the input values
                 var email = document.getElementById('emailInput').value;
                 var password = document.getElementById('passwordInput').value;
-
+    
                 // Create an object with user login data
                 var userData = {
                     email: email,
                     password: password
                 };
-
+    
                 // Send a POST request to /user/login
                 fetch('/user/login', {
                     method: 'POST',
@@ -79,18 +79,31 @@
                     },
                     body: JSON.stringify(userData)
                 })
-                    .then(response => {
+                .then(response => {
+                    if (response.ok) {
                         console.log('Login successful');
-                        // Handle the response as needed
+                        // Redirect to the home page or perform other actions for successful login
                         window.location.href = '/home';
-                    })
-                    .catch(error => {
-                        console.error('Error during login:', error);
-                        // Handle errors as needed
-                    });
+                    } else {
+                        console.log('Login failed');
+                        // Check for specific status codes that indicate invalid login
+                        if (response.status === 401) {
+                            alert('Invalid login credentials. Please try again.');
+                        } else {
+                            // Handle other server errors
+                            console.error('Server error:', response.statusText);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during login:', error);
+                    // Handle other client-side errors
+                });
             });
         });
     </script>
+    
+    
 </body>
 
 </html>
