@@ -4,11 +4,12 @@ const jwt = require("jsonwebtoken");
 const validateToken = asyncHandler(async (req, res, next) => {
     let token = req.cookies.jwt;
     console.log("Token:", token); 
-
+    // res.render("login");
     if (!token) {
         console.error("Token not found");
         res.status(400);
         throw new Error("Token not found");
+        res.render('login');
     }
     const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
     jwt.verify(token, keyy, (err, decoded) => {
