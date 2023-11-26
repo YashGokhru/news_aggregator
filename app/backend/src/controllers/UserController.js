@@ -3,7 +3,6 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../../utils/sendEmail");
-const app = require("../index");
 
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -18,7 +17,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("User already registered");
     }
 
-    
+
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("password : ", hashedPassword);
 
@@ -30,7 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
         }
     )
     console.log(user);
-    
+
     if (user) {
         res.status(200).json({ __id: user.id, email: user.email, password: user.hashedPassword })
         res.render("login");
@@ -74,7 +73,7 @@ const LoginUser = async (req, res) => {
     }
 };
 
-module.exports = { LoginUser };
+
 
 
 //ForgotPassword 
@@ -99,7 +98,7 @@ const ForgotPassword = async (req, res) => {
 
             // Return a success response
             res.send('<html><body>Link Sent Successfully</body></html>');
-            
+
         }
     } catch (error) {
         // Handle any errors that might occur during the process
@@ -130,7 +129,7 @@ const getResetPassword = async (req, res) => {
 
 }
 const ResetPassword = async (req, res) => {
-    const { newP, confP ,email} = req.body;
+    const { newP, confP, email } = req.body;
 
     console.log(req.body);
     if (!newP || !confP) {
@@ -144,7 +143,7 @@ const ResetPassword = async (req, res) => {
         throw new Error("Both Fields should be same");
 
     }
-   
+
 
     User.findOne({ email: email })
         .then(async (user) => {
@@ -168,12 +167,18 @@ const ResetPassword = async (req, res) => {
 
 
 }
+const logout = async (req, res) => {
+    try {
+        console.log("Success.");
+        res.clearCookie("jwt");
+        // res.send({ message: "Logged out successfully" });
+        res.redirect("/login");
+    } catch (err) {
+        res.status(401).send(err);
 
-const Logout = async (req, res) => {
-    res.clearCookie("jwt"); 
-    console.log("Logged out successfully"); 
-
+    }
 };
+
 
 module.exports = {
     registerUser,
@@ -181,7 +186,7 @@ module.exports = {
     ForgotPassword,
     ResetPassword,
     getResetPassword,
-    Logout
+    logout
 
 
 }

@@ -40,7 +40,7 @@ app.get("/login", (req, res) => {
 // });
 
 app.get("/resetpassword", (req, res) => {
-  res.render("ResetPassword_updated");
+  res.render("resetpassword");
 });
 
 app.get("/forgotpassword", (req, res) => {
@@ -70,4 +70,4 @@ const server = app.listen(port, () => {
   console.log("Server listening on port " + port + "✅");
 });
 
-module.exports = {app,server};
+module.exports = app;
