@@ -148,10 +148,10 @@
 }
 .divcontainer-inner {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 45rem;
-  height: 64rem;
+  top: 30;
+  left: 30;
+  width: 37rem;
+  height: 55rem;
   object-fit: cover;
 }
 .divcontainer {
