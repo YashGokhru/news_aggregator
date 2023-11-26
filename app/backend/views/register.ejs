@@ -41,7 +41,7 @@
                         <div id="passwordError" class="error-message"></div>
                     </div>
                 </div>
-                
+
                 <button id="signupButton" class="sign-up-wrapper" autofocus="{true}">
                     <div class="sign-up1">Sign Up</div>
                 </button>
@@ -51,6 +51,12 @@
     </div>
 
     <script>
+        function redirectToLoginPage() {
+            // You can add any additional actions or checks here before redirection
+            // For example, you can use window.location.href to redirect:
+            window.location.href = "/login";
+        }
+
         document.getElementById('signupButton').addEventListener('click', function () {
             var email = document.querySelector('.email-parent:nth-child(1) input').value;
             var username = document.querySelector('.email-parent:nth-child(2) input').value;
@@ -87,8 +93,8 @@
                 name: username,
                 password: password
             };
-    
-            fetch('/user/register', {
+
+            fetch('/user/register', {  // Updated endpoint to /user/register
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -96,17 +102,22 @@
                 body: JSON.stringify(userData)
             })
                 .then(response => {
-                    console.log('User registered successfully');
-                    // Handle the response as needed
-                    window.location.href = '/login';
+                    if (response.ok) {
+                        console.log('User registered successfully');
+                        // Handle the response as needed
+                        window.location.href = '/login';
+                    } else {
+                        throw new Error('Invalid details. Registration failed.');
+                    }
                 })
                 .catch(error => {
                     console.error('Error registering user:', error);
                     // Handle errors as needed
+                    alert(error.message);
                 });
         });
     </script>
-    
+
 </body>
 
 </html>
