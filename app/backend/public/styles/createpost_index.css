@@ -88,7 +88,18 @@
 }
 
 .frame-child1 {
-  left: 39.38rem;
+  left: 30rem;
+}
+
+.frame-child4 {
+  border: 0;
+  background-color: var(--color-gainsboro);
+  position: absolute;
+  top: 48.06rem;
+  border-radius: var(--br-xl);
+  width: 10.5rem;
+  left: 49rem;
+  height: 3.0rem;
 }
 
 .add-video {
@@ -151,7 +162,7 @@
   background-color: var(--color-mediumblue);
   position: absolute;
   top: 55.31rem;
-  left: 47.63rem;
+  left: 46rem;
   border-radius: var(--br-xl);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   width: 8.88rem;
@@ -167,7 +178,7 @@
 
 .cancel {
   top: 55.38rem;
-  left: 49.75rem;
+  left: 48rem;
   color: var(--color-white);
   width: 4.56rem;
   height: 2.44rem;
