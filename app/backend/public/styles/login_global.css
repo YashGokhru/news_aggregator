@@ -8,7 +8,7 @@ body {
   --font-nunito-sans: "Nunito Sans";
 
   /* font sizes */
-  --font-size-xs: 0.75rem;
+  --font-size-lg: 1.13rem;
   --font-size-sm: 0.88rem;
 
   /* Colors */
@@ -19,8 +19,11 @@ body {
   --brand-flat-blue: #0a8bef;
 
   /* Gaps */
-  --gap-5xs: 0.5rem;
   --gap-9xs: 0.25rem;
+
+  /* Paddings */
+  --padding-smi: 0.81rem;
+  --padding-3xs: 0.63rem;
 
   /* Border radiuses */
   --br-8xs: 5px;
