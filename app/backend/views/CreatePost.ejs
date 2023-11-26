@@ -21,7 +21,7 @@
       <input class="frame-child4" type="text" name="link" placeholder="Add link...." />
       <button class="frame-child2" type="submit"></button>
       <div class="post">Post</div>
-      <button class="frame-child3"></button>
+      <button id="cancelButton" class="frame-child3"></button>
       <div class="cancel">Cancel</div>
     </form>
 
@@ -36,9 +36,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var createPostForm = document.getElementById('createPostForm');
+      var cancelButton = document.getElementById('cancelButton');
 
       // Function to get the value of a cookie by its name
-      function getCookie(jwt) {
+      function getCookie(name) {
         var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         if (match) return match[2];
       }
@@ -73,6 +74,11 @@
           .catch(error => {
             console.error('Error:', error);
           });
+      });
+
+      cancelButton.addEventListener('click', function () {
+        // Redirect to the home page when the "Cancel" button is clicked
+        window.location.href = '/home';
       });
     });
   </script>
