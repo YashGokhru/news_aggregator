@@ -17,7 +17,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("User already registered");
     }
 
-    
+
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("password : ", hashedPassword);
 
@@ -29,7 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
         }
     )
     console.log(user);
-    
+
     if (user) {
         res.status(200).json({ __id: user.id, email: user.email, password: user.hashedPassword })
         res.render("login");
@@ -43,37 +43,38 @@ const registerUser = asyncHandler(async (req, res) => {
 const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
 // Login 
 
-const LoginUser = asyncHandler(async (req, res) => {
+const LoginUser = async (req, res) => {
     const { email, password } = req.body;
+
     if (!email || !password) {
-        res.status(400);
-        throw new Error("All Fields are mandotory")
+        return res.status(400).send({ error: "All Fields are mandatory" });
     }
+
     const user = await User.findOne({ email: email });
-    if (user && await bcrypt.compare(password, user.password)) {
-        
+
+    if (user && (await bcrypt.compare(password, user.password))) {
         const accessToken = jwt.sign({
             user: {
                 username: user.username,
                 email: user.email,
                 id: user.id
             },
-        }, keyy,
-            { expiresIn: "30d" }
-        );
-        const oneday = 24*60*60*1000;   
-        res.cookie("jwt",accessToken,{
-            expires:new Date(Date.now()+ oneday),
-            httpOnly:true
+        }, keyy, { expiresIn: "30d" });
+
+        const oneday = 24 * 60 * 60 * 1000;
+        res.cookie("jwt", accessToken, {
+            expires: new Date(Date.now() + oneday),
+            httpOnly: true
         });
-        res.status(200).json({ accessToken });
+
+        return res.status(200).send({ message: "Successfully logged in" });
+    } else {
+        return res.status(401).send({ error: "Email or password is not valid" });
     }
-    else {
-        res.status(401);
-        throw new Error("Email or password is not valid");
-    }
-    // return accessToken;
-});
+};
+
+
+
 
 //ForgotPassword 
 
@@ -97,7 +98,7 @@ const ForgotPassword = async (req, res) => {
 
             // Return a success response
             res.send('<html><body>Link Sent Successfully</body></html>');
-            
+
         }
     } catch (error) {
         // Handle any errors that might occur during the process
@@ -128,7 +129,7 @@ const getResetPassword = async (req, res) => {
 
 }
 const ResetPassword = async (req, res) => {
-    const { newP, confP ,email} = req.body;
+    const { newP, confP, email } = req.body;
 
     console.log(req.body);
     if (!newP || !confP) {
@@ -142,7 +143,7 @@ const ResetPassword = async (req, res) => {
         throw new Error("Both Fields should be same");
 
     }
-   
+
 
     User.findOne({ email: email })
         .then(async (user) => {
@@ -166,7 +167,17 @@ const ResetPassword = async (req, res) => {
 
 
 }
+const logout = async (req, res) => {
+    try {
+        console.log("Success.");
+        res.clearCookie("jwt");
+        // res.send({ message: "Logged out successfully" });
+        res.redirect("/login");
+    } catch (err) {
+        res.status(401).send(err);
 
+    }
+};
 
 
 module.exports = {
@@ -174,7 +185,8 @@ module.exports = {
     LoginUser,
     ForgotPassword,
     ResetPassword,
-    getResetPassword
+    getResetPassword,
+    logout
 
 
 }

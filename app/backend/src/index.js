@@ -66,6 +66,8 @@ app.use("/search",SearchRoutes);
 app.use("/comments",CommentRoutes);
 app.use("/profile",ProfileRoutes);
 //process.env.PORT
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("Server listening on port " + port + "✅");
 });
+
+module.exports = app;

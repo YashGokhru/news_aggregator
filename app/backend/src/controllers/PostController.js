@@ -12,8 +12,7 @@ const CreatePost = async (req, res) => {
   const user_id = req.user.id;
   console.log(user_id);
   if (!title || !content) {
-    res.status(400);
-    throw new Error("All Fields are mandotory");
+    res.status(400).json({ success: false, error: "All Fields are mandatory" });
   }
 
   try {
@@ -36,7 +35,8 @@ const CreatePost = async (req, res) => {
           });
       });
 
-      res.status(201).json({ message: "Post Uploaded Succesfully" });
+      res.status(201).json({ success: true, message: "Post Uploaded Successfully" });
+
     } else {
       res.status(400);
       throw new Error("User Data is not valid");

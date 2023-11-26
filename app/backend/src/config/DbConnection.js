@@ -6,4 +6,4 @@ const connectDb = mongoose.connect('mongodb+srv://G21:2iyH5zsC8Nt$3UQ@cluster0.y
 .catch((err)=>console.log(err));
 
 
-module.exports = connectDb;
+module.exports = connectDb;

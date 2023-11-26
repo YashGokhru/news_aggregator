@@ -14,8 +14,27 @@ const SearchByKeyword = async (req, res) => {
           { content: { $regex: keyword, $options: 'i' } }
         ]
       });
-  
-      res.json(posts);
+
+      // Extract user IDs from posts
+    const userIds = posts.map(post => post.userid);
+
+    // Retrieve user details based on user IDs
+    const users = await User.find({ _id: { $in: userIds } }, 'name');
+
+    // Map user details to posts
+    const postsWithUsernames = posts.map(post => {
+      const user = users.find(user => user._id.equals(post.userid));
+      return {
+        _id: post._id,
+        title: post.title,
+        upvote: post.upvote,
+        downvote: post.downvote,
+        noofreplies: post.noofreplies,
+        username: user.name
+      };
+    });
+
+    res.json(postsWithUsernames);
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -41,7 +60,16 @@ const SearchByKeyword = async (req, res) => {
     
     const postDetails = await Post.find({ _id: { $in: postIds } });
 
-    res.json(postDetails);
+    const postsWithUsername = postDetails.map(post => ({
+      _id: post._id,
+        title: post.title,
+        upvote: post.upvote,
+        downvote: post.downvote,
+        noofreplies: post.noofreplies,
+      username: username  // Include all other properties of the post
+    }));
+
+    res.json(postsWithUsername);
 
     } catch (error) {
       console.error(error);

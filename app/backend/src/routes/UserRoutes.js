@@ -5,7 +5,8 @@ const {
     LoginUser,
     ForgotPassword,
     ResetPassword,
-    getResetPassword
+    getResetPassword,
+    logout
 
 
 } = require("../controllers/UserController");
@@ -24,6 +25,7 @@ router.post("/forgotpassword", ForgotPassword);
 //Reset Password
 
 router.post("/resetpassword", ResetPassword);
+router.get("/logout", logout);
 
 //GetReset Password
 
