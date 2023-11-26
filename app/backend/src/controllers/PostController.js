@@ -1,6 +1,8 @@
 const User = require("../model/UserModel");
 const Post = require("../model/PostModel");
 const Comment = require("../model/CommentModel");
+const CommentVote = require("../model/CommentVoting");
+const PostVote = require("../model/PostVoting");
 const asyncHandler = require("express-async-handler");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -173,6 +175,7 @@ const GetComment = async (req, res) => {
         updatedReplies.push(updatedReply);
       }
     }
+   
     res.json({ replies: updatedReplies });
   } catch (error) {
     console.error(error);
@@ -181,7 +184,7 @@ const GetComment = async (req, res) => {
 };
 
 const GetAllComments = async (req, res) => {
-  //get comments of particular post
+  //get comments of comment
   try {
     const commId = req.params._id;
     if (!commId) {

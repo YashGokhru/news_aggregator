@@ -13,15 +13,27 @@
     />
   </head>
   <body>
-    <div class="header">
-      <!-- Header content goes here -->
-    </div>
+    <div class="home-desktop" data-animate-on-scroll>
+      <div class="header">
+        <img class="header-child" alt="" src="" />
+          <button class="home" onclick="redirectToUrl('/home')">Home</button>
+          <button class="search" onclick="redirectToUrl('/search')">Search</button>
+          <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
+        
+          <button class="profile" onclick="redirectToUrl('/profile')"><img src="/images/profile.png"
+            ></button>
+            <script> 
+            function redirectToUrl(fullUrl) {
+    window.location.href = fullUrl;
+            }
+            </script>
+      </div>
 
     <div class="post-page">
       <!-- Main post content -->
       <div class="post">
         <!-- Post content -->
-        <div class="username-xyz"><%= user.name %></div>
+        <div class="username-xyz">Posted by : <%= user.name %></div>
         <div class="title-this-container">
           <p><%= post.title %></p>
         </div>
@@ -50,6 +62,7 @@
           }
         </script>
         <!-- Upvote, downvote, comment buttons -->
+        <p></p>
         <button class="frame-child upvote">Upvote</button>
         <button class="frame-inner downvote">Downvote</button>
         <div id="voteCounts">
@@ -57,63 +70,64 @@
           Downvotes: <span id="downvoteCount"><%= post.downvote %></span>
         </div>
 
-        <button class="frame-item comment-btn"></button>
+        <a>Comments : <%= post.noofreplies %></a>
 
         <script>
-                 const id = '<%= post._id %>';
-                // Function to handle vote actions
-                function castVote(voteType) {
-                  console.log(voteType);
-                  const requestOptions = {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ vote: voteType }), // Sending vote in the request body
-                  };
-                  fetch("/posts/post/vote/" + id, requestOptions) // Send request to backend with vote type
-                    .then((response) => response.json())
-                    .then((data) => {
-                      const value = data.response;
-                      const upvoteCount = data.uc;
-                      const downvoteCount = data.dc;
+          const id = "<%= post._id %>";
+          // Function to handle vote actions
+          function castVote(voteType) {
+            console.log(voteType);
+            const requestOptions = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ vote: voteType }), // Sending vote in the request body
+            };
+            fetch("/home/post/vote/" + id, requestOptions) // Send request to backend with vote type
+              .then((response) => response.json())
+              .then((data) => {
+                const value = data.response;
+                const upvoteCount = data.uc;
+                const downvoteCount = data.dc;
 
-                      // Update vote counts in the UI
-                      document.getElementById("upvoteCount").innerText = upvoteCount;
-                      document.getElementById("downvoteCount").innerText= downvoteCount;
+                // Update vote counts in the UI
+                document.getElementById("upvoteCount").innerText = upvoteCount;
+                document.getElementById("downvoteCount").innerText =
+                  downvoteCount;
 
-                      // Update button states based on the received value
-                      const upvoteButton = document.querySelector(".upvote");
-                      const downvoteButton = document.querySelector(".downvote");
+                // Update button states based on the received value
+                const upvoteButton = document.querySelector(".upvote");
+                const downvoteButton = document.querySelector(".downvote");
 
-                      if (value === 1) {
-                        upvoteButton.innerText = "Upvoted";
-                        downvoteButton.innerText = "Downvote";
-                      } else if (value === -1) {
-                        upvoteButton.innerText = "Upvote";
-                        downvoteButton.innerText = "Downvoted";
-                      } else {
-                        upvoteButton.innerText = "Upvote";
-                        downvoteButton.innerText = "Downvote";
-                      }
-                    })
-                    .catch((error) => {
-                      console.error("Error:", error);
-                    });
+                if (value === 1) {
+                  upvoteButton.innerText = "Upvoted";
+                  downvoteButton.innerText = "Downvote";
+                } else if (value === -1) {
+                  upvoteButton.innerText = "Upvote";
+                  downvoteButton.innerText = "Downvoted";
+                } else {
+                  upvoteButton.innerText = "Upvote";
+                  downvoteButton.innerText = "Downvote";
                 }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
 
-                // Event listeners for upvote and downvote buttons
-                document
-                  .querySelector(".upvote")
-                  .addEventListener("click", function () {
-                    castVote(1); // 1 represents upvote
-                  });
+          // Event listeners for upvote and downvote buttons
+          document
+            .querySelector(".upvote")
+            .addEventListener("click", function () {
+              castVote(1); // 1 represents upvote
+            });
 
-                document
-                  .querySelector(".downvote")
-                  .addEventListener("click", function () {
-                    castVote(-1); // -1 represents downvote
-                  });
+          document
+            .querySelector(".downvote")
+            .addEventListener("click", function () {
+              castVote(-1); // -1 represents downvote
+            });
         </script>
       </div>
 
@@ -128,19 +142,44 @@
             />
             <div class="comment-username">Comment</div>
           </div>
-          <div class="comment-text">
-          </div>
+          <div class="comment-text"></div>
           <!-- <div class="comment-footer">
             <button class="reply-btn">Reply</button>
             <button class="view-replies-btn">View Replies</button>
           </div> -->
           <form class="reply-form">
             <textarea
+              id="reply-textarea"
               class="reply-textarea"
               placeholder="Your reply..."
             ></textarea>
-            <button class="post-reply-btn">Post Reply</button>
+            <button onclick="sendReply()">Post Reply</button>
           </form>
+
+          <script>
+            function sendReply() {
+              const textareaValue =
+                document.getElementById("reply-textarea").value;
+              const postid = "<%= post._id %>";
+              fetch("/post/CreateComment/" + postid, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ comment: textareaValue }),
+              })
+                .then((response) => {
+                  // Handle response here
+                  console.log("Reply sent to backend:", response);
+                  location.reload();
+                })
+                .catch((error) => {
+                  // Handle error here
+                  console.error("Error sending reply:", error);
+                });
+            }
+          </script>
+
           <div class="replies-container">
             <!-- Nested replies -->
             <div class="comment">
@@ -161,13 +200,12 @@
                     let p;
                     const newUrl = window.location.origin;
 
-                    const pid = '<%= post._id %>';
+                    const pid = "<%= post._id %>";
 
                     if (id) {
                       url = newUrl + "/post/comments/" + id;
                     } else {
-                      url =
-                        newUrl + "/post/ShowComment/" + pid; //access by postid;
+                      url = newUrl + "/post/ShowComment/" + pid; //access by postid;
                     }
 
                     fetch(url)
@@ -176,7 +214,7 @@
                         p = posts.replies;
 
                         // console.log(Array.isArray(p));
-                        // console.log(p);
+                        console.log(p);
                         // console.log(typeof posts);
                         // console.log(posts);
 
@@ -202,6 +240,11 @@
               <div class="comment-footer">
                 <button class="reply-btn" onclick="toggleReplyForm('${replyFormId}')">Reply</button>
                 <button class="view-replies-btn" onclick="toggleReplies('${repliesContainerId}')">View Replies</button>
+                <button class="upvote-btn" onclick="vote(1,'${p[i]._id}')">Upvote</button>
+                <span class="upvote-count">${p[i].upvote}</span> 
+  
+                <button class="downvote-btn" onclick="vote(-1,'${p[i]._id}')">Downvote</button>
+                <span class="downvote-count">${p[i].downvote}</span> 
               </div>
               <div class="reply-form" id="${replyFormId}" style="display: none;">
                 <textarea class="reply-textarea" placeholder="Type your reply..."></textarea>
@@ -236,6 +279,56 @@
       </div>
     </div>
     <script>
+      function vote(action, commenId) {
+        fetch(`/comments/vote/${commenId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ vote: action }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Update UI based on response
+            updateVoteCounts(commenId, data.uc, data.dc);
+            updateVoteStatus(commenId, data.response);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      function updateVoteCounts(commentId, upvotes, downvotes) {
+        document
+          .getElementById(commentId)
+          .querySelector(".upvote-count").textContent = upvotes;
+        document
+          .getElementById(commentId)
+          .querySelector(".downvote-count").textContent = downvotes;
+      }
+
+      function updateVoteStatus(commentId, value) {
+        const upvoteButton = document
+          .getElementById(commentId)
+          .querySelector(".upvote-btn");
+        const downvoteButton = document
+          .getElementById(commentId)
+          .querySelector(".downvote-btn");
+
+        // Reset styles
+        upvoteButton.classList.remove("upvoted", "downvoted");
+
+        if (value === 1) {
+          upvoteButton.classList.add("upvoted");
+          downvoteButton.classList.remove("downvoted");
+        } else if (value === -1) {
+          downvoteButton.classList.add("downvoted");
+          upvoteButton.classList.remove("upvoted");
+        } else {
+          upvoteButton.classList.remove("upvoted", "downvoted");
+          downvoteButton.classList.remove("upvoted", "downvoted");
+        }
+      }
       function toggleReplyForm(formId) {
         // Toggle the visibility of the reply form for the clicked comment
         var replyForm = document.getElementById(formId);

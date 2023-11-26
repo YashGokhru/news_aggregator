@@ -4,6 +4,10 @@ const Post = require("../model/PostModel");
 const asyncHandler = require("express-async-handler");
 const path = require('path');
 
+const Home = async(req, res) => {
+  res.render("home");
+
+}
 const HomePage =  async (req, res) => {
     try {
         const posts = await Post.find().select('userid title content upvote downvote noofreplies').lean(); // Fetch posts
@@ -107,6 +111,7 @@ const vote = async (req, res) => {
   }
 }
 module.exports = {
+  Home,
     HomePage,
     PostPage,
     vote
