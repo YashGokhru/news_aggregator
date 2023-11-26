@@ -45,36 +45,36 @@ const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
 
 const LoginUser = async (req, res) => {
     const { email, password } = req.body;
+
     if (!email || !password) {
-        return res.status(400).send({error:"All Fields are mandotory"});
-        // throw new Error("All Fields are mandotory")
+        return res.status(400).send({ error: "All Fields are mandatory" });
     }
+
     const user = await User.findOne({ email: email });
-    if (user && await bcrypt.compare(password, user.password)) {
-        
+
+    if (user && (await bcrypt.compare(password, user.password))) {
         const accessToken = jwt.sign({
             user: {
                 username: user.username,
                 email: user.email,
                 id: user.id
             },
-        }, keyy,
-            { expiresIn: "30d" }
-        );
-        const oneday = 24*60*60*1000;   
-        res.cookie("jwt",accessToken,{
-            expires:new Date(Date.now()+ oneday),
-            httpOnly:true
+        }, keyy, { expiresIn: "30d" });
+
+        const oneday = 24 * 60 * 60 * 1000;
+        res.cookie("jwt", accessToken, {
+            expires: new Date(Date.now() + oneday),
+            httpOnly: true
         });
-        return res.status(200).send({message:"Succesfully login"});
-        // res.status(200).json({ accessToken });
+
+        return res.status(200).send({ message: "Successfully logged in" });
+    } else {
+        return res.status(401).send({ error: "Email or password is not valid" });
     }
-    else {
-        res.status(401);
-        throw new Error("Email or password is not valid");
-    }
-    // return accessToken;
 };
+
+module.exports = { LoginUser };
+
 
 //ForgotPassword 
 
