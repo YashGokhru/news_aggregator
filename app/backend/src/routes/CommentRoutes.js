@@ -11,6 +11,6 @@ const upload = require("../../utils/multer")
 
 router.post('/replytocomment/:_id',validateToken, replytocomment);
 router.get('/showreplies/:_id', validateToken, showreplies);
-router.get('/vote/:_id', validateToken, vote);
+router.post('/vote/:_id', validateToken, vote);
 
 module.exports = router;

@@ -34,9 +34,9 @@ app.get("/login", (req, res) => {
 app.get("/home", (req, res) => {
   res.render("home");
 });
-app.get("/postpage", (req, res) => {
-  res.render("postpage");
-});
+// app.get("/postpage/", (req, res) => {
+//   res.render("postpage");
+// });
 
 app.get("/resetpassword", (req, res) => {
   res.render("resetpassword");
@@ -45,8 +45,8 @@ app.get("/resetpassword", (req, res) => {
 app.get("/forgotpassword", (req, res) => {
   res.render("ForgotPassword");
 });
-app.get("/postpage", (req, res) => {
-  res.render("postpage");
+app.get("/profile", (req, res) => {
+  res.render("ProfilePage");
 });
 
 app.get("/createpost", (req, res) => {
@@ -64,6 +64,8 @@ app.use("/posts",HomeRoutes);
 app.use("/search",SearchRoutes);
 app.use("/comments",CommentRoutes);
 //process.env.PORT
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("Server listening on port " + port + "✅");
 });
+
+module.exports = {app,server};

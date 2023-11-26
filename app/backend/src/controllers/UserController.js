@@ -43,11 +43,11 @@ const registerUser = asyncHandler(async (req, res) => {
 const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
 // Login 
 
-const LoginUser = asyncHandler(async (req, res) => {
+const LoginUser = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-        res.status(400);
-        throw new Error("All Fields are mandotory")
+        return res.status(400).send({error:"All Fields are mandotory"});
+        // throw new Error("All Fields are mandotory")
     }
     const user = await User.findOne({ email: email });
     if (user && await bcrypt.compare(password, user.password)) {
@@ -61,19 +61,20 @@ const LoginUser = asyncHandler(async (req, res) => {
         }, keyy,
             { expiresIn: "30d" }
         );
-        const oneDay = 24 * 60 * 60 * 1000;
+        const oneday = 24*60*60*1000;   
         res.cookie("jwt",accessToken,{
-            expires:new Date(Date.now()+ oneDay),
+            expires:new Date(Date.now()+ oneday),
             httpOnly:true
         });
-        res.status(200).json({ accessToken });
+        return res.status(200).send({message:"Succesfully login"});
+        // res.status(200).json({ accessToken });
     }
     else {
         res.status(401);
         throw new Error("Email or password is not valid");
     }
     // return accessToken;
-});
+};
 
 //ForgotPassword 
 
