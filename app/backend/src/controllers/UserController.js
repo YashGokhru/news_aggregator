@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../../utils/sendEmail");
+const app = require("../index");
 
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -168,14 +169,19 @@ const ResetPassword = async (req, res) => {
 
 }
 
+const Logout = async (req, res) => {
+    res.clearCookie("jwt"); 
+    console.log("Logged out successfully"); 
 
+};
 
 module.exports = {
     registerUser,
     LoginUser,
     ForgotPassword,
     ResetPassword,
-    getResetPassword
+    getResetPassword,
+    Logout
 
 
 }

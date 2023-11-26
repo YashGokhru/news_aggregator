@@ -40,7 +40,7 @@ app.get("/login", (req, res) => {
 // });
 
 app.get("/resetpassword", (req, res) => {
-  res.render("resetpassword");
+  res.render("ResetPassword_updated");
 });
 
 app.get("/forgotpassword", (req, res) => {
