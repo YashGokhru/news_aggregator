@@ -14,12 +14,13 @@ email:{
 
 password:{
     type:String,
-    required:true,
+    required:true
 },
 
-posts: [{
+posts: [
+    {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Post
+    ref: 'Post'
   }],
 
 }, {timestamps:true})

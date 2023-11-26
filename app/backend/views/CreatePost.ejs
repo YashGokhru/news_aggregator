@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <link rel="stylesheet" href="/styles/createpost_global.css" />
+  <link rel="stylesheet" href="/styles/createpost_index.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" />
+</head>
+
+<body>
+  <div class="rectangle-parent">
+    <img class="frame-child" alt="" src="images/rectangle-9636@2x.png" />
+    <img class="crss-1-icon" alt="" src="images/crss-1@2x.png" />
+
+    <form id="createPostForm">
+      <input class="frame-item" type="text" name="content" placeholder="Add content...." />
+      <input class="frame-child1" type="text" name="title" placeholder="Add title" />
+      <input class="frame-child4" type="text" name="link" placeholder="Add link...." />
+      <button class="frame-child2" type="submit"></button>
+      <div class="post">Post</div>
+      <button class="frame-child3"></button>
+      <div class="cancel">Cancel</div>
+    </form>
+
+    <div class="header">
+      <b class="create-post">Create Post</b>
+      <img class="header-child" alt="" src="images/group-1686550876.svg" />
+      <button class="noun-profile-665436-1"></button>
+      <div class="header-item"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var createPostForm = document.getElementById('createPostForm');
+
+      // Function to get the value of a cookie by its name
+      function getCookie(jwt) {
+        var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) return match[2];
+      }
+
+      createPostForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Retrieve the input values
+        var content = createPostForm.elements['content'].value;
+        var title = createPostForm.elements['title'].value;
+
+        // Fetch the jwt token from cookies
+        var jwtToken = getCookie('jwt');
+
+        // Use the values as needed (e.g., send them to the server or perform client-side validation)
+
+        // Use the Fetch API to send a POST request to the server
+        fetch('/post/createpost', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json', // Specify the content type as JSON
+            'Authorization': 'Bearer ' + jwtToken, // Include the token in the Authorization header
+          },
+          body: JSON.stringify({ content, title }), // Convert the data to JSON format
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response from the server
+            console.log('Server Response:', data);
+            window.location.href = '/home';
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/profile_index.css">
+    <link rel="stylesheet" href="/styles/homepage_global.css" />
+    <link rel="stylesheet" href="/styles/homepage_index.css" />
+</head>
+<body>
+    <div class="home-desktop" data-animate-on-scroll>
+    <div class="header">
+        <img class="header-child" alt="" src="" />
+        <button class="home" onclick="redirectToUrl('/home')" style="
+        font-weight: bold";>Home</button>
+        <button class="search" onclick="redirectToUrl('/search')" style="
+        font-weight: bold";>Search</button>
+        <button class="create-post" onclick="redirectToUrl('/createpost')" style="
+        font-weight: bold";>Create Post</button>
+        
+        <button class="profile"><img src="/images/profile.png"></button>
+    </div>
+
+    <div class="container">
+        <div class="form">
+            <b>Username: </b><%= user.name %><br><br>
+            <b>Email: </b><%= user.email %>
+        </div>
+
+        <div class="buttons-container">
+            <button class="changepw" onclick="redirectToUrl('/resetpassword')">Change Password</button>
+            <button class="changepw" onclick="redirectToUrl('/login')">Sign Out</button>
+        </div>
+        <script>
+        function redirectToUrl(fullUrl) {
+            window.location.href = fullUrl;
+        }
+            </script>
+    </div>
+
+    <div class="dishes" id="postsContainer">
+        <!-- Dynamic content will be added here -->
+    </div>
+</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const postsContainer = document.getElementById("postsContainer");
+
+            // Assuming you have a user ID available, replace 'userId' with the actual user ID
+            // const userId = "user123"; // Replace with your actual user ID
+
+            // // Fetch user data based on user ID
+            // fetchUserData(userId)
+            //     .then((userData) => {
+            //         // Populate the input boxes with user data
+            //         document.getElementById('usernameInput').value = userData.username;
+            //         document.getElementById('emailInput').value = userData.email;
+            //     })
+            //     .catch((error) => console.error("Error fetching user data:", error));
+
+            const baseURL = window.location.origin;
+            console.log("Base URL:", baseURL);
+
+            fetch(baseURL + "/post/getpost")
+                .then((response) => response.json())
+                .then((posts) => {
+                    // Iterate through the fetched posts and create HTML elements
+                    console.log(posts);
+                    console.log(posts.posts);
+                    const p = posts.posts;
+                    console.log(p);
+
+                    let PostPageUrl = "";
+                    const url = baseURL + "/posts/";
+                    p.forEach((post) => {
+                        const postElement = document.createElement("div");
+                        postElement.className = "cardsfood-card";
+
+                        // Populate the post details based on your data structure
+                        PostPageUrl = url + "/${post._id}";
+                        console.log(PostPageUrl);
+                        postElement.innerHTML = `
+                            <div>
+                                <div class="usa-today">${post.user.name}</div>
+                            </div>
+                            <div>
+                                <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${baseURL}/home/posts/${post._id}')">${post.title}</button>
+                            </div>
+                            <div>
+                                <div class="react-container">
+                                    <img class="react" src="/images/upvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+                                    <p class="reaction-count">${post.upvote}</p>
+                                </div>
+                                <div class="react-container">
+                                    <img class="react" src="/images/downvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+                                    <p class="reaction-count">${post.downvote}</p>
+                                </div>
+                                <div class="react-container">
+                                    <img class="react" src="/images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
+                                    <p class="reaction-count">${post.noofreplies}</p>
+                                </div>
+                            </div>
+                        `;
+
+                        postsContainer.appendChild(postElement);
+                    });
+                })
+                .catch((error) => console.error("Error fetching posts:", error));
+        });
+
+        function redirectToUrl(fullUrl) {
+            window.location.href = fullUrl;
+        }
+
+        function fetchUserData(userId) {
+            // Replace 'your_backend_endpoint' with the actual endpoint to fetch user data
+            const userUrl = `/api/users/${userId}`;
+
+            return fetch(userUrl)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                });
+        }
+    </script>
+</body>
+</html>

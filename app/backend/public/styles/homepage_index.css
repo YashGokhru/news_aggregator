@@ -1,0 +1,139 @@
+
+.home-desktop {
+  max-width: 120rem; /* 1200px / 16px = 75rem */
+  margin: 0 auto;
+  padding: 1.25rem; /* 20px / 16px = 1.25rem */
+}
+
+.dishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem; /* 20px / 16px = 1.25rem */
+}
+
+.cardsfood-card {
+  background-color: #f4f4f4;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 26rem;
+    margin: 1rem;
+    height: 18rem;
+    box-sizing: border-box;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cardsfood-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.usa-today {
+  background-color: transparent;
+    color: #525252;
+    font-weight: 700;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    width: 19rem;
+    margin-bottom: 0.625rem;
+}
+
+
+.hours-ago {
+  font-size: 0.875rem; /* 14px / 16px = 0.875rem */
+  margin-bottom: 0.625rem; /* 10px / 16px = 0.625rem */
+  color: #555;
+}
+
+.if-benjamin-netanyahu-led {
+  font-size: 1rem;
+  font-weight: bold;
+  height: 10.5rem;
+  width: 23.5rem;
+  flex-direction: column;
+  text-align: left;
+  padding: 0.5rem
+}
+
+.div,
+.div1 {
+  font-size: 0.875rem; /* 14px / 16px = 0.875rem */
+  margin-top: 0.625rem; /* 10px / 16px = 0.625rem */
+  color: #888;
+}
+
+.header {
+  
+  padding: 1.25rem; /* 20px / 16px = 1.25rem */
+  border-radius: 0.5rem; /* 8px / 16px = 0.5rem */
+  margin-top: 0rem; /* 20px / 16px = 1.25rem */
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  max-height: 3rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid #cdcdcd;
+}
+
+button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 0.625rem 1.25rem; /* 10px 20px / 16px = 0.625rem 1.25rem */
+  border: none;
+  border-radius: 0.25rem; /* 4px / 16px = 0.25rem */
+  cursor: pointer;
+}
+
+/* Add more styles based on your design requirements */
+.profile img{
+    max-width: 2.8rem;
+    max-height: 2.8rem;
+}
+button.profile{
+  background: transparent;
+}
+.home{
+  font-weight: 1000;
+  font-family: var(--font-poppins);
+  font-size: x-large;
+  color: #525252;
+  position: absolute;
+  margin: 0 !important;
+  left: calc(50% - 601px);
+  background-color: transparent
+}
+
+.create-post{
+  font-weight: 1000;
+  font-family: var(--font-poppins);
+  font-size: x-large;
+  color: #525252;
+  position: absolute;
+  margin: 0 !important;
+  left: calc(50% + 320px);
+  background-color: transparent
+}
+.search{
+  font-weight: 1000;
+  font-family: var(--font-poppins);
+  font-size: x-large;
+  color: #525252;
+  position: absolute;
+  margin: 0 !important;
+  left: calc(50% + 100px);
+  background-color: transparent
+}
+
+.react-container {
+  display: inline-block;
+  margin-right: 1rem; /* Adjust the margin as needed */
+}
+
+.reaction-count {
+  display: inline-block;
+  margin-right: 1.5rem;
+  margin-top: 1.3rem;
+}

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <title>postpage</title>
+    <!-- <link rel="stylesheet" href="styles/global.css" /> -->
+    <link rel="stylesheet" href="/styles/postpage.css" />
+    <!-- <link rel="stylesheet" href="styles/index_1.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="home-desktop" data-animate-on-scroll>
+      <div class="header">
+        <img class="header-child" alt="" src="" />
+          <button class="home" onclick="redirectToUrl('/home')">Home</button>
+          <button class="search" onclick="redirectToUrl('/search')">Search</button>
+          <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
+        
+          <button class="profile" onclick="redirectToUrl('/profile')"><img src="/images/profile.png"
+            ></button>
+            <script> 
+            function redirectToUrl(fullUrl) {
+    window.location.href = fullUrl;
+            }
+            </script>
+      </div>
+
+    <div class="post-page">
+      <!-- Main post content -->
+      <div class="post">
+        <!-- Post content -->
+        <div class="username-xyz">Posted by : <%= user.name %></div>
+        <div class="title-this-container">
+          <p><%= post.title %></p>
+        </div>
+        <div class="title-body">
+          <p><%= post.content%></p>
+        </div>
+        <div><a href="<%= post.link %>">Link</a></div>
+
+        <script>
+          let backendLink = "https://www.example.com"; // This could be fetched from the backend or null
+
+          // Get the container element where the link will be displayed
+          const linkContainer = document.getElementById("linkContainer");
+
+          // Check if backendLink is not null and create the link element
+          if (backendLink !== null) {
+            const linkElement = document.createElement("a");
+            linkElement.href = backendLink;
+            linkElement.textContent = "Click here"; // Set the link text, change this as needed
+
+            // Append the link element to the link container
+            linkContainer.appendChild(linkElement);
+          } else {
+            // If backendLink is null, display a message or handle it in any other way you want
+            linkContainer.textContent = "No link available"; // You can display a message or handle it differently
+          }
+        </script>
+        <!-- Upvote, downvote, comment buttons -->
+        <p></p>
+        <button class="frame-child upvote">Upvote</button>
+        <button class="frame-inner downvote">Downvote</button>
+        <div id="voteCounts">
+          Upvotes: <span id="upvoteCount"><%= post.upvote %></span><br />
+          Downvotes: <span id="downvoteCount"><%= post.downvote %></span>
+        </div>
+
+        <a>Comments : <%= post.noofreplies %></a>
+
+        <script>
+          const id = "<%= post._id %>";
+          // Function to handle vote actions
+          function castVote(voteType) {
+            console.log(voteType);
+            const requestOptions = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ vote: voteType }), // Sending vote in the request body
+            };
+            fetch("/home/post/vote/" + id, requestOptions) // Send request to backend with vote type
+              .then((response) => response.json())
+              .then((data) => {
+                const value = data.response;
+                const upvoteCount = data.uc;
+                const downvoteCount = data.dc;
+
+                // Update vote counts in the UI
+                document.getElementById("upvoteCount").innerText = upvoteCount;
+                document.getElementById("downvoteCount").innerText =
+                  downvoteCount;
+
+                // Update button states based on the received value
+                const upvoteButton = document.querySelector(".upvote");
+                const downvoteButton = document.querySelector(".downvote");
+
+                if (value === 1) {
+                  upvoteButton.innerText = "Upvoted";
+                  downvoteButton.innerText = "Downvote";
+                } else if (value === -1) {
+                  upvoteButton.innerText = "Upvote";
+                  downvoteButton.innerText = "Downvoted";
+                } else {
+                  upvoteButton.innerText = "Upvote";
+                  downvoteButton.innerText = "Downvote";
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
+
+          // Event listeners for upvote and downvote buttons
+          document
+            .querySelector(".upvote")
+            .addEventListener("click", function () {
+              castVote(1); // 1 represents upvote
+            });
+
+          document
+            .querySelector(".downvote")
+            .addEventListener("click", function () {
+              castVote(-1); // -1 represents downvote
+            });
+        </script>
+      </div>
+
+      <!-- Comments section -->
+      <div class="comments-container">
+        <div class="comment">
+          <div class="comment-header">
+            <img
+              class="comment-avatar"
+              src="/images/comment.png"
+              alt="User Avatar"
+            />
+            <div class="comment-username">Comment</div>
+          </div>
+          <div class="comment-text"></div>
+          <!-- <div class="comment-footer">
+            <button class="reply-btn">Reply</button>
+            <button class="view-replies-btn">View Replies</button>
+          </div> -->
+          <form class="reply-form">
+            <textarea
+              id="reply-textarea"
+              class="reply-textarea"
+              placeholder="Your reply..."
+            ></textarea>
+            <button onclick="sendReply()">Post Reply</button>
+          </form>
+
+          <script>
+            function sendReply() {
+              const textareaValue =
+                document.getElementById("reply-textarea").value;
+              const postid = "<%= post._id %>";
+              fetch("/post/CreateComment/" + postid, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ comment: textareaValue }),
+              })
+                .then((response) => {
+                  // Handle response here
+                  console.log("Reply sent to backend:", response);
+                  location.reload();
+                })
+                .catch((error) => {
+                  // Handle error here
+                  console.error("Error sending reply:", error);
+                });
+            }
+          </script>
+
+          <div class="replies-container">
+            <!-- Nested replies -->
+            <div class="comment">
+              <!-- Nested reply content -->
+              <div class="comment-header">
+                <img
+                  class="comment-avatar"
+                  src="/images/discuss.png"
+                  alt="User Avatar"
+                />
+                <div class="comment-username">Discussion Forum</div>
+              </div>
+
+              <!-- Start of nested comments section -->
+              <div class="comments-container" id="comments-container">
+                <script>
+                  function generateComments(parentId, depth, id) {
+                    let p;
+                    const newUrl = window.location.origin;
+
+                    const pid = "<%= post._id %>";
+
+                    if (id) {
+                      url = newUrl + "/post/comments/" + id;
+                    } else {
+                      url = newUrl + "/post/ShowComment/" + pid; //access by postid;
+                    }
+
+                    fetch(url)
+                      .then((response) => response.json())
+                      .then((posts) => {
+                        p = posts.replies;
+
+                        // console.log(Array.isArray(p));
+                        console.log(p);
+                        // console.log(typeof posts);
+                        // console.log(posts);
+
+                        const numComments = p.length;
+                        const commentsContainer =
+                          document.getElementById(parentId);
+
+                        for (let i = 0; i < numComments; i++) {
+                          // console.log(p[i]._id);
+                          let commentId = `${p[i]._id}`;
+                          let replyFormId = `reply-form-${commentId}`;
+                          let repliesContainerId = `replies-${commentId}`;
+
+                          let comment = document.createElement("div");
+                          comment.className = "comment";
+                          comment.id = commentId;
+                          comment.innerHTML = `
+              <div class="comment-header">
+                <img class="comment-avatar" src="/images/discuss.png" alt="User Avatar" />
+                <span class="comment-username">User : ${p[i].username}</span>
+              </div>
+              <p class="comment-text">${p[i].content}.</p>
+              <div class="comment-footer">
+                <button class="reply-btn" onclick="toggleReplyForm('${replyFormId}')">Reply</button>
+                <button class="view-replies-btn" onclick="toggleReplies('${repliesContainerId}')">View Replies</button>
+                <button class="upvote-btn" onclick="vote(1,'${p[i]._id}')">Upvote</button>
+                <span class="upvote-count">${p[i].upvote}</span> 
+  
+                <button class="downvote-btn" onclick="vote(-1,'${p[i]._id}')">Downvote</button>
+                <span class="downvote-count">${p[i].downvote}</span> 
+              </div>
+              <div class="reply-form" id="${replyFormId}" style="display: none;">
+                <textarea class="reply-textarea" placeholder="Type your reply..."></textarea>
+                <button class="post-reply-btn" onclick="postReply('${replyFormId}', '${commentId}')">Post</button>
+              </div>
+              <div class="replies-container" id="${repliesContainerId}" style="display: none;"></div>
+            `;
+
+                          commentsContainer.appendChild(comment);
+
+                          // Recursively generate replies
+                          generateComments(
+                            repliesContainerId,
+                            depth + 1,
+                            p[i]._id
+                          );
+                        }
+                      })
+                      .catch((error) =>
+                        console.error("Error fetching posts:", error)
+                      );
+                  }
+
+                  // Generate comments and replies
+                  generateComments("comments-container", 0, null);
+                </script>
+              </div>
+              <!-- End of nested comments section -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function vote(action, commenId) {
+        fetch(`/comments/vote/${commenId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ vote: action }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Update UI based on response
+            updateVoteCounts(commenId, data.uc, data.dc);
+            updateVoteStatus(commenId, data.response);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      function updateVoteCounts(commentId, upvotes, downvotes) {
+        document
+          .getElementById(commentId)
+          .querySelector(".upvote-count").textContent = upvotes;
+        document
+          .getElementById(commentId)
+          .querySelector(".downvote-count").textContent = downvotes;
+      }
+
+      function updateVoteStatus(commentId, value) {
+        const upvoteButton = document
+          .getElementById(commentId)
+          .querySelector(".upvote-btn");
+        const downvoteButton = document
+          .getElementById(commentId)
+          .querySelector(".downvote-btn");
+
+        // Reset styles
+        upvoteButton.classList.remove("upvoted", "downvoted");
+
+        if (value === 1) {
+          upvoteButton.classList.add("upvoted");
+          downvoteButton.classList.remove("downvoted");
+        } else if (value === -1) {
+          downvoteButton.classList.add("downvoted");
+          upvoteButton.classList.remove("upvoted");
+        } else {
+          upvoteButton.classList.remove("upvoted", "downvoted");
+          downvoteButton.classList.remove("upvoted", "downvoted");
+        }
+      }
+      function toggleReplyForm(formId) {
+        // Toggle the visibility of the reply form for the clicked comment
+        var replyForm = document.getElementById(formId);
+        if (replyForm) {
+          replyForm.style.display =
+            replyForm.style.display === "none" ? "block" : "none";
+        }
+      }
+
+      function toggleReplies(repliesId) {
+        // Toggle the visibility of the replies container for the clicked comment
+        var repliesContainer = document.getElementById(repliesId);
+        if (repliesContainer) {
+          repliesContainer.style.display =
+            repliesContainer.style.display === "none" ? "block" : "none";
+        }
+      }
+
+      function postReply(replyFormId, commentId) {
+        const replyForm = document.getElementById(replyFormId);
+        const replyTextArea = replyForm.querySelector(".reply-textarea");
+        const replyContent = replyTextArea.value;
+
+        const parentId = commentId; // Assuming commentId is the parent comment ID
+        const url = window.location.origin;
+        console.log(parentId);
+        fetch(url + "/comments/replytocomment/" + `${parentId}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ comment: replyContent }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json(); // You might handle the response data if needed
+            }
+            throw new Error("Network response was not ok.");
+          })
+          .then((data) => {
+            // Handle success - maybe update UI or perform other actions
+            console.log("Reply posted:", data);
+
+            // Assuming you want to update the UI after posting the reply
+            const newReplyElement = document.createElement("div");
+            newReplyElement.className = "comment";
+            let newcommentId = `${data._id}`;
+            let newreplyFormId = `reply-form-${newcommentId}`;
+            let newrepliesContainerId = `replies-${newcommentId}`;
+            newReplyElement.innerHTML = `
+                <div class="comment-header">
+                    <img class="comment-avatar" src="images/comment.png" alt="User Avatar" />
+                    <span class="comment-username">User : ${data.username}</span>
+                </div>
+                <p class="comment-text">${data.content}.</p>
+                
+            `;
+
+            const repliesContainer = document.getElementById(commentId);
+            repliesContainer.appendChild(newReplyElement);
+
+            // Clear the textarea after posting
+            replyTextArea.value = "";
+
+            // Optionally, hide the reply form after posting
+            replyForm.style.display = "none";
+          })
+          .catch((error) => {
+            console.error("Error posting reply:", error);
+          });
+      }
+      // JavaScript code for upvote and downvote button clicks
+    </script>
+  </body>
+</html>
