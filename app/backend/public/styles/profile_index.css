@@ -1,60 +1,3 @@
-.header {
-  
-    padding: 1.25rem; /* 20px / 16px = 1.25rem */
-    border-radius: 0.5rem; /* 8px / 16px = 0.5rem */
-    margin-top: 0rem; /* 20px / 16px = 1.25rem */
-    display: flex;
-    justify-content: space-between;
-    max-height: 3rem;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    border: 1px solid #cdcdcd;
-  }
-
-  .home{
-    font-weight: 1000;
-    font-family: var(--font-poppins);
-    font-size: x-large;
-    color: #525252;
-    position: absolute;
-    margin: 0 !important;
-    left: calc(50% - 601px);
-    background-color: transparent; 
-    border: none
-  }
-
-  .create-post{
-    font-weight: 1000;
-    font-family: var(--font-poppins);
-    font-size: x-large;
-    color: #525252;
-    position: absolute;
-    margin: 0 !important;
-    left: calc(50% + 320px);
-    background-color: transparent; 
-    border: none
-  }
-
-  .search{
-    font-weight: 1000;
-    font-family: var(--font-poppins);
-    font-size: x-large;
-    color: #525252;
-    position: absolute;
-    margin: 0 !important;
-    left: calc(50% + 100px);
-    background-color: transparent; 
-    border: none
-  }
-
-  .profile img{
-    max-width: 2.8rem;
-    max-height: 2.8rem;
-    border: none
-}
-button.profile{
-  background: transparent;
-  border: none
-}
 
 .container {
     display: flex;
@@ -85,7 +28,7 @@ button.profile{
   }
   
   .changepw{
-    background-color: #7F265B;
+    background-color: #3498db;
     color: white;
     border: none;
     height: 2.5rem; 

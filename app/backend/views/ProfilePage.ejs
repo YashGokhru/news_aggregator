@@ -9,11 +9,15 @@
     <link rel="stylesheet" href="/styles/homepage_index.css" />
 </head>
 <body>
+    <div class="home-desktop" data-animate-on-scroll>
     <div class="header">
-        <img class="header-child" alt="" src=""" />
-        <button class="home" onclick="redirectToUrl('/home')">Home</button>
-        <button class="search" onclick="redirectToUrl('/search')">Search</button>
-        <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
+        <img class="header-child" alt="" src="" />
+        <button class="home" onclick="redirectToUrl('/home')" style="
+        font-weight: bold";>Home</button>
+        <button class="search" onclick="redirectToUrl('/search')" style="
+        font-weight: bold";>Search</button>
+        <button class="create-post" onclick="redirectToUrl('/createpost')" style="
+        font-weight: bold";>Create Post</button>
         
         <button class="profile"><img src="/images/profile.png"></button>
     </div>
@@ -38,7 +42,7 @@
     <div class="dishes" id="postsContainer">
         <!-- Dynamic content will be added here -->
     </div>
-
+</div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const postsContainer = document.getElementById("postsContainer");
