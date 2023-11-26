@@ -9,7 +9,7 @@ body {
   color: #333;
 }
 .home-desktop {
-  max-width: 75rem; /* 1200px / 16px = 75rem */
+  max-width: 120rem; /* 1200px / 16px = 75rem */
   margin: 0 auto;
   padding: 1.25rem; /* 20px / 16px = 1.25rem */
 }
