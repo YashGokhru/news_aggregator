@@ -43,7 +43,6 @@
         <div><a href="<%= post.link %>">Link</a></div>
 
         <script>
-          let backendLink = "https://www.example.com"; // This could be fetched from the backend or null
 
           // Get the container element where the link will be displayed
           const linkContainer = document.getElementById("linkContainer");
@@ -240,6 +239,8 @@
               <div class="comment-footer">
                 <button class="reply-btn" onclick="toggleReplyForm('${replyFormId}')">Reply</button>
                 <button class="view-replies-btn" onclick="toggleReplies('${repliesContainerId}')">View Replies</button>
+                <span class="upvote-count">${p[i].noofreplies}</span> 
+
                 <button class="upvote-btn" onclick="vote(1,'${p[i]._id}')">Upvote</button>
                 <span class="upvote-count">${p[i].upvote}</span> 
   
