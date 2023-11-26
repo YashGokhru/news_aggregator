@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Page</title>
     <link rel="stylesheet" href="/styles/Search_page_global.css">
+    <link rel="stylesheet" href="/styles/homepage_index.css">
     <link rel="stylesheet" href="/styles/Search_page_index.css">
 </head>
 <body>
-
+    <div class="home-desktop" data-animate-on-scroll>
     <div class="header">
-      <img class="header-child" alt="" src="images/group-1686550876.svg" />
-        <button class="home" onclick="redirectToUrl('/home')">Home</button>
-        <button class="search" onclick="redirectToUrl('/search')">Search</button>
-        <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
+      <img class="header-child" alt="" src="" />
+        <button class="home" onclick="redirectToUrl('/home')" style="font-weight: bold;">Home</button>
+        <button class="search" onclick="redirectToUrl('/search')" style="font-weight: bold;">Search</button>
+        <button class="create-post" onclick="redirectToUrl('/createpost')" style="font-weight: bold;">Create Post</button>
       
-        <button class="profile"><img src="/images/profile.png"
+        <button class="profile" onclick="redirectToUrl('/profile')"><img src="/images/profile.png"
           ></button>
 
     </div>
@@ -29,8 +30,11 @@
         <button onclick="searchUser()" class="searchuser">Search User</button>
         <button onclick="searchPost()" class="searchpost">Search Post</button>
     </div>
-    <div id="searchResults"></div>
+    <div class="dishes" id="searchResults"></div>
 
+    
+    
+</div>
     <script>
         function searchUser() {
             const username = document.getElementById('searchBox').value;
@@ -73,12 +77,34 @@
 
             posts.forEach(post => {
                 const postElement = document.createElement('div');
+                postElement.className = "cardsfood-card";
                 postElement.innerHTML = `
-                                          <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('/posts/${post._id}')">${post.title}</button>
-                                          <p>${post.content}</p>
-                                          <p>${post.upvote}</p>
-                                          <p>${post.downvote}</p>
-                                          <p>${post.noofreplies}</p>`;
+
+                
+                
+              <div>
+                  <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('/home/posts/${post._id}')">${post.title}</button>
+              </div>
+              
+              <div>
+                <div>
+
+      <div class="react-container">
+        <img class="react" src="/images/upvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+        <p class="reaction-count">${post.upvote}</p>
+    </div>
+    <div class="react-container">
+        <img class="react" src="/images/downvote.png" style="height: 1.5rem; margin-right: 0.5rem;">
+        <p class="reaction-count">${post.downvote}</p>
+    </div>
+    <div class="react-container">
+        <img class="react" src="/images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
+
+        <p class="reaction-count">${post.noofreplies}</p>
+    </div>
+</div>
+
+</div>`;
                 resultsContainer.appendChild(postElement);
             });
         }
