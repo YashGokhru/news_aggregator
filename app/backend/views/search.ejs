@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Page</title>
+    <link rel="stylesheet" href="/styles/Search_page_global.css">
+    <link rel="stylesheet" href="/styles/Search_page_index.css">
 </head>
 <body>
 
@@ -18,14 +20,15 @@
 
     </div>
 
-    <h1>Search Page</h1>
+    <div class="searchbox">
+        <img class="searchimg" src="/iamges/search.jpg" alt="">
+        <input type="text" id="searchBox" placeholder="Enter Username or Keyword">
+    </div>
 
-    <label for="searchBox">Search:</label>
-    <input type="text" id="searchBox" placeholder="Enter username or keyword">
-
-    <button onclick="searchUser()">Search User</button>
-    <button onclick="searchPost()">Search Post</button>
-
+    <div class="buttonsforsearch">
+        <button onclick="searchUser()" class="searchuser">Search User</button>
+        <button onclick="searchPost()" class="searchpost">Search Post</button>
+    </div>
     <div id="searchResults"></div>
 
     <script>
