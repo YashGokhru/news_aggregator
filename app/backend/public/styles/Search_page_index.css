@@ -1,5 +1,5 @@
 .home-desktop {
-  max-width: 75rem; /* 1200px / 16px = 75rem */
+  max-width: 120rem; /* 1200px / 16px = 75rem */
   margin: 0 auto;
   padding: 1.25rem; /* 20px / 16px = 1.25rem */
 }
@@ -137,7 +137,7 @@ color: white;
   height: 2.5rem; 
   border-radius: 2mm;
   font-weight: 700;
-  background-color: #7F265B;
+  background-color: #3498db;
 }
 
 .searchpost{
@@ -146,7 +146,7 @@ color: white;
   height: 2.5rem; 
   border-radius: 2mm;
   font-weight: 700;
-  background-color: #7F265B;
+  background-color: #3498db;
 }
 
 .searchpostsreasult{
@@ -218,4 +218,15 @@ padding: 0.5rem
 font-size: 0.875rem; /* 14px / 16px = 0.875rem */
 margin-top: 0.625rem; /* 10px / 16px = 0.625rem */
 color: #888;
+}
+
+.react-container {
+  display: inline-block;
+  margin-right: 1rem; /* Adjust the margin as needed */
+}
+
+.reaction-count {
+  display: inline-block;
+  margin-right: 1.5rem;
+  margin-top: 1.3rem;
 }
