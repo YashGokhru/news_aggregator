@@ -2,7 +2,7 @@ const express = require("express");
 // require('ejs');
 require("../src/config/DbConnection");
 const app = express();
-const dotenv = require("dotenv").config();
+
 const UserRoutes = require("./routes/UserRoutes");
 const PostRoutes = require("./routes/PostRoutes");
 const HomeRoutes = require("./routes/HomeRoutes");
@@ -11,6 +11,10 @@ const CommentRoutes = require("./routes/CommentRoutes");
 const ProfileRoutes = require("./routes/ProfileRoutes");
 const cookieParser = require("cookie-parser");
 const path = require('path');
+
+
+console.log({ path: path.resolve(__dirname, '../.env') });
+const dotenv = require("dotenv").config({ path: path.resolve(__dirname, '../.env') });
 
 app.set('view engine', 'ejs'); // To parse .ejs from view
 app.use(cookieParser());
@@ -58,7 +62,7 @@ app.get("/search", (req, res) => {
   res.render("search");
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 147;
 app.use("/user",UserRoutes);
 app.use("/post",PostRoutes);
 app.use("/home",HomeRoutes);
