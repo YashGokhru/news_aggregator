@@ -31,7 +31,7 @@ describe("loginHandler", () => {
     it('should return 200 and set "jwt" cookie on successful login', async () => {
       const response = await supertest(app)
         .post('/user/login')
-        .send({ "email": "202101237@daiict.ac.in", "password": "1234" })
+        .send({ "email": "202101237@daiict.ac.in", "password": "smeet12345" })
         .expect(200);
     
       // Check the response body
