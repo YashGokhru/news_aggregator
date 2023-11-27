@@ -82,12 +82,17 @@ const ForgotPassword = async (req, res) => {
     try {
         const { email } = req.body;
 
+        if (!email) {
+            // If email is missing, return an error response
+           return  res.status(400).send({ message: "Email is required" });
+        }
+
         // Check if the user with the given email exists
         const user = await User.findOne({ email: email });
 
         if (!user) {
             // If user doesn't exist, return an error response
-            res.status(400).json({ message: "User not found" });
+           return  res.status(400).send({ message: "User not found" });
         } else {
             const subject = "Forgot Password";
             const link = `http://localhost:${process.env.PORT}/resetpassword`;
@@ -102,8 +107,8 @@ const ForgotPassword = async (req, res) => {
         }
     } catch (error) {
         // Handle any errors that might occur during the process
-        console.error(error);
-        res.status(500).json({ message: "An error occurred" });
+        console.log(error);
+        return res.status(500).send({ message: "An error occurred" });
     }
 };
 
