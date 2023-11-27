@@ -80,7 +80,7 @@ const LoginUser = async (req, res) => {
 
 const ForgotPassword = async (req, res) => {
     try {
-        const { email } = req.body;
+        const { email, baseurl } = req.body;
 
         // Check if the user with the given email exists
         const user = await User.findOne({ email: email });
@@ -90,7 +90,7 @@ const ForgotPassword = async (req, res) => {
             res.status(400).json({ message: "User not found" });
         } else {
             const subject = "Forgot Password";
-            const link = `http://localhost:${process.env.PORT}/resetpassword`;
+            const link = `${baseurl}/resetpassword`;
             const body = `Click on the following link to reset your password: ${link}`;
 
             // Send the email
