@@ -81,7 +81,7 @@
                 postElement.innerHTML = `
 
                 <div>
-                      <div class="usa-today">${post.username}</div>
+                    <button class="usa-today" onclick="redirectToUrl('/profile/${post.userid}')">${post.username}</button>
               </div>
                 
               <div>
