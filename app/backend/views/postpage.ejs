@@ -238,8 +238,9 @@
               <p class="comment-text">${p[i].content}.</p>
               <div class="comment-footer">
                 <button class="reply-btn" onclick="toggleReplyForm('${replyFormId}')">Reply</button>
+
                 <button class="view-replies-btn" onclick="toggleReplies('${repliesContainerId}')">View Replies</button>
-                <span class="upvote-count">${p[i].noofreplies}</span> 
+                <span class="viewreplies">${p[i].noofreplies}</span>
 
                 <button class="upvote-btn" onclick="vote(1,'${p[i]._id}')">Upvote</button>
                 <span class="upvote-count">${p[i].upvote}</span> 
@@ -316,19 +317,7 @@
           .getElementById(commentId)
           .querySelector(".downvote-btn");
 
-        // Reset styles
-        upvoteButton.classList.remove("upvoted", "downvoted");
-
-        if (value === 1) {
-          upvoteButton.classList.add("upvoted");
-          downvoteButton.classList.remove("downvoted");
-        } else if (value === -1) {
-          downvoteButton.classList.add("downvoted");
-          upvoteButton.classList.remove("upvoted");
-        } else {
-          upvoteButton.classList.remove("upvoted", "downvoted");
-          downvoteButton.classList.remove("upvoted", "downvoted");
-        }
+    
       }
       function toggleReplyForm(formId) {
         // Toggle the visibility of the reply form for the clicked comment
