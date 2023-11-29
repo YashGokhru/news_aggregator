@@ -97,7 +97,7 @@ const ForgotPassword = async (req, res) => {
             await sendEmail(user.email, subject, body);
 
             // Return a success response
-            res.send('<html><body>Link Sent Successfully</body></html>');
+            res.json({link : '<html><body>Link Sent Successfully</body></html>', success : true});
 
         }
     } catch (error) {
