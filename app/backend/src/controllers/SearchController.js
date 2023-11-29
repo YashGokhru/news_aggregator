@@ -21,16 +21,18 @@ const SearchByKeyword = async (req, res) => {
     // Retrieve user details based on user IDs
     const users = await User.find({ _id: { $in: userIds } }, 'name');
 
-    // Map user details to posts
+    
     const postsWithUsernames = posts.map(post => {
       const user = users.find(user => user._id.equals(post.userid));
+      
       return {
         _id: post._id,
         title: post.title,
         upvote: post.upvote,
         downvote: post.downvote,
         noofreplies: post.noofreplies,
-        username: user.name
+        username: user.name,
+        userid : user._id
       };
     });
 
@@ -59,14 +61,15 @@ const SearchByKeyword = async (req, res) => {
     const postIds = users.reduce((acc, user) => acc.concat(user.posts), []);
     
     const postDetails = await Post.find({ _id: { $in: postIds } });
-
+    console.log(postDetails);
     const postsWithUsername = postDetails.map(post => ({
       _id: post._id,
         title: post.title,
         upvote: post.upvote,
         downvote: post.downvote,
         noofreplies: post.noofreplies,
-      username: username  // Include all other properties of the post
+      username: username,  // Include all other properties of the post
+      userid : post.userid
     }));
 
     res.json(postsWithUsername);

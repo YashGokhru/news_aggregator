@@ -47,10 +47,11 @@ const CreatePost = async (req, res) => {
 };
 const GetPost = async (req, res) => {
   try {
-    const posts = await Post.find({userid : req.user.id.toString()}).select('userid title content upvote downvote noofreplies').lean(); // Fetch posts
+    const reqid = req.params._id;
+    const posts = await Post.find({userid : reqid}).select('userid title content upvote downvote noofreplies').lean(); // Fetch posts
 
         // Get unique user IDs from posts
-        const userIds = req.user.id;
+        const userIds = req.params._id;
 
         // Fetch user details for all user IDs
         const users = await User.find({ _id : userIds }, 'name').lean();
