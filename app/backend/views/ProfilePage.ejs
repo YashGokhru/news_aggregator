@@ -1,87 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/styles/profile_index.css">
+    <link rel="stylesheet" href="/styles/profile_index.css" />
     <link rel="stylesheet" href="/styles/homepage_global.css" />
     <link rel="stylesheet" href="/styles/homepage_index.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="home-desktop" data-animate-on-scroll>
-        <div class="header">
-            <img class="header-child" alt="" src="" />
-            <button class="home" onclick="redirectToUrl('/home')" style="font-weight: bold;">Home</button>
-            <button class="search" onclick="redirectToUrl('/search')" style="font-weight: bold;">Search</button>
-            <button class="create-post" onclick="redirectToUrl('/createpost')" style="font-weight: bold;">Create Post</button>
+      <div class="header">
+        <img class="header-child" alt="" src="" />
+        <button
+          class="home"
+          onclick="redirectToUrl('/home')"
+          style="font-weight: bold"
+        >
+          Home
+        </button>
+        <button
+          class="search"
+          onclick="redirectToUrl('/search')"
+          style="font-weight: bold"
+        >
+          Search
+        </button>
+        <button
+          class="create-post"
+          onclick="redirectToUrl('/createpost')"
+          style="font-weight: bold"
+        >
+          Create Post
+        </button>
 
-            <button class="profile"><img src="/images/profile.png"></button>
+        <button class="profile"><img src="/images/profile.png" /></button>
+      </div>
+
+      <div class="container">
+        <div class="form">
+          <b>Username: </b><%= user.name %><br /><br />
+          <b>Email: </b><%= user.email %>
         </div>
 
-        <div class="container">
-            <div class="form">
-                <b>Username: </b><%= user.name %><br><br>
-                <b>Email: </b><%= user.email %>
-            </div>
-
-            <div class="buttons-container">
-                <button class="changepw" onclick="redirectToUrl('/resetpassword')">Change Password</button>
-                <button class="changepw" onclick="window.location.href='/user/logout'">Sign Out</button>
-            </div>
-            <script>
-                function redirectToUrl(fullUrl) {
-                    window.location.href = fullUrl;
-                }
-
-                function logout() {
-                    fetch("/user/logout", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                        })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            console.log("Logout Success:", data);
-                            // Redirect to the login page after successful logout
-                            redirectToUrl('/login');
-                        })
-                        .catch((error) => {
-                            console.error("Logout Error:", error);
-                        });
-                }
-            </script>
+        <div class="buttons-container">
+          <button class="changepw" onclick="reset()">Change Password</button>
+          <button
+            class="changepw"
+            onclick="window.location.href='/user/logout'"
+          >
+            Sign Out
+          </button>
+          <script>
+            function reset() {
+               const email = "<%= user.email %>";
+              var url = `/user/resetpassword/send-email?email=${encodeURIComponent(
+                email
+              )}`;
+              redirectToUrl(url);
+            }
+          </script>
         </div>
+        <script>
+          function redirectToUrl(fullUrl) {
+            window.location.href = fullUrl;
+          }
 
-        <div class="dishes" id="postsContainer">
-            <!-- Dynamic content will be added here -->
-        </div>
+          function logout() {
+            fetch("/user/logout", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log("Logout Success:", data);
+                // Redirect to the login page after successful logout
+                redirectToUrl("/login");
+              })
+              .catch((error) => {
+                console.error("Logout Error:", error);
+              });
+          }
+        </script>
+      </div>
+
+      <div class="dishes" id="postsContainer">
+        <!-- Dynamic content will be added here -->
+      </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const postsContainer = document.getElementById("postsContainer");
+      document.addEventListener("DOMContentLoaded", function () {
+        const postsContainer = document.getElementById("postsContainer");
 
-            const baseURL = window.location.origin;
-            console.log("Base URL:", baseURL);
+        const baseURL = window.location.origin;
+        console.log("Base URL:", baseURL);
 
-            fetch(baseURL + "/post/getpost")
-                .then((response) => response.json())
-                .then((posts) => {
-                    const p = posts.posts;
-                    console.log(p);
+        fetch(baseURL + "/post/getpost")
+          .then((response) => response.json())
+          .then((posts) => {
+            const p = posts.posts;
+            console.log(p);
 
-                    let PostPageUrl = "";
-                    const url = baseURL + "/posts/";
-                    p.forEach((post) => {
-                        const postElement = document.createElement("div");
-                        postElement.className = "cardsfood-card";
+            let PostPageUrl = "";
+            const url = baseURL + "/posts/";
+            p.forEach((post) => {
+              const postElement = document.createElement("div");
+              postElement.className = "cardsfood-card";
 
-                        PostPageUrl = url + "/${post._id}";
-                        console.log(PostPageUrl);
-                        postElement.innerHTML = `
+              PostPageUrl = url + "/${post._id}";
+              console.log(PostPageUrl);
+              postElement.innerHTML = `
                             <div>
                                 <div class="usa-today">${post.user.name}</div>
                             </div>
@@ -104,12 +135,11 @@
                             </div>
                         `;
 
-                        postsContainer.appendChild(postElement);
-                    });
-                })
-                .catch((error) => console.error("Error fetching posts:", error));
-        });
+              postsContainer.appendChild(postElement);
+            });
+          })
+          .catch((error) => console.error("Error fetching posts:", error));
+      });
     </script>
-</body>
-
+  </body>
 </html>
