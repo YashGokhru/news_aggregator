@@ -135,7 +135,8 @@
 .frame-child2 {
   cursor: pointer;
   padding: 0;
-  background-color: var(--color-mediumblue);
+  color: white;
+  background-color: #3498db;
   top: 55.31rem;
   left: 33.44rem;
   border-radius: var(--br-xl);
@@ -159,7 +160,7 @@
   cursor: pointer;
   border: 0;
   padding: 0;
-  background-color: var(--color-mediumblue);
+  background-color: #3498db;
   position: absolute;
   top: 55.31rem;
   left: 46rem;
@@ -177,11 +178,12 @@
 }
 
 .cancel {
-  top: 55.38rem;
-  left: 48rem;
-  color: var(--color-white);
-  width: 4.56rem;
-  height: 2.44rem;
+  top: 55.6rem;
+    font-size: small;
+    left: 48.8rem;
+    color: #fff;
+    width: 4.56rem;
+    height: 2.44rem;
 }
 
 .add-tag {
