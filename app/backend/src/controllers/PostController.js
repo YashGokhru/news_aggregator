@@ -146,10 +146,10 @@ const PostComment = async (req, res) => {
       }
     );
 
-    res.status(200).json({ message: "Comment Added Succesfully" });
+   return res.status(200).send({ message: "Comment Added Succesfully" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.log(error);
+    return res.status(500).send({ error: "Internal Server Error" });
   }
 };
 

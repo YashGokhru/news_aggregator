@@ -94,6 +94,9 @@ function generateOTP() {
 const ForgotPassword = async (req, res) => {
   try {
     const email = req.body.email;
+    if(!email){
+      return res.status(400).send({ message: "Email is required" });
+    }
 
     const user = await User.findOne({ email: email });
     console.log(email);
