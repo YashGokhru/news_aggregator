@@ -94,9 +94,6 @@ function generateOTP() {
 const ForgotPassword = async (req, res) => {
   try {
     const email = req.body.email;
-    if(!email){
-      return res.status(400).send({ message: "Email is required" });
-    }
 
     const user = await User.findOne({ email: email });
     console.log(email);
@@ -104,7 +101,7 @@ const ForgotPassword = async (req, res) => {
       // If user doesn't exist, return an error response
       res.status(400).json({ message: "User not found", check: false });
     } else {
-      return res.status(200).send({ message: "User found", check: true });
+      res.json({ message: "User found", check: true });
     }
   } catch (error) {
     // Handle any errors that might occur during the process
