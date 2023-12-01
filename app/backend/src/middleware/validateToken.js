@@ -7,8 +7,10 @@ const validateToken = asyncHandler(async (req, res, next) => {
 
     if (!token) {
         console.error("Token not found");
-        res.status(400).render('login'); // Respond with a status code and render login page
-        return;
+        res.redirect('login');
+        res.status(400);
+        throw new Error("Token not found");
+   
     }
 
     const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";

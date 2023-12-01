@@ -24,7 +24,7 @@ describe('ForgotPassword', () => {
             .send({ email: 'smeetagr@gmail.com' })
             .expect(400);
 
-        expect(response.body).toEqual({ message: 'User not found' });
+        expect(response.body).toEqual({ message: 'User not found' ,check:false});
     });
 
     it('should return 200 and send email on successful request', async () => {
@@ -33,10 +33,10 @@ describe('ForgotPassword', () => {
 
         const response = await supertest(app)
             .post('/user/forgotpassword')
-            .send({ email: 'test@example.com' })
+            .send({ email: '202101237@daiict.ac.in' })
             .expect(200);
 
-        expect(response.text).toEqual('<html><body>Link Sent Successfully</body></html>');
+        expect(response.body).toEqual({message:"User found",check:true});
     });
 
     it('should return 500 if an error occurs during the process', async () => {
@@ -47,6 +47,6 @@ describe('ForgotPassword', () => {
             .send({ email: 'test@example.com' })
             .expect(500);
 
-        expect(response.body).toEqual({ message: 'An error occurred' });
+        expect(response.body).toEqual({ message: 'An error occurred',check:false });
     });
 });

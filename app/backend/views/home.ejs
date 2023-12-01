@@ -70,7 +70,7 @@
               
                             
               <div>
-                      <div class="usa-today">${post.user.name}</div>
+                      <button class="usa-today" onclick="redirectToUrl('/profile/${post.userid}')">${post.user.name}</button>
               </div>
               <div>
                   <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${baseurl}/home/posts/${post._id}')">${post.title}</button>
