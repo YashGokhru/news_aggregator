@@ -36,10 +36,10 @@ const SearchByKeyword = async (req, res) => {
       };
     });
 
-    res.json(postsWithUsernames);
+    return res.status(200).send(postsWithUsernames);
     } catch (error) {
       console.error(error);
-      res.status(500).send('Internal Server Error');
+     return res.status(500).send('Internal Server Error');
     }
 
 

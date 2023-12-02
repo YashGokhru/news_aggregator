@@ -8,13 +8,12 @@ const path = require("path");
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
-    res.status(400);
-    throw new Error("All Fields are mandotory");
+    return res.status(400).send({ error: "All Fields are mandatory" }); 
   }
+
   const availableUser = await User.findOne({ email });
   if (availableUser) {
-    res.status(400);
-    throw new Error("User already registered");
+    return res.status(409).send({ error: "User already registered" }); 
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -94,6 +93,9 @@ function generateOTP() {
 const ForgotPassword = async (req, res) => {
   try {
     const email = req.body.email;
+    if(!email){
+      return res.status(400).send({ message: "Email is required" });
+    }
 
     const user = await User.findOne({ email: email });
     console.log(email);

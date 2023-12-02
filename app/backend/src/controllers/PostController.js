@@ -10,9 +10,9 @@ const mongoose = require("mongoose");
 const CreatePost = async (req, res) => {
   const { title, content, link } = req.body;
   const user_id = req.user.id;
-  console.log(user_id);
+  // console.log(user_id);
   if (!title || !content) {
-    res.status(400).json({ success: false, error: "All Fields are mandatory" });
+   return  res.status(400).send({error: "All Fields are mandatory" });
   }
 
   try {
@@ -31,18 +31,18 @@ const CreatePost = async (req, res) => {
             console.log("Post added to user successfully");
           })
           .catch((err) => {
-            console.error("Error updating user:", err);
+            console.log("Error updating user:", err);
           });
       });
 
-      res.status(201).json({ success: true, message: "Post Uploaded Successfully" });
+      return res.status(201).send({ message: "Post Uploaded Successfully" });
 
     } else {
       res.status(400);
       throw new Error("User Data is not valid");
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).send({ error: error.message });
   }
 };
 const GetPost = async (req, res) => {
@@ -110,8 +110,8 @@ const PostComment = async (req, res) => {
   const { comment } = req.body;
 
   if (!comment) {
-    res.status(400).json({ error: "All fields are mandatory" });
-    return;
+    return res.status(400).send({ error: "All fields are mandatory" });
+    
   }
 
   try {
@@ -146,10 +146,10 @@ const PostComment = async (req, res) => {
       }
     );
 
-    res.status(200).json({ message: "Comment Added Succesfully" });
+   return res.status(200).send({ message: "Comment Added Succesfully" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.log(error);
+    return res.status(500).send({ error: "Internal Server Error" });
   }
 };
 
