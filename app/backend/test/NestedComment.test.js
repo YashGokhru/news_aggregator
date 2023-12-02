@@ -122,8 +122,8 @@ describe('NestedComment', () => {
 
 });
 
-// describe("getcomment",()=>{
-//     it('it should return 400 if email not found',async()=>{
+// describe("showreplies",()=>{
+//     it('it should',async()=>{
 //         const user = {
 //             email: "202101237@daiict.ac.in",
 //             password: "smeet12345"
@@ -135,12 +135,13 @@ describe('NestedComment', () => {
             
 //             const cookies = res.headers['set-cookie'];
 //             const id = '655d9ab7fb51c568261b46d5';
-//             const comments = findById
-
 //             const res1 = await supertest(app)
-//             .get(`/comments/showreplies/${id}`)
-
+//             .post(`/comments/showreplies/:${id}`)
+//             .set('Cookie', cookies)
+            
+    
+//         expect(res1.statusCode).toEqual(200);
+//         // expect(res1.body.error).toEqual("Internal Server Error");
 //     })
 // })
-
 
