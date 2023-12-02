@@ -16,7 +16,7 @@ const replytocomment = async (req, res) => {
   }
   try {
     const commid = req.params._id;
-    if (!commid) {
+    if (!commid.length) {
       res.status(400).json({ error: "Comment id not found" });
       return;
     }
@@ -56,12 +56,12 @@ const replytocomment = async (req, res) => {
 const showreplies = async (req, res) => {
   try {
     const commid = req.params._id;
-    if (!commid) {
+    if (!commid.length) {
       res.status(400).json({ error: "Comment id not found" });
       return;
     }
     const comments = await Comment.find({ parentid: commid }).lean();
-    if (!comments) {
+    if (!comments.length) {
       res.status(400).json({ error: "Comment not found" });
       return;
     }

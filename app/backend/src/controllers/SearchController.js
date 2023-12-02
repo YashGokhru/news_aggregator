@@ -36,10 +36,10 @@ const SearchByKeyword = async (req, res) => {
       };
     });
 
-    res.json(postsWithUsernames);
+    return res.status(200).send(postsWithUsernames);
     } catch (error) {
       console.error(error);
-      res.status(500).send('Internal Server Error');
+     return res.status(500).send('Internal Server Error');
     }
 
 
@@ -53,9 +53,10 @@ const SearchByKeyword = async (req, res) => {
     try {
       // Find the user by username
       const users = await User.find({ name: username })
-  
-      if (!users) {
-        return res.status(404).json({ error: 'User not found' });
+      
+      if (!users.length) {
+        
+        return res.status(404).send({ error: 'User not found' });
       }
   
     const postIds = users.reduce((acc, user) => acc.concat(user.posts), []);
