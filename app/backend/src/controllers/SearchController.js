@@ -52,26 +52,29 @@ const SearchByKeyword = async (req, res) => {
   
     try {
       // Find the user by username
-      const users = await User.find({ name: username })
-      
-      if (!users.length) {
-        
-        return res.status(404).send({ error: 'User not found' });
+      const users = await User.find({ name: { $regex: username, $options: 'i' } })
+  
+      if (!users) {
+        return res.status(404).json({ error: 'User not found' });
       }
   
     const postIds = users.reduce((acc, user) => acc.concat(user.posts), []);
     
     const postDetails = await Post.find({ _id: { $in: postIds } });
     console.log(postDetails);
-    const postsWithUsername = postDetails.map(post => ({
+    const postsWithUsername = postDetails.map(post => {
+
+      const user = users.find(u => u.posts.includes(post._id));
+      
+      return{
       _id: post._id,
         title: post.title,
         upvote: post.upvote,
         downvote: post.downvote,
         noofreplies: post.noofreplies,
-      username: username,  // Include all other properties of the post
+      username: user.name,  // Include all other properties of the post
       userid : post.userid
-    }));
+    }});
 
     res.json(postsWithUsername);
 
