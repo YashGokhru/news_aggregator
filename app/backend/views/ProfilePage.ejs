@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="header">
-        <img class="header-child" alt="" src=""" />
+        <img class="header-child" alt="" src="" />
         <button class="home" onclick="redirectToUrl('/home')">Home</button>
         <button class="search" onclick="redirectToUrl('/search')">Search</button>
         <button class="create-post" onclick="redirectToUrl('/createpost')">Create Post</button>
@@ -39,6 +39,7 @@
         <!-- Dynamic content will be added here -->
     </div>
 
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const postsContainer = document.getElementById("postsContainer");
@@ -54,6 +55,21 @@
             //         document.getElementById('emailInput').value = userData.email;
             //     })
             //     .catch((error) => console.error("Error fetching user data:", error));
+
+            const deleteButton = document.getElementById('deleteButton');
+    const deletePopup = document.getElementById('deletePopup');
+
+    deleteButton.addEventListener('click', () => {
+      deletePopup.style.display = 'block';
+    });
+
+    function confirmDelete() {
+      deletePopup.style.display = 'none';
+    }
+
+    function cancelDelete() {
+      deletePopup.style.display = 'none';
+    }
 
             const baseURL = window.location.origin;
             console.log("Base URL:", baseURL);
@@ -95,6 +111,16 @@
                                 <div class="react-container">
                                     <img class="react" src="/images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
                                     <p class="reaction-count">${post.noofreplies}</p>
+                                </div>
+                                                                <div class="react-container">
+                                    <img class="react" src="/images/delete.png" style="height: 1.5rem; margin-right: 0.5rem;" id="deleteButton">
+                                    <p class="reaction-count" id="deleteCount">${post.delete}</p>
+                                </div>
+
+                                <div class="popup" id="deletePopup">
+                                    <p>Are you sure you want to delete?</p>
+                                    <button onclick="confirmDelete()">Yes, Delete</button>
+                                    <button onclick="cancelDelete()">Cancel</button>
                                 </div>
                             </div>
                         `;
