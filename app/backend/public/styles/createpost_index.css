@@ -88,7 +88,18 @@
 }
 
 .frame-child1 {
-  left: 39.38rem;
+  left: 30rem;
+}
+
+.frame-child4 {
+  border: 0;
+  background-color: var(--color-gainsboro);
+  position: absolute;
+  top: 48.06rem;
+  border-radius: var(--br-xl);
+  width: 10.5rem;
+  left: 49rem;
+  height: 3.0rem;
 }
 
 .add-video {
@@ -124,7 +135,8 @@
 .frame-child2 {
   cursor: pointer;
   padding: 0;
-  background-color: var(--color-mediumblue);
+  color: white;
+  background-color: #3498db;
   top: 55.31rem;
   left: 33.44rem;
   border-radius: var(--br-xl);
@@ -148,10 +160,10 @@
   cursor: pointer;
   border: 0;
   padding: 0;
-  background-color: var(--color-mediumblue);
+  background-color: #3498db;
   position: absolute;
   top: 55.31rem;
-  left: 47.63rem;
+  left: 46rem;
   border-radius: var(--br-xl);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   width: 8.88rem;
@@ -166,11 +178,12 @@
 }
 
 .cancel {
-  top: 55.38rem;
-  left: 49.75rem;
-  color: var(--color-white);
-  width: 4.56rem;
-  height: 2.44rem;
+  top: 55.6rem;
+    font-size: small;
+    left: 48.8rem;
+    color: #fff;
+    width: 4.56rem;
+    height: 2.44rem;
 }
 
 .add-tag {

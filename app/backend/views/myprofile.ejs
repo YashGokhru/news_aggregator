@@ -45,7 +45,22 @@
         </div>
 
         <div class="buttons-container">
-          
+          <button class="changepw" onclick="reset()">Change Password</button>
+          <button
+            class="changepw"
+            onclick="window.location.href='/user/logout'"
+          >
+            Sign Out
+          </button>
+          <script>
+            function reset() {
+               const email = "<%= user.email %>";
+              var url = `/user/resetpassword/send-email?email=${encodeURIComponent(
+                email
+              )}`;
+              redirectToUrl(url);
+            }
+          </script>
         </div>
         <script>
           function redirectToUrl(fullUrl) {
@@ -99,7 +114,7 @@
               console.log(PostPageUrl);
               postElement.innerHTML = `
                             <div>
-                              <button class="usa-today" >${post.user.name}</button>
+                                <button class="usa-today" ">${post.user.name}</button>
                             </div>
                             <div>
                                 <button class="if-benjamin-netanyahu-led" onclick="redirectToUrl('${baseURL}/home/posts/${post._id}')">${post.title}</button>

@@ -25,7 +25,7 @@ const HomePage =  async (req, res) => {
                 ...post,
                 user: user ? { name: user.name} : null // Add user details to post
             };
-        });
+        }).reverse();
 
         
 

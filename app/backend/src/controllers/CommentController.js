@@ -16,7 +16,7 @@ const replytocomment = async (req, res) => {
   }
   try {
     const commid = req.params._id;
-    if (!commid) {
+    if (!commid.length) {
       res.status(400).json({ error: "Comment id not found" });
       return;
     }
@@ -45,7 +45,8 @@ const replytocomment = async (req, res) => {
     await Post.updateOne({ _id: postidd }, { $inc: { noofreplies: 1 } });
     await Comment.updateOne({ _id: commid }, { $inc: { noofreplies: 1 } });
     const user = await User.findById(req.user.id).select('name').lean();
-    res.status(200).json({ message: "Comment Added Succesfully", content : comment, username :  user.name, _id :createdComment._id });
+    res.status(200).json({ message: "Comment Added Succesfully", content : comment, username :  user.name });
+    // res.status(200).json({ message: "Comment Added Succesfully", content : comment, username :  user.name, _id :createdComment._id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -55,17 +56,17 @@ const replytocomment = async (req, res) => {
 const showreplies = async (req, res) => {
   try {
     const commid = req.params._id;
-    if (!commid) {
+    if (!commid.length) {
       res.status(400).json({ error: "Comment id not found" });
       return;
     }
     const comments = await Comment.find({ parentid: commid }).lean();
-    if (!comments) {
+    if (!comments.length) {
       res.status(400).json({ error: "Comment not found" });
       return;
     }
     console.log(comments);
-    res.json({ comments });
+   return  res.status(200).send({ comments });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -78,7 +79,7 @@ const vote = async (req, res) => {
     const { vote } = req.body;
 
     if(!vote){
-       res.status(400).json({ error: 'Invalid Voting' });
+      return  res.status(400).send({ error: 'Invalid Voting' });
     }
     const commidd = req.params._id;
     const useridd = req.user.id; 
@@ -120,10 +121,10 @@ const vote = async (req, res) => {
     
     await Comment.updateOne({ _id: commidd }, { $set: { upvote: upvotecount,  downvote: downvotecount } });
 
-    res.json({ response : response , uc : upvotecount , dc : downvotecount });
+   return  res.status(200).send({ response : response , uc : upvotecount , dc : downvotecount });
     
   }catch(error){
-    return res.status(400).json({ error: 'ERROR IN VOTING' });
+    return res.status(400).send({ error: 'ERROR IN VOTING' });
   }
 }
 

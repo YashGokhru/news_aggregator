@@ -4,20 +4,24 @@ const jwt = require("jsonwebtoken");
 const validateToken = asyncHandler(async (req, res, next) => {
     let token = req.cookies.jwt;
     console.log("Token:", token); 
-    // res.render("login");
+
     if (!token) {
         console.error("Token not found");
+        res.redirect('login');
         res.status(400);
         throw new Error("Token not found");
-        res.render('login');
+   
     }
+
     const keyy = process.env.ACCESS_TOKEN_SECRET || "newsagr21";
+
     jwt.verify(token, keyy, (err, decoded) => {
         if (err) {
             console.error("Token verification failed:", err.message);
-            res.status(401);
-            throw new Error("User unauthorized");
+            res.status(401).render('login'); // Respond with a status code and render login page
+            return;
         }
+
         req.user = decoded.user;
         next();
     });

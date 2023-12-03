@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="styles/global_1.css" />
-    <link rel="stylesheet" href="styles/index_1.css" />
+    <link rel="stylesheet" href="/styles/global_1.css" />
+    <link rel="stylesheet" href="/styles/index_1.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Nunito Sans:wght@400;600;700;800&display=swap" />
 </head>
@@ -18,7 +18,7 @@
             <div class="have-an-account">Have an account?</div>
             <a class="login" href="#" onclick="redirectToLoginPage()">Login</a>
         </div>
-        <img class="divcontainer-item" alt="" src="images/group-1686550876.svg" />
+        <img class="divcontainer-item" alt="" src="/images/group-1686550876.svg" />
 
         <div class="frame-parent">
             <div class="sign-up-parent">
@@ -29,7 +29,7 @@
                 <div class="frame-container">
                     <div class="email-parent">
                         <div class="email">Email</div>
-                        <input class="frame-child" placeholder="mail@abc.com" type="text" />
+                        <input class="frame-child" placeholder="email.com" type="text" />
                     </div>
                     <div class="email-parent">
                         <div class="email">Username</div>
@@ -37,35 +37,63 @@
                     </div>
                     <div class="email-parent">
                         <div class="email">Password</div>
-                        <input class="frame-child" placeholder="xyz123" type="text" />
+                        <input id="passwordInput" class="frame-child" placeholder="xyz123" type="password" />
+                        <div id="passwordError" class="error-message"></div>
                     </div>
                 </div>
-                
+
                 <button id="signupButton" class="sign-up-wrapper" autofocus="{true}">
                     <div class="sign-up1">Sign Up</div>
                 </button>
             </div>
         </div>
-        <img class="divcontainer-inner" alt="" src="images/rectangle-9637@2x.png" />
+        <img class="divcontainer-inner" alt="" src="/images/2424701.svg" />
     </div>
 
     <script>
         function redirectToLoginPage() {
-    // You can add any additional actions or checks here before redirection
-    // For example, you can use window.location.href to redirect:
-             window.location.href = "/login";
+            // You can add any additional actions or checks here before redirection
+            // For example, you can use window.location.href to redirect:
+            window.location.href = "/login";
         }
+
         document.getElementById('signupButton').addEventListener('click', function () {
             var email = document.querySelector('.email-parent:nth-child(1) input').value;
             var username = document.querySelector('.email-parent:nth-child(2) input').value;
-            var password = document.querySelector('.email-parent:nth-child(3) input').value;
+            var password = document.getElementById('passwordInput').value;
     
+            // Password constraints
+            var passwordError = document.getElementById('passwordError');
+            if (password.length < 8) {
+                passwordError.textContent = 'Password must be at least 8 characters long';
+                alert('Password must be at least 8 characters long');
+                return; // Prevent further execution
+            }
+    
+            var hascase = /[a-zA-Z]/.test(password);
+            if (!hascase) {
+                passwordError.textContent = 'Password must contain at least one uppercase letter';
+                alert('Password must contain alteast one character');
+                return;
+            }
+    
+            var hasNumber = /\d/.test(password);
+            if (!hasNumber) {
+                passwordError.textContent = 'Password must contain at least one number';
+                alert('Password must contain alteast one digit');
+                return;
+            }
+    
+            // Clear password error message if all constraints are met
+            passwordError.textContent = '';
+    
+            // Proceed with registration if all checks pass
             var userData = {
                 email: email,
                 name: username,
                 password: password
             };
-    
+
             fetch('/user/register', {  // Updated endpoint to /user/register
                 method: 'POST',
                 headers: {
@@ -74,17 +102,22 @@
                 body: JSON.stringify(userData)
             })
                 .then(response => {
-                    console.log('User registered successfully');
-                    // Handle the response as needed
-                    window.location.href = '/login';
+                    if (response.ok) {
+                        console.log('User registered successfully');
+                        // Handle the response as needed
+                        window.location.href = '/login';
+                    } else {
+                        throw new Error('Invalid details. Registration failed.');
+                    }
                 })
                 .catch(error => {
                     console.error('Error registering user:', error);
                     // Handle errors as needed
+                    alert(error.message);
                 });
         });
     </script>
-    
+
 </body>
 
 </html>

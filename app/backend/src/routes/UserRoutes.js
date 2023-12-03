@@ -5,8 +5,9 @@ const {
     LoginUser,
     ForgotPassword,
     ResetPassword,
-    getResetPassword
-
+    getResetPassword,
+    logout,
+    newpassword
 
 } = require("../controllers/UserController");
 const validateToken = require("../middleware/validateToken");
@@ -19,11 +20,12 @@ router.post("/register", registerUser);
 router.post("/login", LoginUser);
 
 //Forgot Passowrd
-router.post("/forgotpassword", ForgotPassword);
-
+router.post("/forgotpassword/", ForgotPassword);
+router.post("/newpassword/", newpassword);
 //Reset Password
 
-router.post("/resetpassword", ResetPassword);
+router.get("/resetpassword/send-email", ResetPassword);
+router.get("/logout", logout);
 
 //GetReset Password
 
