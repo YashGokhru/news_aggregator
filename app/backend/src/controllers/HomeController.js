@@ -27,8 +27,6 @@ const HomePage =  async (req, res) => {
             };
         }).reverse();
 
-        
-
         res.json({ posts: postsWithUserDetails }); // Send posts with user details
 
         // res.json(posts); 
@@ -50,7 +48,6 @@ const PostPage =  async (req, res) => {
         console.log(user);
 
         res.render('postpage',{post,user}); 
-        console.log({post,user});
         console.log("Post send");
 
     } catch (error) {
