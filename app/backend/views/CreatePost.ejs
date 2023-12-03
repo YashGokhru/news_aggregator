@@ -17,7 +17,7 @@
 
     <form id="createPostForm">
       <input class="frame-item" type="text" name="content" placeholder="Add content...." />
-      <input class="frame-child1" type="text" name="title" placeholder="Add title..." />
+      <input class="frame-child1" type="text" name="title" placeholder="Add title..."  maxlength="270"/>
       <input class="frame-child4" type="text" name="link" placeholder="Add link...." />
       <button class="frame-child2" type="submit">Post</button>
       <div class="frame-child3" id="cancelButton"></div>
@@ -70,7 +70,8 @@
                 alert('Post created successfully!');
                 window.location.href = '/home';
               } else {
-                alert('Failed to create post: ' + data.message);
+                alert(data.message);
+                window.location.href = '/home';
               }
             })
             .catch(error => {

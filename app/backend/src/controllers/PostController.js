@@ -34,8 +34,8 @@ const CreatePost = async (req, res) => {
             console.log("Error updating user:", err);
           });
       });
-
-      return res.status(201).send({ message: "Post Uploaded Successfully" });
+      const test = true;
+      return res.status(201).send({ message: "Post Uploaded Successfully" , success : true});
 
     } else {
       res.status(400);

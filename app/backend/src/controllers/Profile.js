@@ -15,11 +15,12 @@ const Profile = async (req, res) => {
   try {
     const userid = req.user.id;
     const user = await User.findById(reqid);
+    
     console.log(userid.toString() === reqid.toString());
     if (userid.toString() === reqid.toString()) { 
       res.render("myprofile", { user });
     }
-    res.render("ProfilePage", {user});
+    res.render("ProfilePage", { user });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
