@@ -16,94 +16,88 @@
         <div class="divcontainer-child"></div>
         <div class="dont-have-an-account-parent">
             <div class="dont-have-an-account">Don't have an account?</div>
-            <a class="login" href="#" onclick="redirectToLoginPage()">SignUp</a>
+            <a class="login" href="#" onclick="redirectToRegisterPage()">SignUp</a>
         </div>
         <img class="divcontainer-item" alt="" src="/images/group-1686550876.svg" />
         <form id="loginForm">
-        <div class="frame-parent">
-            <div class="login-parent">
-                <b class="log_in">Login to Your Account</b>
-                <div></div>
-            </div>
-            <div class="frame-group">
-                <div class="frame-container">
-                    <div class="email-parent">
-                        <div class="email">Email</div>
-                        <input id="emailInput" class="frame-child" placeholder="mail@abc.com" type="email" required/>
-                    </div>
-                    <div class="email-parent">
-                        <div class="email">Password</div>
-                        <input id="passwordInput" class="frame-child" placeholder="xyz123" type="password" required/>
-                    </div>
+            <div class="frame-parent">
+                <div class="login-parent">
+                    <b class="log_in">Login to Your Account</b>
+                    <div></div>
                 </div>
-                
-                <button id="loginButton" class="login-wrapper" autofocus="{true}">
-                    <div class="login1">Login</div>
-                </button>
-            </form>
+                <div class="frame-group">
+                    <div class="frame-container">
+                        <div class="email-parent">
+                            <div class="email">Email</div>
+                            <input id="emailInput" class="frame-child" placeholder="mail@abc.com" type="email"
+                                required />
+                        </div>
+                        <div class="email-parent">
+                            <div class="email">Password</div>
+                            <input id="passwordInput" class="frame-child" placeholder="xyz123" type="password"
+                                required />
+                        </div>
+                    </div>
+
+                    <button id="loginButton" class="login-wrapper" autofocus="{true}">
+                        <div class="login1">Login</div>
+                    </button>
+                </div>
                 <div class="checkbox-parent">
-                                <a class="forgot-password" href="/forgotpassword">Forgot Password?</a>
-                            </div>
+                    <a class="forgot-password" href="/forgotpassword">Forgot Password?</a>
+                </div>
             </div>
-        </div>
+        </form>
+
         <img class="divcontainer-inner" alt="" src="/images/2424701.svg" />
     </div>
 
     <script>
-        function redirectToLoginPage() {
-    // You can add any additional actions or checks here before redirection
-    // For example, you can use window.location.href to redirect:
-             window.location.href = "/register";
+        function redirectToRegisterPage() {
+            window.location.href = '/register';
         }
+
         document.addEventListener('DOMContentLoaded', function () {
             var loginForm = document.getElementById('loginForm');
-    
+
             loginForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevent the default form submission
-    
-                // Retrieve the input values
+                event.preventDefault();
+
                 var email = document.getElementById('emailInput').value;
                 var password = document.getElementById('passwordInput').value;
-    
-                // Create an object with user login data
+
                 var userData = {
                     email: email,
                     password: password
                 };
-    
-                // Send a POST request to /user/login
+
                 fetch('/user/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(userData)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Login successful');
-                        // Redirect to the home page or perform other actions for successful login
-                        window.location.href = '/home';
-                    } else {
-                        console.log('Login failed');
-                        // Check for specific status codes that indicate invalid login
-                        if (response.status === 401) {
-                            alert('Invalid login credentials. Please try again.');
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (response.ok) {
+                            console.log('Login successful');
+                            window.location.href = '/home';
                         } else {
-                            // Handle other server errors
-                            console.error('Server error:', response.statusText);
+                            console.log('Login failed');
+                            if (response.status === 401) {
+                                alert('Invalid login credentials. Please try again.');
+                            } else {
+                                console.error('Server error:', response.statusText);
+                            }
                         }
-                    }
-                })
-                .catch(error => {
-                    console.error('Error during login:', error);
-                    // Handle other client-side errors
-                });
+                    })
+                    .catch(error => {
+                        console.error('Error during login:', error);
+                    });
             });
         });
     </script>
-    
-    
 </body>
 
 </html>
