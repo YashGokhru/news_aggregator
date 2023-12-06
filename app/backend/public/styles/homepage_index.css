@@ -37,7 +37,7 @@
     border: none;
     border-radius: 0.25rem;
     cursor: pointer;
-    width: 19rem;
+    /* width: 19rem; */
     margin-bottom: 0.625rem;
 }
 
@@ -86,6 +86,9 @@ button {
   border-radius: 0.25rem; /* 4px / 16px = 0.25rem */
   cursor: pointer;
 }
+.delete-button{
+  background-color: transparent;
+}
 
 /* Add more styles based on your design requirements */
 .profile img{
@@ -132,8 +135,39 @@ button.profile{
   margin-right: 1rem; /* Adjust the margin as needed */
 }
 
+.react-delete {
+  background-color: transparent;
+  display: inline-block;
+  margin-right: 1rem; /* Adjust the margin as needed */
+}
+
 .reaction-count {
   display: inline-block;
   margin-right: 1.5rem;
   margin-top: 1.3rem;
+}
+
+
+
+.delete-button {
+  background-color: transparent; /* Transparent background for the button */
+}
+
+.delete-button img {
+  height: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+/* New CSS */
+
+/* To change the background color behind the image */
+.delete-button img {
+  background-color: transparent; /* Change 'yourDesiredColor' to your preferred color code */
+  padding: 0.2rem; /* Adding some padding around the image */
+  border-radius: 50%; /* Optional: Makes the background circular */
+}
+
+/* If you want to remove the transparent background from the button */
+.delete-button, .react-delete {
+  background-color: transparent; /* Change 'transparent' to the desired color */
 }

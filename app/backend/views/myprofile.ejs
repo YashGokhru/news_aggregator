@@ -132,14 +132,22 @@
                                     <img class="react" src="/images/comment.png" style="height: 1.5rem; margin-right: 0.5rem;">
                                     <p class="reaction-count">${post.noofreplies}</p>
                                 </div>
+                                <button class = "del-but"><img  src="/images/deleteicon.png" style="height: 1.5rem; margin-right: 0.5rem;"></button>
                             </div>
+                            
+                                    
+                                
                         `;
 
               postsContainer.appendChild(postElement);
+
+
+
             });
           })
           .catch((error) => console.error("Error fetching posts:", error));
       });
+      
     </script>
   </body>
 </html>

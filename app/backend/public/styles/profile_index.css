@@ -45,3 +45,36 @@
 .changepw {
   margin-bottom: 10px; /* Add margin between buttons if desired */
 }
+
+.deleteicon {
+  margin-bottom: 100px; /* Add margin between buttons if desired */
+}
+
+
+.delete-button {
+  background-color: transparent; /* Transparent background for the button */
+}
+
+.delete-button img {
+  height: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+/* New CSS */
+
+/* To change the background color behind the image */
+.delete-button img {
+  background-color: transparent; /* Change 'yourDesiredColor' to your preferred color code */
+  padding: 0.2rem; /* Adding some padding around the image */
+  border-radius: 50%; /* Optional: Makes the background circular */
+}
+
+/* If you want to remove the transparent background from the button */
+.del-but{
+background-color: transparent;
+    color: #fff;
+    
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
